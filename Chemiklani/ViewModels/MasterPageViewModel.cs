@@ -6,9 +6,9 @@ using DotVVM.Framework.ViewModel;
 
 namespace Chemiklani.ViewModels
 {
-	public class DefaultViewModel : MasterPageViewModel
+	public abstract class MasterPageViewModel : DotvvmViewModelBase
 	{
-	    public override string PageTitle => "dotVVM Wen";
-	}
+	    public abstract string PageTitle { get; }
+    }
 }
 

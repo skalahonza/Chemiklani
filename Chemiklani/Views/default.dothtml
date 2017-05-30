@@ -1,15 +1,11 @@
-@viewModel Chemiklani.ViewModels.DefaultViewModel, Chemiklani
+﻿@viewModel Chemiklani.ViewModels.DefaultViewModel, Chemiklani
+@masterPage Views/MasterPage.dotmaster
 
-<!DOCTYPE html>
+<dot:Content ContentPlaceHolderID="MainContent">
+    <div class="jumbotron">
+        <h1>Chemikláni</h1>
+        <h2>Hodnotící systém pro soutěž chemiklání.</h2>
+    </div>
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+</dot:Content>
 
-	<h1>{{value: Title}}</h1>
-
-</body>
-</html>
