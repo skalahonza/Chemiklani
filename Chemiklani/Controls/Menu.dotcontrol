@@ -1,3 +1,18 @@
-﻿@viewModel System.Object, mscorlib
+﻿@viewModel Chemiklani.ViewModels.MasterPageViewModel, Chemiklani
 
-
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class-active="{value: CurrentRoute == 'Default'}"><dot:RouteLink RouteName="Default" Text="Domů"></dot:RouteLink></li>
+                <li class-active="{value: CurrentRoute == 'Teams'}"><dot:RouteLink RouteName="Default" Text="Týmy"></dot:RouteLink></li>
+                <li class-active="{value: CurrentRoute == 'Tasks'}"><dot:RouteLink RouteName="Default" Text="Úlohy"></dot:RouteLink></li>
+            </ul>
+            <!--
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Hledat...">
+            </form>
+            -->
+        </div>
+    </div>
+</nav>
