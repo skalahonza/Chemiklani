@@ -2,10 +2,22 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-    <div class="jumbotron">
+    <div class="jumbotron">        
         <h1>Chemikláni</h1>
-        <h2>Hodnotící systém pro soutěž chemiklání.</h2>
+        <h2>Hodnotící systém pro soutěž chemiklání</h2>
     </div>
-
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6 text-center">
+                <h2>Týmy</h2>
+                <p>Na kartě <b>Týmy</b> můžete spravovat jednotlivé týmy, přidat mazat, upravovat.</p>
+                <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+            </div>
+            <div class="col-sm-6 text-center">
+                <h2>Úlohy</h2>
+                <p>Na kartě <b>Úlohy</b> můžete spravovat jednotlivé úlohy.</p>
+                <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+            </div>
+        </div>
 </dot:Content>
 
