@@ -25,7 +25,7 @@
         <dot:ContentPlaceHolder ID="MainContent" />
     </div>
 
-    <div class="container-fluid part-footer text-center">
+    <div class="container-fluid part-footer text-center align-bottom">
         Powered by <a href="https://www.dotvvm.com" target="_blank">DotVVM</a>
     </div>
 
