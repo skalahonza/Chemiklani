@@ -6,7 +6,9 @@ using Owin;
 using DotVVM.Framework;
 using DotVVM.Framework.Configuration;
 using DotVVM.Framework.Hosting;
+using Microsoft.AspNet.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Owin.Security.Cookies;
 
 [assembly: OwinStartup(typeof(Chemiklani.Startup))]
 namespace Chemiklani
@@ -16,6 +18,19 @@ namespace Chemiklani
         public void Configuration(IAppBuilder app)
         {
             var applicationPhysicalPath = HostingEnvironment.ApplicationPhysicalPath;
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions()
+            {
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                LoginPath = new PathString("/sign-in"),
+                Provider = new CookieAuthenticationProvider()
+                {
+                    OnApplyRedirect = context =>
+                    {
+                        DotvvmAuthenticationHelper.ApplyRedirectResponse(context.OwinContext, context.RedirectUri);
+                    }
+                }
+            });
 
             // use DotVVM
             var dotvvmConfiguration = app.UseDotVVM<DotvvmStartup>(applicationPhysicalPath, options: options =>
