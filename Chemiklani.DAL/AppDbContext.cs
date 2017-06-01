@@ -1,13 +1,14 @@
 using System;
 using System.Data.Entity;
+using Chemiklani.DAL.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Chemiklani.DAL
 {
-    public class AppDbContext:DbContext// : IdentityDbContext<AppUser, AppRole, int, AppUserLogin, AppUserRole, AppUserClaim>
+    public class AppDbContext: IdentityDbContext<AppUser, AppRole, int, AppUserLogin, AppUserRole, AppUserClaim>
     {
 
-        public AppDbContext() : base("Data Source=(localdb)\\mssqllocaldb; Integrated Security=true; Initial Catalog=Chemiklani")
+        public AppDbContext() : base("DB")
         {
         }
 
@@ -16,7 +17,9 @@ namespace Chemiklani.DAL
         }
 
         //Tables
-        //public virtual DbSet<Attachment> Attachments { get; set; }      
+        public virtual DbSet<Score> Scores { get; set; }      
+        public virtual DbSet<Task> Tasks { get; set; }      
+        public virtual DbSet<Team> Teams { get; set; }      
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
