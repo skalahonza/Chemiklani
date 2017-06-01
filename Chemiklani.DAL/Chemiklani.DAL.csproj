@@ -60,6 +60,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppDbContext.cs" />
+    <Compile Include="Entities\AppRole.cs" />
+    <Compile Include="Entities\AppUser.cs" />
+    <Compile Include="Entities\Score.cs" />
+    <Compile Include="Entities\Task.cs" />
+    <Compile Include="Entities\Team.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,7 +72,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Entities\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

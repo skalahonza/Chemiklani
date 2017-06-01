@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using System.ComponentModel;
 
-namespace Chemiklani.Models
+namespace Chemiklani.DAL.Entities
 {
     public class Team
     {

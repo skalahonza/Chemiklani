@@ -1,4 +1,4 @@
-namespace Chemiklani.Models
+namespace Chemiklani.DAL.Entities
 {
     public class Score
     {
