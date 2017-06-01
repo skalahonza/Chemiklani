@@ -1,8 +1,8 @@
+using Chemiklani.DAL;
 using Riganti.Utils.Infrastructure.Core;
-using iPodnik.DAL;
 using Riganti.Utils.Infrastructure.EntityFramework;
 
-namespace iPodnik.BL.Queries
+namespace Chemiklani.BL.Queries
 {
     public abstract class AppQueryBase<TResult> : EntityFrameworkQuery<TResult>
     {

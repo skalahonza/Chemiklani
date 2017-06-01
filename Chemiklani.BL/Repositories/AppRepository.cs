@@ -1,8 +1,8 @@
+using Chemiklani.DAL;
 using Riganti.Utils.Infrastructure.Core;
-using iPodnik.DAL;
 using Riganti.Utils.Infrastructure.EntityFramework;
 
-namespace iPodnik.BL.Repositories
+namespace Chemiklani.BL.Repositories
 {
     public class AppRepository<TEntity, TKey> : EntityFrameworkRepository<TEntity, TKey> where TEntity : class, IEntity<TKey>, new()
     {

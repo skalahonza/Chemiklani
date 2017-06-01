@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Chemiklani.DAL\Chemiklani.DAL.csproj" />
     <ProjectReference Include="..\iPodnik.DAL\iPodnik.DAL.csproj" />
   </ItemGroup>
 

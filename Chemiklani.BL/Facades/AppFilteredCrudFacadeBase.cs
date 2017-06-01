@@ -1,8 +1,8 @@
+using System;
 using Riganti.Utils.Infrastructure.Core;
 using Riganti.Utils.Infrastructure.Services.Facades;
-using System;
 
-namespace iPodnik.BL.Facades
+namespace Chemiklani.BL.Facades
 {
     public class AppFilteredCrudFacadeBase<TEntity, TKey, TListDTO, TDetailDTO, TFilterDTO> : FilteredCrudFacadeBase<TEntity, TKey, TListDTO, TDetailDTO, TFilterDTO> 
         where TEntity : IEntity<TKey>

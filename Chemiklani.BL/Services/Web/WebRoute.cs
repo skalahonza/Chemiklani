@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace iPodnik.BL.Services.Web
+﻿namespace Chemiklani.BL.Services.Web
 {
     public class WebRoute
     {

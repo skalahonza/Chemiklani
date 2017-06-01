@@ -2,7 +2,7 @@ using System;
 using Riganti.Utils.Infrastructure.Core;
 using Riganti.Utils.Infrastructure.Services.Facades;
 
-namespace iPodnik.BL.Facades
+namespace Chemiklani.BL.Facades
 {
     public class AppCrudFacadeBase<TEntity, TKey, TListDTO, TDetailDTO> : CrudFacadeBase<TEntity, TKey, TListDTO, TDetailDTO>
         where TEntity : IEntity<TKey>

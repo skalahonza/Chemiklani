@@ -1,8 +1,9 @@
-using iPodnik.BL.Services.Web;
-
-public interface IWebRouteBuilder
+namespace Chemiklani.BL.Services.Web
 {
-    WebRoute Default();
-    WebRoute About();
-    WebRoute Contact();
+    public interface IWebRouteBuilder
+    {
+        WebRoute Default();
+        WebRoute About();
+        WebRoute Contact();
+    }
 }

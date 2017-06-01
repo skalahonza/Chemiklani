@@ -1,6 +1,6 @@
 using Riganti.Utils.Infrastructure.Services.Facades;
 
-namespace iPodnik.BL.Facades
+namespace Chemiklani.BL.Facades
 {
     public class AppFacadeBase : FacadeBase
     {

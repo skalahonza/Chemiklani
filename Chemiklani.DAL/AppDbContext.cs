@@ -2,7 +2,7 @@ using System;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace iPodnik.DAL
+namespace Chemiklani.DAL
 {
     public class AppDbContext:DbContext// : IdentityDbContext<AppUser, AppRole, int, AppUserLogin, AppUserRole, AppUserClaim>
     {

@@ -1,6 +1,6 @@
 using AutoMapper;
 
-namespace iPodnik.BL.Mapping
+namespace Chemiklani.BL.Mapping
 {
     public interface IMapping
     {

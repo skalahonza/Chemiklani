@@ -7,8 +7,8 @@
     <ProjectGuid>{7A74169C-65B2-4C7B-BFBC-4B149230B905}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>iPodnik.DAL</RootNamespace>
-    <AssemblyName>iPodnik.DAL</AssemblyName>
+    <RootNamespace>Chemiklani.DAL</RootNamespace>
+    <AssemblyName>Chemiklani.DAL</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
