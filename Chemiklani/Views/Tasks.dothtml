@@ -1,0 +1,9 @@
+﻿@viewModel Chemiklani.ViewModels.TasksViewModel, Chemiklani
+@masterPage Views/MasterPage.dotmaster
+
+<dot:Content ContentPlaceHolderID="MainContent">
+    <bs:Jumbotron>
+        <h1>{{value: PageTitle}}</h1>
+        <h2>Přehled a správa úloh</h2>
+    </bs:Jumbotron>
+</dot:Content>

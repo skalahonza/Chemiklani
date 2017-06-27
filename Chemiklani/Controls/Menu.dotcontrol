@@ -1,18 +1,19 @@
 ﻿@viewModel Chemiklani.ViewModels.MasterPageViewModel, Chemiklani
 
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class-active="{value: CurrentRoute == 'Default'}"><dot:RouteLink RouteName="Default" Text="Domů"></dot:RouteLink></li>
-                <li class-active="{value: CurrentRoute == 'Teams'}"><dot:RouteLink RouteName="Default" Text="Týmy"></dot:RouteLink></li>
-                <li class-active="{value: CurrentRoute == 'Tasks'}"><dot:RouteLink RouteName="Default" Text="Úlohy"></dot:RouteLink></li>
-            </ul>
-            <!--
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Hledat...">
-            </form>
-            -->
-        </div>
-    </div>
-</nav>
+<bs:ResponsiveNavigation HeaderText="Chemiklání" IsInverted="true" FixedTo="Top" IsResponsivelyCollapsing="true" HeaderLinkUrl="/">
+    <LeftAlignedItemsTemplate>
+        <bs:NavigationItem RouteName="Default" Text="Domů" IsSelected="{value: CurrentRoute=='Default'}" />
+        <bs:NavigationItem RouteName="Tasks" Text="Úlohy" IsSelected="{value: CurrentRoute=='Tasks'}" />
+        <bs:NavigationItem RouteName="Teams" Text="Týny" IsSelected="{value: CurrentRoute=='Teams'}" />
+    </LeftAlignedItemsTemplate>
+    <RightAlignedItemsTemplate>
+        <dot:AuthenticatedView>
+            <AuthAuthenticatedTemplate>
+                <bs:NavigationItem RouteName="SignOut" Text="Odhlásit" IsSelected="{value: CurrentRoute=='SignOut'}" />
+            </AuthAuthenticatedTemplate>
+            <NotANotAuthenticatedTemplate>
+                <bs:NavigationItem RouteName="SignIn" Text="Přihlásit" IsSelected="{value: CurrentRoute=='SignIn'}" />
+            </NotANotAuthenticatedTemplate>
+        </dot:AuthenticatedView>
+    </RightAlignedItemsTemplate>
+</bs:ResponsiveNavigation>
