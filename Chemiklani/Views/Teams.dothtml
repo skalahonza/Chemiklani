@@ -2,6 +2,24 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-    
+<bs:Container>
+    <h2>Seznam týmů</h2>
+    <dot:Repeater DataSource="{value: Teams}" WrapperTagName="ul">
+        <ItemTemplate>
+            <li>{{value: Name}}</li>
+        </ItemTemplate>
+    </dot:Repeater>    
+
+    <bs:Button Type="Primary" Text="Přidat týmy z csv"/>
+
+    <bs:Form DataContext="{value: NewTeamData}">
+        <bs:FormGroup>
+            <dot:Literal Text="Název týmu"/>
+            <dot:TextBox Text="{value: Name}"/>
+        </bs:FormGroup>        
+        <bs:Button Type="Success" Text="Přidat tým" IsSubmitButton="true"
+                   Click="{command: _parent.AddTeam()}"/>
+    </bs:Form>
+</bs:Container>    
 </dot:Content>
 

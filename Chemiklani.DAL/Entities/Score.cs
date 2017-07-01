@@ -2,9 +2,9 @@ using Riganti.Utils.Infrastructure.Core;
 
 namespace Chemiklani.DAL.Entities
 {
-    public class Score : IEntity<long>
+    public class Score : IEntity<int>
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
         public Task Task { get; set; }
         public Team Team { get; set; }
         public int Points { get; set; }

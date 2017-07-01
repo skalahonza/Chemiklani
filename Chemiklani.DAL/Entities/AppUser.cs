@@ -2,7 +2,7 @@
 
 namespace Chemiklani.DAL.Entities
 {
-    public class AppUser : IdentityUser<long, AppUserLogin, AppUserRole, AppUserClaim>
+    public class AppUser : IdentityUser<int, AppUserLogin, AppUserRole, AppUserClaim>
     {
     }
 }
