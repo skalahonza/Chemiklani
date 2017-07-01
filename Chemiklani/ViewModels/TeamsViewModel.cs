@@ -26,6 +26,11 @@ namespace Chemiklani.ViewModels
 	        service.AddTeam(NewTeamData);
             NewTeamData = new TeamDetailDTO();
 	    }
-	}
+
+	    public void DeleteTeam(int id)
+	    {
+	        service.DeleteTeam(id);
+	    }
+    }
 }
 

@@ -2,7 +2,6 @@
 using System.Linq;
 using Chemiklani.BL.DTO;
 using Chemiklani.DAL.Entities;
-using DotVVM.Framework.Controls;
 
 namespace Chemiklani.BL.Services
 {
@@ -35,6 +34,19 @@ namespace Chemiklani.BL.Services
                 });
 
                 return queryable.ToList();
+            }
+        }
+
+        public void DeleteTeam(int id)
+        {
+            using (var dc = CreateDbContext())
+            {
+                var entity = dc.Teams.FirstOrDefault(x => x.Id == id);
+                if (entity != null)
+                {
+                    dc.Teams.Remove(entity);
+                    dc.SaveChanges();
+                }
             }
         }
     }

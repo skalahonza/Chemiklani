@@ -2,8 +2,8 @@
 
 namespace Chemiklani.BL.DTO
 {
-    public class BaseDTO:IEntity<long>
+    public class BaseDTO:IEntity<int>
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
     }
 }

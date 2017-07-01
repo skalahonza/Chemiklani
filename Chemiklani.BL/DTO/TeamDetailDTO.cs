@@ -5,7 +5,7 @@ namespace Chemiklani.BL.DTO
 {
     public class TeamDetailDTO : BaseDTO
     {
-        [Required]
+        [Required(ErrorMessage = "Musíte vyplnit název týmu.")]
         public string Name { get; set; }
         public ICollection<string> Members { get; set; }
     }
