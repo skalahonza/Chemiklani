@@ -1,6 +1,8 @@
-﻿@viewModel Chemiklani.ViewModels.TasksViewModel, Chemiklani
+﻿@viewModel Chemiklani.ViewModels.SignOutViewModel, Chemiklani
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-    
+
+
 </dot:Content>
+

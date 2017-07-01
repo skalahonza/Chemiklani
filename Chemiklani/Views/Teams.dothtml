@@ -2,10 +2,6 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-    <bs:Jumbotron>
-        <h1>{{value: PageTitle}}</h1>
-        <h2>Přehled týmu a výsledků</h2>
-    </bs:Jumbotron>
-
+    
 </dot:Content>
 

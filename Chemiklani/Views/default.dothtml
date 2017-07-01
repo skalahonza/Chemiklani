@@ -2,10 +2,6 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-    <div class="jumbotron">        
-        <h1>Chemikláni</h1>
-        <h2>Hodnotící systém pro soutěž chemiklání</h2>
-    </div>
     <bs:Container>
         <div class="row">
             <div class="col-sm-6 text-center">

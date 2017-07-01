@@ -9,6 +9,7 @@ namespace Chemiklani.ViewModels
 	public class TasksViewModel : MasterPageViewModel
 	{
 	    public override string PageTitle => "Úlohy";
+	    public override string PageDescription => "Správa úloh a jejich bodového ohodnocení.";
 	}
 }
 

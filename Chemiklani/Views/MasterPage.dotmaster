@@ -23,6 +23,10 @@
         
         <cc:Menu/>
 
+        <bs:Jumbotron>
+            <h1>{{value: PageTitle}}</h1>
+            <h2>{{value: PageDescription}}</h2>
+        </bs:Jumbotron>
         <dot:ContentPlaceHolder ID="MainContent" />
 
         <br/>
