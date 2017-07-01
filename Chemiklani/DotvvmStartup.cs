@@ -1,12 +1,7 @@
-using System.Web.Hosting;
-using Microsoft.Owin;
-using Microsoft.Owin.FileSystems;
-using Microsoft.Owin.StaticFiles;
-using Owin;
-using DotVVM.Framework;
 using DotVVM.Framework.Configuration;
+using DotVVM.Framework.Controls.Bootstrap;
 using DotVVM.Framework.ResourceManagement;
-using DotVVM.Framework.Routing;
+
 
 namespace Chemiklani
 {
@@ -24,7 +19,9 @@ namespace Chemiklani
 
         private void ConfigureRoutes(DotvvmConfiguration config, string applicationPath)
         {
-            config.RouteTable.Add("Default", "", "Views/default.dothtml");
+            config.RouteTable.Add("Default", "", "Views/Default.dothtml");
+            config.RouteTable.Add("Teams", "tymy", "Views/Teams.dothtml");
+            config.RouteTable.Add("Tasks", "ulohy", "Views/Tasks.dothtml");
 
             // Uncomment the following line to auto-register all dothtml files in the Views folder
             // config.RouteTable.AutoDiscoverRoutes(new DefaultRouteStrategy(config));    
@@ -32,19 +29,21 @@ namespace Chemiklani
 
         private void ConfigureControls(DotvvmConfiguration config, string applicationPath)
         {
+            config.AddBootstrapConfiguration(new DotvvmBootstrapOptions()
+            {
+                BootstrapJsUrl = "~/lib/bootstrap/dist/js/bootstrap.min.js",
+                BootstrapCssUrl = "~/lib/bootstrap/dist/css/bootstrap.min.css",
+                IncludeBootstrapResourcesInPage = true,
+                IncludeJQueryResourceInPage = true,
+                JQueryUrl = "~/lib/jquery/dist/jquery.js"
+            });
+
             // register code-only controls and markup controls
-            config.Markup.AddMarkupControl("cc", "Menu", "Controls/Menu.dotcontrol");
+            config.Markup.AddMarkupControl("cc", "Menu", "Controls/Menu.dotcontrol");            
         }
 
         private void ConfigureResources(DotvvmConfiguration config, string applicationPath)
         {
-            // register custom resources and adjust paths to the built-in resources
-            config.Resources.Register("bootstrap", new ScriptResource(new UrlResourceLocation("~/lib/bootstrap/dist/bootstrap.min.js"))
-            {
-                Dependencies = new[] { "jquery" }
-            });
-
-            config.Resources.Register("site", new ScriptResource(new UrlResourceLocation("~/js/site.min.js")));
 
         }
     }
