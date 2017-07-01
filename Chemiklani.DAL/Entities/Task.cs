@@ -1,8 +1,10 @@
+using Riganti.Utils.Infrastructure.Core;
+
 namespace Chemiklani.DAL.Entities
 {
-    public class Task
+    public class Task: IEntity<long>
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         public string Name { get; set; }
 

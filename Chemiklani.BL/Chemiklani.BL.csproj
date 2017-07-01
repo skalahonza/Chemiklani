@@ -17,8 +17,4 @@
     <PackageReference Include="Riganti.Utils.Infrastructure.EntityFramework" Version="2.0.0" />
     <PackageReference Include="EntityFramework" Version="6.1.3" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="DTO\" />
-  </ItemGroup>
 </Project>

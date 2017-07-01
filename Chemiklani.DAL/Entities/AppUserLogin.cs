@@ -3,8 +3,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Chemiklani.DAL.Entities
 {
-    public class AppUserLogin : IdentityUserLogin<int>
+    public class AppUserLogin : IdentityUserLogin<long>
     {
-        public int Id { get; set; }
     }
 }

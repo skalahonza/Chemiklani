@@ -6,6 +6,6 @@ namespace Chemiklani.DAL.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<string> Members { get; set; } = new List<string>();
+        public ICollection<string> Members { get; set; }
     }
 }
