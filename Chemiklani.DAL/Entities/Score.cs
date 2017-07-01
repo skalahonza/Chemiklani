@@ -1,6 +1,8 @@
+using Riganti.Utils.Infrastructure.Core;
+
 namespace Chemiklani.DAL.Entities
 {
-    public class Score
+    public class Score : IEntity<int>
     {
         public int Id { get; set; }
         public Task Task { get; set; }
