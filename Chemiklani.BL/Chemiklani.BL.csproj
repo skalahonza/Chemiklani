@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="6.0.1" />
     <PackageReference Include="Microsoft.AspNet.Identity.EntityFramework" Version="2.2.1" />
     <PackageReference Include="Riganti.Utils.Infrastructure.Core" Version="2.0.0" />
     <PackageReference Include="Riganti.Utils.Infrastructure.Services" Version="2.0.0" />
