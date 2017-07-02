@@ -81,6 +81,7 @@
                 <dot:ValidationSummary IncludeErrorsFromChildren="true" class="alert-danger"/>
             </form>
         </div>
+        <bs:Alert Type="Danger" Text="{value: ErrorMessage}" />
     </div>
 </body>
 </html>

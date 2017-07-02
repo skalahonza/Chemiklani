@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data;
+using System.Security.Authentication;
 using System.Security.Claims;
 using Chemiklani.BL.DTO;
 using Chemiklani.DAL;
@@ -32,14 +34,14 @@ namespace Chemiklani.BL.Services
                             var result = userManager.ResetPassword(user.Id, userManager.GeneratePasswordResetToken(user.Id), data.Password);
                             if (!result.Succeeded)
                             {
-                                throw new Exception("The password is too short!");
+                                throw new DataException("Heslo je příliš krátké.");
                             }
                             userManager.Update(user);
                             dc.SaveChanges();
                         }
                         else
-                        {
-                            throw new Exception("Invalid user name or password!");
+                        {                            
+                            throw new AuthenticationException("Špatné uživatelské jméno nebo heslo.");
                         }
                     }
                     return userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);

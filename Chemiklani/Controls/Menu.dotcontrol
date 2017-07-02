@@ -7,13 +7,6 @@
         <bs:NavigationItem RouteName="Teams" Text="Týny" IsSelected="{value: CurrentRoute=='Teams'}" />
     </LeftAlignedItemsTemplate>
     <RightAlignedItemsTemplate>
-        <dot:AuthenticatedView>
-            <AuthAuthenticatedTemplate>
-                <bs:NavigationItem RouteName="SignOut" Text="Odhlásit" IsSelected="{value: CurrentRoute=='SignOut'}" />
-            </AuthAuthenticatedTemplate>
-            <NotANotAuthenticatedTemplate>
-                <bs:NavigationItem RouteName="SignIn" Text="Přihlásit" IsSelected="{value: CurrentRoute=='SignIn'}" />
-            </NotANotAuthenticatedTemplate>
-        </dot:AuthenticatedView>
+        Odhlásit
     </RightAlignedItemsTemplate>
 </bs:ResponsiveNavigation>
