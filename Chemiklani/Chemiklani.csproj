@@ -125,6 +125,7 @@
     <Compile Include="DotvvmStartup.cs" />
     <Compile Include="ViewModels\DefaultViewModel.cs" />
     <Compile Include="ViewModels\MasterPageViewModel.cs" />
+    <Compile Include="ViewModels\SignInViewModel.cs" />
     <Compile Include="ViewModels\SignOutViewModel.cs" />
     <Compile Include="ViewModels\TasksViewModel.cs" />
     <Compile Include="ViewModels\TeamsViewModel.cs" />
@@ -159,6 +160,7 @@
     <Content Include="Views\Teams.dothtml" />
     <Content Include="Views\Tasks.dothtml" />
     <Content Include="Views\SignOut.dothtml" />
+    <Content Include="Views\SignIn.dothtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

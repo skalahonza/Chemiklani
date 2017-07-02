@@ -22,6 +22,7 @@ namespace Chemiklani
             config.RouteTable.Add("Default", "", "Views/Default.dothtml");
             config.RouteTable.Add("Teams", "tymy", "Views/Teams.dothtml");
             config.RouteTable.Add("Tasks", "ulohy", "Views/Tasks.dothtml");
+            config.RouteTable.Add("SignIn", "sign-in", "Views/SignIn.dothtml");
 
             // Uncomment the following line to auto-register all dothtml files in the Views folder
             // config.RouteTable.AutoDiscoverRoutes(new DefaultRouteStrategy(config));    
