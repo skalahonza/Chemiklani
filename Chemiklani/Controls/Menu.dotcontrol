@@ -7,6 +7,15 @@
         <bs:NavigationItem RouteName="Teams" Text="Týny" IsSelected="{value: CurrentRoute=='Teams'}" />
     </LeftAlignedItemsTemplate>
     <RightAlignedItemsTemplate>
-        Odhlásit
+        <bs:DropDownButton Text="{value: "Přihlášen jako: " + CurrentUserName}">
+            <Items>
+                <bs:DropDownButtonItem NavigateUrl="#">
+                    <bs:GlyphIcon Icon="Cog" /> Nastavení
+                </bs:DropDownButtonItem>
+                <bs:DropDownButtonItem Click="{command: SignOut()}">
+                    <bs:GlyphIcon Icon="User" /> Odhlásit
+                </bs:DropDownButtonItem>
+            </Items>
+        </bs:DropDownButton>
     </RightAlignedItemsTemplate>
 </bs:ResponsiveNavigation>
