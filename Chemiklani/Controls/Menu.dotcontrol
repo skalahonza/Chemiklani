@@ -5,15 +5,18 @@
         <bs:NavigationItem RouteName="Default" Text="Domů" IsSelected="{value: CurrentRoute=='Default'}" />
         <bs:NavigationItem RouteName="Tasks" Text="Úlohy" IsSelected="{value: CurrentRoute=='Tasks'}" />
         <bs:NavigationItem RouteName="Teams" Text="Týny" IsSelected="{value: CurrentRoute=='Teams'}" />
+        <bs:NavigationItem RouteName="Users" Text="Uživatelé" IsSelected="{value: CurrentRoute=='Users'}" />
     </LeftAlignedItemsTemplate>
     <RightAlignedItemsTemplate>
-        <dot:AuthenticatedView>
-            <AuthAuthenticatedTemplate>
-                <bs:NavigationItem RouteName="SignOut" Text="Odhlásit" IsSelected="{value: CurrentRoute=='SignOut'}" />
-            </AuthAuthenticatedTemplate>
-            <NotANotAuthenticatedTemplate>
-                <bs:NavigationItem RouteName="SignIn" Text="Přihlásit" IsSelected="{value: CurrentRoute=='SignIn'}" />
-            </NotANotAuthenticatedTemplate>
-        </dot:AuthenticatedView>
+        <bs:DropDownButton Text="{value: "Přihlášen jako: " + CurrentUserName}">
+            <Items>
+                <bs:DropDownButtonItem NavigateUrl="#">
+                    <bs:GlyphIcon Icon="Cog" /> Nastavení
+                </bs:DropDownButtonItem>
+                <bs:DropDownButtonItem Click="{command: SignOut()}">
+                    <bs:GlyphIcon Icon="User" /> Odhlásit
+                </bs:DropDownButtonItem>
+            </Items>
+        </bs:DropDownButton>
     </RightAlignedItemsTemplate>
 </bs:ResponsiveNavigation>

@@ -1,0 +1,46 @@
+﻿@viewModel Chemiklani.ViewModels.UsersViewModel, Chemiklani
+@masterPage Views/MasterPage.dotmaster
+
+<dot:Content ContentPlaceHolderID="MainContent">
+    <h2>Seznam uživatelů</h2>
+    <dot:Repeater DataSource="{value: Users}" WrapperTagName="table"
+                  class="table" Validation.Enabled="false">
+        <ItemTemplate>
+            <tr>
+                <td class="col-md-10">{{value: UserName}}</td>
+                <td><bs:CheckBox Text="Admin" Checked="{value: IsAdmin}" Changed="{command: _parent.ChangeAdmin(Id,IsAdmin)}"/></td>
+                <td>
+                <bs:LinkButton Text="Smazat" Type="Danger" Click="{command: _parent.DeleteUser(Id)}" /></td>
+            </tr>
+        </ItemTemplate>
+    </dot:Repeater>  
+
+    <h2>Přidat uživatele</h2>
+
+    <bs:Form DataContext="{value: NewUser}"
+             Validator.InvalidCssClass="has-danger">
+        <fieldset Validation.Target="{value: _parent.NewUser}">
+            <bs:FormGroup>
+                <dot:Literal Text="Uživatelské jméno" />
+                <dot:TextBox Text="{value: UserName}" />
+                <dot:Validator Value="{value: UserName}" ShowErrorMessageText="true" class="alert-danger" />
+            </bs:FormGroup>
+            <bs:FormGroup>
+                <dot:Literal Text="Heslo" />
+                <dot:TextBox Text="{value: Password}" Type="Password"/>
+                <dot:Validator Value="{value: Password}" ShowErrorMessageText="true" class="alert-danger" />
+            </bs:FormGroup>
+            <bs:FormGroup>
+                <dot:Literal Text="Heslo znovu" />
+                <dot:TextBox Text="{value: PasswordConfirm}" Type="Password" />
+                <dot:Validator Value="{value: PasswordConfirm}" ShowErrorMessageText="true" class="alert-danger" />
+            </bs:FormGroup>
+            <bs:FormGroup>                
+                <bs:CheckBox Text="Admin" class="text-center" Checked="{value: IsAdmin}"/>
+            </bs:FormGroup>
+            <bs:Button Type="Success" Text="Přidat uživatele" IsSubmitButton="true"
+                       Click="{command: _parent.AddUser()}" />
+        </fieldset>
+    </bs:Form> 
+</dot:Content>
+

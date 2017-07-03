@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Chemiklani.BL.DTO
+﻿namespace Chemiklani.BL.DTO
 {
     public class TeamListDTO:BaseDTO
     {
