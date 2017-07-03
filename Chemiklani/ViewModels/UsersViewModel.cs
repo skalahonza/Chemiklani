@@ -37,7 +37,7 @@ namespace Chemiklani.ViewModels
 
 	    public void ChangeAdmin(int id, bool isAdmin)
 	    {
-	        
+	        service.ChangeAdmin(id, isAdmin);
 	    }
 	}
 }

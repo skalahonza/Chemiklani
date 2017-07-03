@@ -152,5 +152,24 @@ namespace Chemiklani.BL.Services
                 }
             }
         }
+
+        public void ChangeAdmin(int id, bool isAdmin)
+        {
+            using (var dc = CreateDbContext())
+            {
+                using (var userManager = CreateUserManager(dc))
+                {
+                    if (isAdmin)
+                    {
+                        userManager.AddToRole(id, UserRoles.Admin.ToString());
+                    }
+                    else
+                    {
+                        userManager.RemoveFromRole(id, UserRoles.Admin.ToString());
+                    }
+                    dc.SaveChanges();
+                }
+            }
+        }
     }
 }

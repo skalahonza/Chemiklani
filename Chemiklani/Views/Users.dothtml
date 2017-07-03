@@ -8,7 +8,7 @@
         <ItemTemplate>
             <tr>
                 <td class="col-md-10">{{value: UserName}}</td>
-                <td><bs:CheckBox Text="Admin" Checked="{value: IsAdmin}"/></td>
+                <td><bs:CheckBox Text="Admin" Checked="{value: IsAdmin}" Changed="{command: _parent.ChangeAdmin(Id,IsAdmin)}"/></td>
                 <td>
                 <bs:LinkButton Text="Smazat" Type="Danger" Click="{command: _parent.DeleteUser(Id)}" /></td>
             </tr>
