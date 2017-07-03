@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Security.Authentication;
 using System.Security.Claims;
 using Chemiklani.BL.DTO;
@@ -31,7 +33,8 @@ namespace Chemiklani.BL.Services
                         user = userManager.FindByName(data.UserName);
                         if (user != null && !userManager.HasPassword(user.Id))
                         {
-                            var result = userManager.ResetPassword(user.Id, userManager.GeneratePasswordResetToken(user.Id), data.Password);
+                            var result = userManager.ResetPassword(user.Id,
+                                userManager.GeneratePasswordResetToken(user.Id), data.Password);
                             if (!result.Succeeded)
                             {
                                 throw new DataException("Heslo je příliš krátké.");
@@ -40,7 +43,7 @@ namespace Chemiklani.BL.Services
                             dc.SaveChanges();
                         }
                         else
-                        {                            
+                        {
                             throw new AuthenticationException("Špatné uživatelské jméno nebo heslo.");
                         }
                     }
@@ -49,12 +52,12 @@ namespace Chemiklani.BL.Services
             }
         }
 
-        public void AddNewUser(RegisterNewUserDTO data)
+        public void AddNewUser(UserDto data)
         {
             AddNewUser(data, CreateRandomPassword());
         }
 
-        public void AddNewUser(RegisterNewUserDTO data, string password)
+        public void AddNewUser(UserDto data, string password)
         {
             using (var dc = CreateDbContext())
             {
@@ -62,10 +65,9 @@ namespace Chemiklani.BL.Services
                 {
                     var user = new AppUser
                     {
-                        UserName = data.UserName,  
-                        Email = data.Email
+                        UserName = data.UserName,
                     };
-                    
+
                     var check = userManager.Create(user, password);
 
                     //User created
@@ -86,17 +88,36 @@ namespace Chemiklani.BL.Services
                 {
                     if (!roleManager.RoleExists(role.ToString()))
                     {
-                        roleManager.Create(new AppRole { Name = role.ToString() });
+                        roleManager.Create(new AppRole {Name = role.ToString()});
                     }
                     dc.SaveChanges();
                 }
             }
         }
 
-        private static string CreateRandomPassword()  //If you are always going to want 8 characters then there is no need to pass a length argument
+        public List<UserDto> GetUsers(string currentAdminUserName)
+        {
+            using (var dc = CreateDbContext())
+            {
+                using (var userManager = CreateUserManager(dc))
+                {
+                    var result = userManager.Users.Select(u => new UserDto
+                        {
+                            Id = u.Id,
+                            UserName = u.UserName,
+                        })
+                        .Where(u => u.UserName != currentAdminUserName)
+                        .ToList();
+                    result.ForEach(dto => dto.IsAdmin = userManager.IsInRole(dto.Id, UserRoles.Admin.ToString()));
+                    return result;
+                }
+            }
+        }
+
+        private static string CreateRandomPassword()
         {
             var _allowedChars = "abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ123456789-";
-            var randNum = new Random((int)DateTime.Now.Ticks);
+            var randNum = new Random((int) DateTime.Now.Ticks);
             var chars = new char[8];
 
             for (var i = 0; i < 8; i++)
@@ -108,7 +129,8 @@ namespace Chemiklani.BL.Services
 
         private UserManager<AppUser, int> CreateUserManager(AppDbContext dc)
         {
-            return new UserManager<AppUser, int>(new UserStore<AppUser,AppRole,int,AppUserLogin,AppUserRole,AppUserClaim>(dc))
+            return new UserManager<AppUser, int>(
+                new UserStore<AppUser, AppRole, int, AppUserLogin, AppUserRole, AppUserClaim>(dc))
             {
                 UserTokenProvider = new TotpSecurityStampBasedTokenProvider<AppUser, int>()
             };
@@ -116,7 +138,19 @@ namespace Chemiklani.BL.Services
 
         private RoleManager<AppRole, int> CreateRoleManager(AppDbContext dc)
         {
-            return new RoleManager<AppRole, int>(new RoleStore<AppRole,int,AppUserRole>(dc));
+            return new RoleManager<AppRole, int>(new RoleStore<AppRole, int, AppUserRole>(dc));
+        }
+
+        public void DeleteUser(int id)
+        {
+            using (var dc = CreateDbContext())
+            {
+                using (var userManager = CreateUserManager(dc))
+                {
+                    userManager.Delete(userManager.FindById(id));
+                    dc.SaveChanges();
+                }
+            }
         }
     }
 }

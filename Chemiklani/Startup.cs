@@ -38,8 +38,8 @@ namespace Chemiklani
             userService.AddRole(UserService.UserRoles.User);
             userService.AddRole(UserService.UserRoles.Admin);
 
-            userService.AddNewUser(new RegisterNewUserDTO {UserName = "normal"},"normal");
-            userService.AddNewUser(new RegisterNewUserDTO {UserName = "admin",IsAdmin = true},"password");
+            userService.AddNewUser(new UserDto { UserName = "normal"},"normal");
+            userService.AddNewUser(new UserDto { UserName = "admin",IsAdmin = true},"password");
 
             // use DotVVM
             var dotvvmConfiguration = app.UseDotVVM<DotvvmStartup>(applicationPhysicalPath, options: options =>
