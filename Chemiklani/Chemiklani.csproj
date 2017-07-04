@@ -149,6 +149,7 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\Chemiklani - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -177,6 +178,10 @@
     <ProjectReference Include="..\Chemiklani.BL\Chemiklani.BL.csproj">
       <Project>{636B6406-C114-4825-AB03-F04CEB835C82}</Project>
       <Name>Chemiklani.BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Chemiklani.DAL\Chemiklani.DAL.csproj">
+      <Project>{7a74169c-65b2-4c7b-bfbc-4b149230b905}</Project>
+      <Name>Chemiklani.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
