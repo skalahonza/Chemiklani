@@ -179,11 +179,16 @@
       <Project>{636B6406-C114-4825-AB03-F04CEB835C82}</Project>
       <Name>Chemiklani.BL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Chemiklani.DAL\Chemiklani.DAL.csproj">
+      <Project>{7a74169c-65b2-4c7b-bfbc-4b149230b905}</Project>
+      <Name>Chemiklani.DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
