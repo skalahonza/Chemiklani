@@ -57,7 +57,7 @@ namespace Chemiklani.BL.Services
             AddNewUser(data, CreateRandomPassword());
         }
 
-        public void AddNewUser(UserDto data, string password)
+        public IdentityResult AddNewUser(UserDto data, string password)
         {
             using (var dc = CreateDbContext())
             {
@@ -76,6 +76,8 @@ namespace Chemiklani.BL.Services
                         userManager.AddToRole(user.Id,
                             data.IsAdmin ? UserRoles.Admin.ToString() : UserRoles.User.ToString());
                     }
+
+                    return check;
                 }
             }
         }

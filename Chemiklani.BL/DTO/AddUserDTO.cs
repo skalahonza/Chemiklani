@@ -4,7 +4,7 @@ namespace Chemiklani.BL.DTO
 {
     public class AddUserDTO : UserDto
     {
-        [Required(ErrorMessage = "´Heslo nesmí ýt prázdné."), DataType(DataType.Password)]
+        [Required(ErrorMessage = "´Heslo nesmí ýt prázdné."), DataType(DataType.Password), MinLength(6, ErrorMessage = "Heslo musí mít alespoò 6 znakù.")]
         public string Password { get; set; }
         [Required(ErrorMessage = "Potvrzení hesla nesmí být prázdné"), DataType(DataType.Password), Compare(nameof(Password), ErrorMessage = "Hesla se neshodují.")]
         public string PasswordConfirm { get; set; }

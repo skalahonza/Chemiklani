@@ -2,55 +2,53 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-<bs:Container>
-    <h2>Seznam týmů</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Název týmu</th>
-                <th>Místnost</th>                
-            </tr>
-        </thead>
-        <tbody>
-            <dot:Repeater DataSource="{value: Teams}" WrapperTagName="table" RenderWrapperTag="false"
-                          Validation.Enabled="false">
-                <ItemTemplate>
-                    <tr>
-                        <td class="col-md-10">{{value: Name}}</td>
-                        <td class="col-md-10">{{value: Room}}</td>
-                        <td>
-                            <bs:LinkButton Text="Smazat" Type="Danger" Click="{command: _parent.DeleteTeam(Id)}" />
-                        </td>
-                    </tr>
-                </ItemTemplate>
-            </dot:Repeater>
-        </tbody>
-    </table>
-    <h2>Přidat týmy</h2>    
+    <bs:Container>
+        <h2>Seznam týmů</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Název týmu</th>
+                    <th>Místnost</th>
+                </tr>
+            </thead>
+            <tbody>
+                <dot:Repeater DataSource="{value: Teams}" WrapperTagName="table" RenderWrapperTag="false"
+                              Validation.Enabled="false">
+                    <ItemTemplate>
+                        <tr>
+                            <td class="col-md-10">{{value: Name}}</td>
+                            <td class="col-md-10">{{value: Room}}</td>
+                            <td>
+                                <bs:LinkButton Text="Smazat" Type="Danger" Click="{command: _parent.DeleteTeam(Id)}" />
+                            </td>
+                        </tr>
+                    </ItemTemplate>
+                </dot:Repeater>
+            </tbody>
+        </table>
+        <h2>Přidat týmy</h2>
 
-    <bs:Form DataContext="{value: NewTeamData}"
-             Validator.InvalidCssClass="has-danger">
-        <fieldset Validation.Target="{value: _parent.NewTeamData}">
+        <bs:Form DataContext="{value: NewTeamData}"
+                 Validator.InvalidCssClass="has-danger">
+            <fieldset Validation.Target="{value: _parent.NewTeamData}">
                 <bs:FormGroup>
                     <dot:Literal Text="Název týmu" />
-                    <dot:TextBox Text="{value: Name}" />                    
+                    <dot:TextBox Text="{value: Name}" />
                     <dot:Validator Value="{value: Name}" ShowErrorMessageText="true" class="alert-danger" />
                 </bs:FormGroup>
-            <bs:FormGroup class="text-center">
-                <bs:ButtonGroup>
+                <bs:FormGroup>
                     <dot:Literal Text="Název místnosti" />
                     <dot:TextBox Text="{value: Room}" />
-                </bs:ButtonGroup>
-            </bs:FormGroup>
-            <bs:FormGroup>
-                <bs:ButtonGroup>
-                    <bs:Button Type="Success" Text="Přidat tým" IsSubmitButton="true"
-                               Click="{command: _parent.AddTeam()}" />
-                    <bs:Button Type="Primary" Text="Přidat týmy z csv" />
-                </bs:ButtonGroup>
-            </bs:FormGroup>
-        </fieldset>
-    </bs:Form>   
-</bs:Container>    
+                </bs:FormGroup>
+                <bs:FormGroup>
+                    <bs:ButtonGroup>
+                        <bs:Button Type="Success" Text="Přidat tým" IsSubmitButton="true"
+                                   Click="{command: _parent.AddTeam()}" />
+                        <bs:Button Type="Primary" Text="Přidat týmy z csv" />
+                    </bs:ButtonGroup>
+                </bs:FormGroup>
+            </fieldset>
+        </bs:Form>
+    </bs:Container>
 </dot:Content>
 
