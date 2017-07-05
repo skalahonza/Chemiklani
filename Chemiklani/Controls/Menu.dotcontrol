@@ -4,7 +4,7 @@
     <LeftAlignedItemsTemplate>
         <bs:NavigationItem RouteName="Default" Text="Domů" IsSelected="{value: CurrentRoute=='Default'}" />
         <bs:NavigationItem RouteName="Tasks" Text="Úlohy" IsSelected="{value: CurrentRoute=='Tasks'}" />
-        <bs:NavigationItem RouteName="Teams" Text="Týny" IsSelected="{value: CurrentRoute=='Teams'}" />
+        <bs:NavigationItem RouteName="Teams" Text="Týmy" IsSelected="{value: CurrentRoute=='Teams'}" />
         <bs:NavigationItem RouteName="Users" Text="Uživatelé" IsSelected="{value: CurrentRoute=='Users'}" />
     </LeftAlignedItemsTemplate>
     <RightAlignedItemsTemplate>
