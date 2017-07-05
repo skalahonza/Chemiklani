@@ -4,29 +4,51 @@
 <dot:Content ContentPlaceHolderID="MainContent">
 <bs:Container>
     <h2>Seznam týmů</h2>
-    <dot:Repeater DataSource="{value: Teams}" WrapperTagName="table" 
-                  class="table" Validation.Enabled="false">
-        <ItemTemplate>
+    <table class="table">
+        <thead>
             <tr>
-                <td class="col-md-10">{{value: Name}}</td>
-                <td><bs:LinkButton Text="Smazat" Type="Danger" Click="{command: _parent.DeleteTeam(Id)}"/></td>
+                <th>Název týmu</th>
+                <th>Místnost</th>                
             </tr>
-        </ItemTemplate>
-    </dot:Repeater>    
-
+        </thead>
+        <tbody>
+            <dot:Repeater DataSource="{value: Teams}" WrapperTagName="table" RenderWrapperTag="false"
+                          Validation.Enabled="false">
+                <ItemTemplate>
+                    <tr>
+                        <td class="col-md-10">{{value: Name}}</td>
+                        <td class="col-md-10">{{value: Room}}</td>
+                        <td>
+                            <bs:LinkButton Text="Smazat" Type="Danger" Click="{command: _parent.DeleteTeam(Id)}" />
+                        </td>
+                    </tr>
+                </ItemTemplate>
+            </dot:Repeater>
+        </tbody>
+    </table>
     <h2>Přidat týmy</h2>    
 
     <bs:Form DataContext="{value: NewTeamData}"
              Validator.InvalidCssClass="has-danger">
         <fieldset Validation.Target="{value: _parent.NewTeamData}">
-            <bs:FormGroup>
-                <dot:Literal Text="Název týmu" />
-                <dot:TextBox Text="{value: Name}" />
-                <dot:Validator Value="{value: Name}" ShowErrorMessageText="true" class="alert-danger" />
+                <bs:FormGroup>
+                    <dot:Literal Text="Název týmu" />
+                    <dot:TextBox Text="{value: Name}" />                    
+                    <dot:Validator Value="{value: Name}" ShowErrorMessageText="true" class="alert-danger" />
+                </bs:FormGroup>
+            <bs:FormGroup class="text-center">
+                <bs:ButtonGroup>
+                    <dot:Literal Text="Název místnosti" />
+                    <dot:TextBox Text="{value: Room}" />
+                </bs:ButtonGroup>
             </bs:FormGroup>
-            <bs:Button Type="Success" Text="Přidat tým" IsSubmitButton="true"
-                       Click="{command: _parent.AddTeam()}" />
-            <bs:Button Type="Primary" Text="Přidat týmy z csv" />
+            <bs:FormGroup>
+                <bs:ButtonGroup>
+                    <bs:Button Type="Success" Text="Přidat tým" IsSubmitButton="true"
+                               Click="{command: _parent.AddTeam()}" />
+                    <bs:Button Type="Primary" Text="Přidat týmy z csv" />
+                </bs:ButtonGroup>
+            </bs:FormGroup>
         </fieldset>
     </bs:Form>   
 </bs:Container>    

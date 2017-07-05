@@ -13,7 +13,7 @@
                 <bs:DropDownButtonItem NavigateUrl="#">
                     <bs:GlyphIcon Icon="Cog" /> Nastavení
                 </bs:DropDownButtonItem>
-                <bs:DropDownButtonItem Click="{command: SignOut()}">
+                <bs:DropDownButtonItem Validation.Enabled="false" Click="{command: SignOut()}">
                     <bs:GlyphIcon Icon="User" /> Odhlásit
                 </bs:DropDownButtonItem>
             </Items>
