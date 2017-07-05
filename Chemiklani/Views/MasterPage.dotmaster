@@ -30,6 +30,6 @@
     </bs:Container>
 </body>
 <footer class="text-center fixed-bottom">
-    Powered by <a href="https://www.dotvvm.com" target="_blank">DotVVM</a>
+Chemiklání &copy 2017 - Powered by <a href="https://www.dotvvm.com" target="_blank">DotVVM</a>
 </footer>
 </html>
