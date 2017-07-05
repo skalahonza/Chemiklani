@@ -22,7 +22,7 @@ namespace Chemiklani.ViewModels
 	    }
 
 	    public void AddTeam()
-	    {
+	    {	                        
 	        service.AddTeam(NewTeamData);
             NewTeamData = new TeamDetailDTO();
 	    }

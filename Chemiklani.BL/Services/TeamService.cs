@@ -9,12 +9,16 @@ namespace Chemiklani.BL.Services
     {
         public void AddTeam(TeamDetailDTO team)
         {
+            if (string.IsNullOrEmpty(team.Room))
+                team.Room = "Žádná místnost";
+
             using (var dc = CreateDbContext())
             {
                 var tmp = new Team
                 {
                     Members = team.Members,
-                    Name = team.Name
+                    Name = team.Name,
+                    Room = team.Room,
                 };
 
                 dc.Teams.Add(tmp);
@@ -31,6 +35,7 @@ namespace Chemiklani.BL.Services
                 {
                     Id = t.Id,
                     Name = t.Name,
+                    Room = t.Room,
                 });
 
                 return queryable.ToList();
