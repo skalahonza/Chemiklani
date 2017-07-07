@@ -28,6 +28,7 @@ namespace Chemiklani.ViewModels
 	        if (NewUser.Password == NewUser.PasswordConfirm)
 	        {
 	            var result = service.AddNewUser(NewUser,NewUser.Password);
+                //TODO RESOLVE RESULT
 	            NewUser = new AddUserDTO();
 	        }
 	    }
