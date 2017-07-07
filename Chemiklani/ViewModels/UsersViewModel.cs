@@ -2,10 +2,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Chemiklani.BL.DTO;
 using Chemiklani.BL.Services;
+using DotVVM.Framework.Runtime.Filters;
 
 namespace Chemiklani.ViewModels
 {
-	public class UsersViewModel : MasterPageViewModel
+    [Authorize(Roles = new[] { "Admin" })]
+    public class UsersViewModel : MasterPageViewModel
 	{
 	    public override string PageTitle => "Uživatelé";
 	    public override string PageDescription => "Správa uživatelù. Uživatele lze libovolnì pøidávat a odebírat.";

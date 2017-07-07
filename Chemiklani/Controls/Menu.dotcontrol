@@ -3,9 +3,15 @@
 <bs:ResponsiveNavigation HeaderText="Chemiklání" IsInverted="true" FixedTo="Top" IsResponsivelyCollapsing="true" HeaderLinkUrl="/">
     <LeftAlignedItemsTemplate>
         <bs:NavigationItem RouteName="Default" Text="Domů" IsSelected="{value: CurrentRoute=='Default'}" />
-        <bs:NavigationItem RouteName="Tasks" Text="Úlohy" IsSelected="{value: CurrentRoute=='Tasks'}" />
-        <bs:NavigationItem RouteName="Teams" Text="Týmy" IsSelected="{value: CurrentRoute=='Teams'}" />
-        <bs:NavigationItem RouteName="Users" Text="Uživatelé" IsSelected="{value: CurrentRoute=='Users'}" />
+        <dot:RoleView Roles="Admin">
+            <IsMemberTemplate>
+                <bs:NavigationItem RouteName="Tasks" Text="Úlohy" IsSelected="{value: CurrentRoute=='Tasks'}" />
+                <bs:NavigationItem RouteName="Teams" Text="Týmy" IsSelected="{value: CurrentRoute=='Teams'}" />
+                <bs:NavigationItem RouteName="Users" Text="Uživatelé" IsSelected="{value: CurrentRoute=='Users'}" />
+            </IsMemberTemplate>
+            <IsNotMemberTemplate>
+            </IsNotMemberTemplate>
+        </dot:RoleView>        
     </LeftAlignedItemsTemplate>
     <RightAlignedItemsTemplate>
         <bs:DropDownButton Text="{value: "Přihlášen jako: " + CurrentUserName}">
