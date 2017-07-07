@@ -4,7 +4,7 @@
 <dot:Content ContentPlaceHolderID="MainContent">
     <bs:Container>
         <h2>Seznam týmů</h2>
-        <table class="table">
+        <table class="table" Visible="{value: Teams.Count != 0}">
             <thead>
                 <tr>
                     <th>Název týmu</th>
@@ -26,18 +26,23 @@
                 </dot:Repeater>
             </tbody>
         </table>
+
+        <bs:HelpText class="text-center" Visible="{value: Teams.Count == 0}">
+            <h2>
+                Zatím zde nejsou žádné týmy.
+            </h2>
+        </bs:HelpText>
+
         <h2>Přidat týmy</h2>
 
         <bs:Form DataContext="{value: NewTeamData}"
                  Validator.InvalidCssClass="has-danger">
             <fieldset Validation.Target="{value: _parent.NewTeamData}">
-                <bs:FormGroup>
-                    <dot:Literal Text="Název týmu" />
+                <bs:FormGroup LabelText="Název týmu">
                     <dot:TextBox Text="{value: Name}" />
                     <dot:Validator Value="{value: Name}" ShowErrorMessageText="true" class="alert-danger" />
                 </bs:FormGroup>
-                <bs:FormGroup>
-                    <dot:Literal Text="Název místnosti" />
+                <bs:FormGroup LabelText="Název místnosti">
                     <dot:TextBox Text="{value: Room}" />
                 </bs:FormGroup>
                 <bs:FormGroup>

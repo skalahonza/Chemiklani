@@ -2,5 +2,63 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-    
+    <bs:Container>
+        <h2>Seznam Úloh</h2>
+        <table class="table" Visible="{value: Tasks.Count != 0}">
+            <thead>
+                <tr>
+                    <th>Název úlohy</th>
+                    <th>Popis</th>
+                    <th>Maximum bodů</th>
+                </tr>
+            </thead>
+            <tbody>
+                <dot:Repeater DataSource="{value: Tasks}" WrapperTagName="table" RenderWrapperTag="false"
+                              Validation.Enabled="false">
+                    <ItemTemplate>
+                        <tr>
+                            <td class="col-md-10">{{value: Name}}</td>
+                            <td class="col-md-10">{{value: Description}}</td>
+                            <td class="col-md-10">{{value: MaximumPoints}}</td>
+                            <td>
+                                <bs:LinkButton Text="Smazat" Type="Danger" Click="{command: _parent.DeleteTask(Id)}" />
+                            </td>
+                        </tr>
+                    </ItemTemplate>
+                </dot:Repeater>
+            </tbody>
+            </table>
+
+            <bs:HelpText class="text-center" Visible="{value: Tasks.Count == 0}">
+                <h2>
+                    Zatím zde nejsou žádné úlohy.
+                </h2>
+            </bs:HelpText>
+
+            <h2>Přidat Úlohy</h2>
+            <bs:Form DataContext="{value: NewTask}"
+                     Validator.InvalidCssClass="has-danger">
+                <fieldset Validation.Target="{value: _parent.NewTask}">
+                    <bs:FormGroup LabelText="Název úlohy">
+                        <dot:TextBox Text="{value: Name}" />
+                        <dot:Validator Value="{value: Name}" ShowErrorMessageText="true" class="alert-danger" />
+                    </bs:FormGroup>
+                    <bs:FormGroup LabelText="Popis">
+                        <dot:TextBox Text="{value: Description}" Type="MultiLine" />
+                        <dot:Validator Value="{value: Description}" ShowErrorMessageText="true" class="alert-danger" />
+                    </bs:FormGroup>
+                    <bs:FormGroup LabelText="Maximum bodů">
+                        <dot:TextBox Text="{value: MaximumPoints}" Type="Number" />
+                        <dot:Validator Value="{value: MaximumPoints}" ShowErrorMessageText="true" class="alert-danger" />
+                    </bs:FormGroup>
+                    <bs:FormGroup>
+                        <bs:ButtonGroup>
+                            <bs:Button Type="Success" Text="Přidat tým" IsSubmitButton="true"
+                                       Click="{command: _parent.AddTask()}" />
+                            <bs:Button Type="Primary" Text="Přidat úlohy z csv" />
+                        </bs:ButtonGroup>
+                    </bs:FormGroup>
+                </fieldset>
+            </bs:Form>
+    </bs:Container>
 </dot:Content>
