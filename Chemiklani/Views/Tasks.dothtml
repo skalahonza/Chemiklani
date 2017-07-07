@@ -53,7 +53,7 @@
                     </bs:FormGroup>
                     <bs:FormGroup>
                         <bs:ButtonGroup>
-                            <bs:Button Type="Success" Text="Přidat tým" IsSubmitButton="true"
+                            <bs:Button Type="Success" Text="Přidat úlohu" IsSubmitButton="true"
                                        Click="{command: _parent.AddTask()}" />
                             <bs:Button Type="Primary" Text="Přidat úlohy z csv" />
                         </bs:ButtonGroup>
