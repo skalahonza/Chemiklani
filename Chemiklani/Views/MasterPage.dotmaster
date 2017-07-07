@@ -11,11 +11,18 @@ window.addEventListener("load", function(){
 window.cookieconsent.initialise({
   "palette": {
     "popup": {
-      "background": "#000"
+      "background": "#252e39"
     },
     "button": {
-      "background": "#f1d600"
+      "background": "transparent",
+      "text": "#14a7d0",
+      "border": "#14a7d0"
     }
+  },
+  "content": {
+    "message": "Tato stránka používá cookies aby správně fungovala.",
+    "dismiss": "OK",
+    "link": "Co je cookies ?"
   }
 })});
 </script>
@@ -45,6 +52,6 @@ window.cookieconsent.initialise({
     </bs:Container>
 </body>
 <footer class="text-center fixed-bottom">
-Chemiklání &copy 2017 - Powered by <a href="https://www.dotvvm.com" target="_blank">DotVVM</a>
+    Chemiklání &copy 2017 - Powered by <a href="https://www.dotvvm.com" target="_blank">DotVVM</a>
 </footer>
 </html>
