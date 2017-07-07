@@ -2,10 +2,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Chemiklani.BL.DTO;
 using Chemiklani.BL.Services;
+using DotVVM.Framework.Runtime.Filters;
 
 namespace Chemiklani.ViewModels
 {
-	public class TasksViewModel : MasterPageViewModel
+    [Authorize(Roles = new[] { "Admin" })]
+    public class TasksViewModel : MasterPageViewModel
 	{
 	    public override string PageTitle => "Úlohy";
 	    public override string PageDescription => "Správa úloh a jejich bodového ohodnocení.";

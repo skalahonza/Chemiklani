@@ -2,10 +2,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Chemiklani.BL.DTO;
 using Chemiklani.BL.Services;
+using DotVVM.Framework.Runtime.Filters;
 
 namespace Chemiklani.ViewModels
 {
-	public class TeamsViewModel : MasterPageViewModel
+    [Authorize(Roles = new[] { "Admin" })]
+    public class TeamsViewModel : MasterPageViewModel
 	{
 	    public override string PageTitle => "Týmy";
 	    public override string PageDescription => "Správa týmu.";
