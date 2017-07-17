@@ -61,6 +61,12 @@
                 </bs:FormGroup>
             </fieldset>
         </bs:Form>
+        <bs:Well>
+            <h2>Formát csv:</h2>
+            nazevtymu,mistnost <br />
+            nazevtymu,mistnost <br />
+            nazevtymu,mistnost
+        </bs:Well>
     </bs:Container>
 </dot:Content>
 

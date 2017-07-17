@@ -27,44 +27,50 @@
                     </ItemTemplate>
                 </dot:Repeater>
             </tbody>
-            </table>
+        </table>
 
-            <bs:HelpText class="text-center" Visible="{value: Tasks.Count == 0}">
-                <h2>
-                    Zatím zde nejsou žádné úlohy.
-                </h2>
-            </bs:HelpText>
+        <bs:HelpText class="text-center" Visible="{value: Tasks.Count == 0}">
+            <h2>
+                Zatím zde nejsou žádné úlohy.
+            </h2>
+        </bs:HelpText>
 
-            <h2>Přidat Úlohy</h2>
-            <bs:Form DataContext="{value: NewTask}"
-                     Validator.InvalidCssClass="has-danger">
-                <fieldset Validation.Target="{value: _parent.NewTask}">
-                    <bs:FormGroup LabelText="Název úlohy">
-                        <dot:TextBox Text="{value: Name}" />
-                        <dot:Validator Value="{value: Name}" ShowErrorMessageText="true" class="alert-danger" />
-                    </bs:FormGroup>
-                    <bs:FormGroup LabelText="Popis">
-                        <dot:TextBox Text="{value: Description}" Type="MultiLine" />
-                        <dot:Validator Value="{value: Description}" ShowErrorMessageText="true" class="alert-danger" />
-                    </bs:FormGroup>
-                    <bs:FormGroup LabelText="Maximum bodů">
-                        <dot:TextBox Text="{value: MaximumPoints}" Type="Number" />
-                        <dot:Validator Value="{value: MaximumPoints}" ShowErrorMessageText="true" class="alert-danger" />
-                    </bs:FormGroup>
-                    <bs:FormGroup>
-                            <bs:Button Type="Success" Text="Přidat úlohu" IsSubmitButton="true"
-                                       Click="{command: _parent.AddTask()}" />
-                        <dot:FileUpload Validation.Enabled="false"
-                                        NumberOfFilesIndicatorText=""
-                                        UploadedFiles="{value: _parent.Files}"
-                                        AllowMultipleFiles="false"
-                                        UploadCompleted="{command: _parent.ProcessFile()}"
-                                        AllowedFileTypes=".csv"
-                                        SuccessMessageText=""
-                                        UploadErrorMessageText="Nahrávání selhalo."
-                                        UploadButtonText="Přidat úlohy z csv" />
-                    </bs:FormGroup>
-                </fieldset>
-            </bs:Form>
+        <h2>Přidat Úlohy</h2>
+        <bs:Form DataContext="{value: NewTask}"
+                 Validator.InvalidCssClass="has-danger">
+            <fieldset Validation.Target="{value: _parent.NewTask}">
+                <bs:FormGroup LabelText="Název úlohy">
+                    <dot:TextBox Text="{value: Name}" />
+                    <dot:Validator Value="{value: Name}" ShowErrorMessageText="true" class="alert-danger" />
+                </bs:FormGroup>
+                <bs:FormGroup LabelText="Popis">
+                    <dot:TextBox Text="{value: Description}" Type="MultiLine" />
+                    <dot:Validator Value="{value: Description}" ShowErrorMessageText="true" class="alert-danger" />
+                </bs:FormGroup>
+                <bs:FormGroup LabelText="Maximum bodů">
+                    <dot:TextBox Text="{value: MaximumPoints}" Type="Number" />
+                    <dot:Validator Value="{value: MaximumPoints}" ShowErrorMessageText="true" class="alert-danger" />
+                </bs:FormGroup>
+                <bs:FormGroup>
+                    <bs:Button Type="Success" Text="Přidat úlohu" IsSubmitButton="true"
+                               Click="{command: _parent.AddTask()}" />
+                    <dot:FileUpload Validation.Enabled="false"
+                                    NumberOfFilesIndicatorText=""
+                                    UploadedFiles="{value: _parent.Files}"
+                                    AllowMultipleFiles="false"
+                                    UploadCompleted="{command: _parent.ProcessFile()}"
+                                    AllowedFileTypes=".csv"
+                                    SuccessMessageText=""
+                                    UploadErrorMessageText="Nahrávání selhalo."
+                                    UploadButtonText="Přidat úlohy z csv" />
+                </bs:FormGroup>
+            </fieldset>
+        </bs:Form>
+        <bs:Well>
+            <h2>Formát csv:</h2>
+            nazevUlohy,popisek,maximumBodu<br />
+            nazevUlohy,popisek,maximumBodu<br />
+            nazevUlohy,popisek,maximumBodu<br />
+        </bs:Well>
     </bs:Container>
 </dot:Content>
