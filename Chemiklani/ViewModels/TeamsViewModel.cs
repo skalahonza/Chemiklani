@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Chemiklani.BL.DTO;
@@ -33,6 +35,11 @@ namespace Chemiklani.ViewModels
             NewTeamData = new TeamDTO();
         }
 
+        private void test()
+        {
+            
+        }
+
         public void DeleteTeam(int id)
         {
             service.DeleteTeam(id);
@@ -46,11 +53,26 @@ namespace Chemiklani.ViewModels
             {
                 // get the stream of the uploaded file and do whatever you need to do
                 var stream = storage.GetFile(file.FileId);
-                var teams = service.GetTeamsFromCsv(stream);
+                try
+                {
+                    var teams = service.GetTeamsFromCsv(stream);
+                    service.AddTeams(teams);
+                    SetSuccess("Týmy úspìšnì naèteny z csv.");
+                }
+
+                catch (InvalidDataException e)
+                {
+                    SetError(e.Message);
+                }
+
+                catch (Exception e)
+                {
+                    SetError("V aplikaci došlo k neznámé chybì.");
+                }
             }
             else
             {
-                //Invalid file type
+                SetError("CSV soubor není validní.");
             }
         }
     }

@@ -33,6 +33,24 @@ namespace Chemiklani.BL.Services
         }
 
         /// <summary>
+        /// Add multiple teams to database
+        /// </summary>
+        /// <param name="teams">List of teams</param>
+        public void AddTeams(List<TeamDTO> teams)
+        {
+            using (var dc = CreateDbContext())
+            {
+                dc.Teams.AddRange(teams.Select(x => new Team
+                {
+                    Members = x.Members,
+                    Name = x.Name,
+                    Room = x.Room
+                }));
+                dc.SaveChanges();
+            }
+        }
+
+        /// <summary>
         /// Load all teams from database
         /// </summary>
         /// <returns>All teams as list</returns>
@@ -76,11 +94,11 @@ namespace Chemiklani.BL.Services
         /// <returns>List of teams serialized from csv</returns>
         public List<TeamDTO> GetTeamsFromCsv(Stream stream)
         {
-            List <TeamDTO> dtos;
+            List<TeamDTO> dtos;
             var parser = new CsvParser();
-            parser.ParseDtos<TeamDTO>(stream, row =>
+            parser.ParseDtos(stream, row =>
             {
-                if(row.Length < 2)
+                if (row.Length < 2)
                     throw new InvalidDataException("Neplatný formát csv.");
 
                 return new TeamDTO
