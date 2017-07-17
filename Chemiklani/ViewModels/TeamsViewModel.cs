@@ -35,11 +35,6 @@ namespace Chemiklani.ViewModels
             NewTeamData = new TeamDTO();
         }
 
-        private void test()
-        {
-            
-        }
-
         public void DeleteTeam(int id)
         {
             service.DeleteTeam(id);
@@ -65,9 +60,14 @@ namespace Chemiklani.ViewModels
                     SetError(e.Message);
                 }
 
-                catch (Exception e)
+                catch (Exception)
                 {
                     SetError("V aplikaci došlo k neznámé chybì.");
+                }
+                finally
+                {
+                    storage.DeleteFile(file.FileId);
+                    Files.Clear();
                 }
             }
             else

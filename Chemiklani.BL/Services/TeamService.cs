@@ -93,8 +93,7 @@ namespace Chemiklani.BL.Services
         /// <param name="stream">Csv string loaded by stream object</param>
         /// <returns>List of teams serialized from csv</returns>
         public List<TeamDTO> GetTeamsFromCsv(Stream stream)
-        {
-            List<TeamDTO> dtos;
+        {            
             var parser = new CsvParser();
             parser.ParseDtos(stream, row =>
             {
@@ -106,7 +105,7 @@ namespace Chemiklani.BL.Services
                     Name = row[0],
                     Room = row[1]
                 };
-            }, out dtos);
+            }, out List<TeamDTO> dtos);
             return dtos;
         }
     }

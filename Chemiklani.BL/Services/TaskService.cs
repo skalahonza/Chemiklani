@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Chemiklani.BL.DTO;
+using Chemiklani.BL.Utils;
 using Chemiklani.DAL.Entities;
 
 namespace Chemiklani.BL.Services
@@ -11,9 +14,6 @@ namespace Chemiklani.BL.Services
         {
             using (var dc = CreateDbContext())
             {
-                if (string.IsNullOrEmpty(task.Description))
-                    task.Description = "Bez popisku.";
-
                 var tmp = new Task
                 {                    
                     Name = task.Name,
@@ -53,6 +53,38 @@ namespace Chemiklani.BL.Services
                 });
 
                 return queryable.ToList();
+            }
+        }
+
+        public List<TaskDTO> GetTeamsFromCsv(Stream stream)
+        {
+            var parser = new CsvParser();
+            parser.ParseDtos(stream, row =>
+            {
+                if (row.Length < 3)
+                    throw new InvalidDataException("Neplatný formát csv.");
+
+                return new TaskDTO
+                {
+                    Name = row[0],
+                    Description = row[1],
+                    MaximumPoints = Convert.ToInt32(row[2]),
+                };
+            }, out List<TaskDTO> dtos);
+            return dtos;
+        }
+
+        public void AddTasks(List<TaskDTO> tasks)
+        {
+            using (var dc = CreateDbContext())
+            {
+                dc.Tasks.AddRange(tasks.Select(x => new Task
+                {                    
+                    Name = x.Name,
+                    Description = x.Description,
+                    MaximumPoints = x.MaximumPoints
+                }));
+                dc.SaveChanges();
             }
         }
     }

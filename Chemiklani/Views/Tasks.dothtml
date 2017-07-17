@@ -52,11 +52,17 @@
                         <dot:Validator Value="{value: MaximumPoints}" ShowErrorMessageText="true" class="alert-danger" />
                     </bs:FormGroup>
                     <bs:FormGroup>
-                        <bs:ButtonGroup>
                             <bs:Button Type="Success" Text="Přidat úlohu" IsSubmitButton="true"
                                        Click="{command: _parent.AddTask()}" />
-                            <bs:Button Type="Primary" Text="Přidat úlohy z csv" />
-                        </bs:ButtonGroup>
+                        <dot:FileUpload Validation.Enabled="false"
+                                        NumberOfFilesIndicatorText=""
+                                        UploadedFiles="{value: _parent.Files}"
+                                        AllowMultipleFiles="false"
+                                        UploadCompleted="{command: _parent.ProcessFile()}"
+                                        AllowedFileTypes=".csv"
+                                        SuccessMessageText=""
+                                        UploadErrorMessageText="Nahrávání selhalo."
+                                        UploadButtonText="Přidat úlohy z csv" />
                     </bs:FormGroup>
                 </fieldset>
             </bs:Form>
