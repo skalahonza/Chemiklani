@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using System.Web.Hosting;
 using Chemiklani.BL.DTO;
 using Chemiklani.BL.Services;
@@ -6,6 +8,7 @@ using Microsoft.Owin.FileSystems;
 using Microsoft.Owin.StaticFiles;
 using Owin;
 using DotVVM.Framework.Hosting;
+using DotVVM.Framework.Storage;
 using Microsoft.AspNet.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Owin.Security.Cookies;
@@ -45,6 +48,12 @@ namespace Chemiklani
             var dotvvmConfiguration = app.UseDotVVM<DotvvmStartup>(applicationPhysicalPath, options: options =>
             {
                 options.AddDefaultTempStorages("temp");
+                
+                //Register uplad service
+                var uploadPath = Path.Combine(applicationPhysicalPath, "App_Data\\UploadTemp");
+                options.Services.AddSingleton<IUploadedFileStorage>(
+                    new FileSystemUploadedFileStorage(uploadPath, TimeSpan.FromMinutes(30))
+                );
             });
 #if !DEBUG
             dotvvmConfiguration.Debug = false;

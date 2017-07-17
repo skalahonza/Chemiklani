@@ -1,6 +1,5 @@
 using DotVVM.Framework.Configuration;
 using DotVVM.Framework.Controls.Bootstrap;
-using DotVVM.Framework.ResourceManagement;
 
 
 namespace Chemiklani

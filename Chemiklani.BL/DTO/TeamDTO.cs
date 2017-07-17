@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Chemiklani.BL.DTO
 {
-    public class TeamDetailDTO : BaseDTO
+    public class TeamDTO : BaseDTO
     {
         [Required(ErrorMessage = "Musíte vyplnit název týmu.")]
         public string Name { get; set; }

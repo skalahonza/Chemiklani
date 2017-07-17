@@ -49,11 +49,16 @@
                     <bs:ButtonGroup>
                         <bs:Button Type="Success" Text="Přidat tým" IsSubmitButton="true"
                                    Click="{command: _parent.AddTeam()}" />
-                        <bs:Button Type="Primary" Text="Přidat týmy z csv" />
+                        <dot:FileUpload Validation.Enabled="false"
+                                        UploadedFiles="{value: _parent.Files}" 
+                                        AllowMultipleFiles="false" 
+                                        UploadCompleted="{command: _parent.ProcessFile()}"
+                                        AllowedFileTypes=".csv"
+                                        UploadErrorMessageText="Nahrávání selhalo."/>
                     </bs:ButtonGroup>
                 </bs:FormGroup>
             </fieldset>
         </bs:Form>
     </bs:Container>
 </dot:Content>
-
+ 
