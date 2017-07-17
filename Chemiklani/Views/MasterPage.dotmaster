@@ -26,6 +26,7 @@ window.cookieconsent.initialise({
   }
 })});
 </script>
+<script src="https://use.fontawesome.com/4a80ad6f9a.js"></script>
 <head>
     <meta charset="utf-8" />
     <title>Chemiklání | {{value: PageTitle}}</title>
@@ -41,13 +42,20 @@ window.cookieconsent.initialise({
 </head>
 <body>
     <bs:Container>
-
         <cc:Menu />
 
         <bs:Jumbotron>
             <h1>{{value: PageTitle}}</h1>
             <h2>{{value: PageDescription}}</h2>
         </bs:Jumbotron>
+
+        <bs:Alert Type="{value: AlertType}" Visible="{value: IsDialogDisplayed}">
+            {{value: AlertText}}
+            <bs:Button Text="OK" 
+                       Validation.Enabled="false"
+                       Click="{command: DialogAction()}" />
+        </bs:Alert>
+
         <dot:ContentPlaceHolder ID="MainContent" />
     </bs:Container>
 </body>

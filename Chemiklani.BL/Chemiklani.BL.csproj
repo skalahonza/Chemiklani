@@ -22,5 +22,6 @@
     <Reference Include="DotVVM.Core">
       <HintPath>..\packages\DotVVM.Core.1.1.1\lib\net451\DotVVM.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
   </ItemGroup>
 </Project>

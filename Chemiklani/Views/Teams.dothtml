@@ -46,14 +46,27 @@
                     <dot:TextBox Text="{value: Room}" />
                 </bs:FormGroup>
                 <bs:FormGroup>
-                    <bs:ButtonGroup>
-                        <bs:Button Type="Success" Text="Přidat tým" IsSubmitButton="true"
-                                   Click="{command: _parent.AddTeam()}" />
-                        <bs:Button Type="Primary" Text="Přidat týmy z csv" />
-                    </bs:ButtonGroup>
+                    <bs:Button Type="Success" Text="Přidat tým"
+                               Validation.Target="{value: _root.NewTeamData}"
+                               Click="{command: _parent.AddTeam()}" />
+                    <dot:FileUpload Validation.Enabled="false"
+                                    NumberOfFilesIndicatorText=""
+                                    UploadedFiles="{value: _parent.Files}"
+                                    AllowMultipleFiles="false"
+                                    UploadCompleted="{command: _parent.ProcessFile()}"
+                                    AllowedFileTypes=".csv"
+                                    SuccessMessageText=""
+                                    UploadErrorMessageText="Nahrávání selhalo."
+                                    UploadButtonText="Přidat týmy z csv" />
                 </bs:FormGroup>
             </fieldset>
         </bs:Form>
+        <bs:Well>
+            <h2>Formát csv:</h2>
+            nazevtymu,mistnost <br />
+            nazevtymu,mistnost <br />
+            nazevtymu,mistnost
+        </bs:Well>
     </bs:Container>
 </dot:Content>
 

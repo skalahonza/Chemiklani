@@ -1,0 +1,11 @@
+﻿@viewModel Chemiklani.ViewModels.ScoreViewModel, Chemiklani
+@masterPage Views/MasterPage.dotmaster
+
+<dot:Content ContentPlaceHolderID="MainContent">
+    <bs:HelpText>
+        <h2>
+            Coming soon...
+        </h2>
+    </bs:HelpText>
+</dot:Content>
+
