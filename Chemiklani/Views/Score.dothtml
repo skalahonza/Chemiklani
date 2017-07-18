@@ -22,10 +22,10 @@
     <table class="table" Visible="{value: Teams.Count != 0}">
         <thead>
             <tr>
+                <th></th>
                 <th>Název týmu</th>
                 <th>Místnost</th>
                 <th>Body</th>
-                <th>Hodnoceno</th>
             </tr>
         </thead>
         <tbody>
@@ -33,15 +33,12 @@
                           Validation.Enabled="false">
                 <ItemTemplate>
                     <tr>
-                        <td class="col-md-10">{{value: Name}}</td>
-                        <td class="col-md-10">{{value: Room}}</td>
-                        <td class="col-md-10">{{value: Points}}</td>
-                        <td class="col-md-10">
-                            <bs:CheckBox Enabled="false" Checked="{value: Evaluated}" />
-                        </td>
                         <td>
                             <bs:LinkButton Text="Hodnotit" Click="{command: _parent.EvaluateTeam(_this.Id)}" />
                         </td>
+                        <td class="col-md-10">{{value: Name}}</td>
+                        <td class="col-md-10">{{value: Room}}</td>
+                        <td class="col-md-10">{{value: Points}}</td>                        
                     </tr>
                 </ItemTemplate>
             </dot:Repeater>
