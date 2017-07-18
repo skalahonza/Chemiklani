@@ -3,18 +3,22 @@
 
 <dot:Content ContentPlaceHolderID="MainContent">
     <h2>Týmy k hodnocení</h2>
-        <bs:ComboBoxGroup LabelText="Místnost"
-                          DataSource="{value: Rooms}" EmptyItemText="Vyberte místnost..."
-                          SelectedValue="{value: SelectedRoom}" />
-        <bs:ButtonGroup>
-            <bs:Button Text="Všechny týmy" Type="Success" Click="{command: LoadAllTeams()}" />
-            <bs:Button Text="Filtrovat" Type="Primary" Click="{command: FilterTeams()}" />
-        </bs:ButtonGroup>
+
+    <bs:ComboBoxGroup LabelText="Místnost"
+                      DataSource="{value: Rooms}" EmptyItemText="Vyberte místnost..."
+                      SelectedValue="{value: SelectedRoom}" />
+
     <bs:HelpText Visible="{value: Teams.Count == 0}">
         <h2 class="text-center">
             Zatím zde nejsou žádné týmy, načtěte si je, abyste mohli začít hodnotit.
         </h2>
     </bs:HelpText>
+    <div class="text-center">
+        <bs:ButtonGroup>
+            <bs:Button Text="Všechny týmy" Type="Success" Click="{command: LoadAllTeams()}" />
+            <bs:Button Text="Filtrovat" Type="Primary" Click="{command: FilterTeams()}" />
+        </bs:ButtonGroup>
+    </div>
     <table class="table" Visible="{value: Teams.Count != 0}">
         <thead>
             <tr>

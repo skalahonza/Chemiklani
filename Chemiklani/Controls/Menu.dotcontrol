@@ -17,9 +17,6 @@
     <RightAlignedItemsTemplate>
         <bs:DropDownButton Text="{value: "Přihlášen jako: " + CurrentUserName}">
             <Items>
-                <bs:DropDownButtonItem NavigateUrl="#">
-                    <bs:GlyphIcon Icon="Cog" /> Nastavení
-                </bs:DropDownButtonItem>
                 <bs:DropDownButtonItem Validation.Enabled="false" Click="{command: SignOut()}">
                     <bs:GlyphIcon Icon="User" /> Odhlásit
                 </bs:DropDownButtonItem>
