@@ -50,7 +50,7 @@ namespace Chemiklani.ViewModels
 	            var stream = storage.GetFile(file.FileId);
 	            try
 	            {
-	                var tasks = service.GetTeamsFromCsv(stream);
+	                var tasks = service.GetTasksFromCsv(stream);
 	                service.AddTasks(tasks);
 	                SetSuccess("Úlohy úspìšnì naèteny z csv.");
 	            }

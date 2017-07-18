@@ -31,7 +31,7 @@ namespace Chemiklani
 
         private void ConfigureControls(DotvvmConfiguration config, string applicationPath)
         {
-            config.AddBootstrapConfiguration(new DotvvmBootstrapOptions()
+            config.AddBootstrapConfiguration(new DotvvmBootstrapOptions
             {
                 BootstrapJsUrl = "~/lib/bootstrap/dist/js/bootstrap.min.js",
                 BootstrapCssUrl = "~/lib/bootstrap/dist/css/bootstrap.min.css",

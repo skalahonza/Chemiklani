@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using Chemiklani.BL.DTO;
@@ -7,6 +8,12 @@ namespace Chemiklani.BL.Services
 {
     public class ScoreServie : BaseService
     {
+        /// <summary>
+        /// Set points gained by the team from a certain task
+        /// </summary>
+        /// <param name="teamId">Team to be ranked</param>
+        /// <param name="taskId">Task the team competed in</param>
+        /// <param name="points">Points gained</param>
         public void ScoreTeam(int teamId, int taskId, int points)
         {
             using (var dc = CreateDbContext())
@@ -48,6 +55,11 @@ namespace Chemiklani.BL.Services
             }
         }
 
+        /// <summary>
+        /// Get all scores for given team
+        /// </summary>
+        /// <param name="teamId">Team for filtering</param>
+        /// <returns>List of scores</returns>
         public List<ScoreDTO> GetScoresForTeam(int teamId)
         {
             using (var dc = CreateDbContext())
@@ -64,6 +76,40 @@ namespace Chemiklani.BL.Services
                     dto.MapFrom(x);
                     return dto;
                 }).ToList();
+            }
+        }
+
+        /// <summary>
+        /// Sum points of given
+        /// </summary>
+        /// <param name="teamId">Team id to examine</param>
+        /// <returns>-1 if not yet evaluated</returns>
+        public int? GetPointsOfTeam(int teamId)
+        {
+            using (var dc = CreateDbContext())
+            {
+                var team = dc.Teams.Find(teamId);
+                if (team == null)
+                {
+                    throw new DataException("Vybraný tým neexistuje.");
+                }
+
+                var scores = dc.Scores.Where(x => x.Team.Id == team.Id);                
+                if (!scores.Any())
+                    return null;
+                return scores.ToList().Select(x => x.Points).Sum();
+            }
+        }
+
+        /// <summary>
+        /// Filter available rooms from the database
+        /// </summary>
+        /// <returns>List of strings with room names</returns>
+        public List<string> GetRooms()
+        {
+            using (var dc = CreateDbContext())
+            {
+                return dc.Teams.GroupBy(x => x.Room).Select(x => x.Key).ToList();
             }
         }
     }

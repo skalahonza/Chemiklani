@@ -29,6 +29,8 @@ window.cookieconsent.initialise({
 <script src="https://use.fontawesome.com/4a80ad6f9a.js"></script>
 <head>
     <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Chemiklání | {{value: PageTitle}}</title>
 
     <!-- Latest compiled and minified CSS -->

@@ -11,6 +11,10 @@ namespace Chemiklani.BL.DTO
         public ICollection<string> Members { get; set; }
         public string Room { get; set; }
 
+        //Aditional fields
+        public int? Points { get; set; }
+        public bool Evaluated => Points != null;
+
         public void MapFrom(Team entity)
         {
             Id = entity.Id;

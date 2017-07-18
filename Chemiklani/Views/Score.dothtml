@@ -2,10 +2,46 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-    <bs:HelpText>
-        <h2>
-            Coming soon...
+    <h2>Týmy k hodnocení</h2>
+        <bs:ComboBoxGroup LabelText="Místnost"
+                          DataSource="{value: Rooms}" EmptyItemText="Vyberte místnost..."
+                          SelectedValue="{value: SelectedRoom}" />
+        <bs:ButtonGroup>
+            <bs:Button Text="Všechny týmy" Type="Success" Click="{command: LoadAllTeams()}" />
+            <bs:Button Text="Filtrovat" Type="Primary" Click="{command: FilterTeams()}" />
+        </bs:ButtonGroup>
+    <bs:HelpText Visible="{value: Teams.Count == 0}">
+        <h2 class="text-center">
+            Zatím zde nejsou žádné týmy, načtěte si je, abyste mohli začít hodnotit.
         </h2>
     </bs:HelpText>
+    <table class="table" Visible="{value: Teams.Count != 0}">
+        <thead>
+            <tr>
+                <th>Název týmu</th>
+                <th>Místnost</th>
+                <th>Body</th>
+                <th>Hodnoceno</th>
+            </tr>
+        </thead>
+        <tbody>
+            <dot:Repeater DataSource="{value: Teams}" WrapperTagName="table" RenderWrapperTag="false"
+                          Validation.Enabled="false">
+                <ItemTemplate>
+                    <tr>
+                        <td class="col-md-10">{{value: Name}}</td>
+                        <td class="col-md-10">{{value: Room}}</td>
+                        <td class="col-md-10">{{value: Points}}</td>
+                        <td class="col-md-10">
+                            <bs:CheckBox Enabled="false" Checked="{value: Evaluated}" />
+                        </td>
+                        <td>
+                            <bs:LinkButton Text="Hodnotit" Click="{command: _parent.EvaluateTeam(_this.Id)}" />
+                        </td>
+                    </tr>
+                </ItemTemplate>
+            </dot:Repeater>
+        </tbody>
+    </table>
 </dot:Content>
 
