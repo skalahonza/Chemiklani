@@ -21,7 +21,7 @@ namespace Chemiklani.BL.Utils
             using (var parser = new TextFieldParser(stream))
             {
                 parser.TextFieldType = FieldType.Delimited;
-                parser.SetDelimiters(",", ";", "\t");
+                parser.SetDelimiters(";", "\t");
                 while (!parser.EndOfData)
                 {
                     //Processing row
