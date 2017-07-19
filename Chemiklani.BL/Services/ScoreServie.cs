@@ -30,7 +30,7 @@ namespace Chemiklani.BL.Services
                     throw new InvalidDataException("Vybraná úloha neexistuje.");
                 }
 
-                if (points > task?.MaximumPoints)
+                if (points > task.MaximumPoints)
                 {
                     throw new InvalidDataException("Body pøekraèují bodové maximum úlohy.");
                 }

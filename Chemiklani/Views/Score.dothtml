@@ -9,14 +9,14 @@
                       SelectedValue="{value: SelectedRoom}" />
 
     <bs:HelpText Visible="{value: Teams.Count == 0}">
-        <h2 class="text-center">
-            Zatím zde nejsou žádné týmy, načtěte si je, abyste mohli začít hodnotit.
-        </h2>
+        <h3 class="text-center">
+            Zatím zde nejsou žádné týmy, načtěte si je, abyste mohli začít hodnotit. Vyberte místnost, abyste mohli spustit filtr. Nebo si zobrazte všechny týmy, je to na Vás.
+        </h3>
     </bs:HelpText>
     <div class="text-center">
         <bs:ButtonGroup>
-            <bs:Button Text="Všechny týmy" Type="Success" Click="{command: LoadAllTeams()}" />
-            <bs:Button Text="Filtrovat" Type="Primary" Click="{command: FilterTeams()}" />
+            <bs:Button Text="Všechny týmy" Type="Success" Click="{command: LoadAllTeams()}" Validation.Enabled="false" />
+            <bs:Button Text="Filtrovat" Type="Primary" Click="{command: FilterTeams()}" Validation.Enabled="false" Enabled="{value: SelectedRoom != null}"/>
         </bs:ButtonGroup>
     </div>
     <table class="table" Visible="{value: Teams.Count != 0}">
@@ -34,15 +34,41 @@
                 <ItemTemplate>
                     <tr>
                         <td>
-                            <bs:LinkButton Text="Hodnotit" Click="{command: _parent.EvaluateTeam(_this.Id)}" />
+                            <bs:LinkButton Text="Hodnotit" Click="{command: _parent.EvaluateTeam(_this)}" Validation.Enabled="false" />
                         </td>
                         <td class="col-md-10">{{value: Name}}</td>
                         <td class="col-md-10">{{value: Room}}</td>
-                        <td class="col-md-10">{{value: Points}}</td>                        
+                        <td class="col-md-10">{{value: Points}}</td>
                     </tr>
                 </ItemTemplate>
             </dot:Repeater>
         </tbody>
     </table>
+
+    <bs:ModalDialog HeaderText="Hodnocení týmu"
+                    DataContext="{value: _this}"
+                    IsDisplayed="{value: Displayed}"
+                    Size="Large">
+        <ContentTemplate>
+            <div DataContext="{value: NewScore}">
+                <h3>Tým: {{value: SelectedTeam.Name}}</h3>
+                <bs:ComboBoxGroup LabelText="Úloha" DataSource="{value: Tasks}"
+                                  DisplayMember="Name"
+                                  SelectedValue="{value: SelectedTask}" />
+                <bs:Label Text="Body" />
+                <input type="number" class="form-control" value="{value: Points}" min="0" max="{value: SelectedTask.MaximumPoints}">
+            </div>
+        </ContentTemplate>
+        <FooterTemplate>
+            <div class="text-center">
+                <bs:Button ButtonTagName="button" Type="Danger" Click="{staticCommand: Displayed = false}" >
+                    <bs:GlyphIcon Icon="Ban_circle" /> Zrušit
+                </bs:Button>
+                <bs:Button ButtonTagName="button" Type="Success" Click="{command: Evaluate()}" >
+                    <bs:GlyphIcon Icon="Ok" /> Ohodnotit
+                </bs:Button>                
+            </div>
+        </FooterTemplate>
+    </bs:ModalDialog>
 </dot:Content>
 

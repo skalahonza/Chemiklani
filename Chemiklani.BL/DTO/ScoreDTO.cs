@@ -1,4 +1,6 @@
-﻿using Chemiklani.DAL.Entities;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using Chemiklani.DAL.Entities;
 
 namespace Chemiklani.BL.DTO
 {
@@ -26,5 +28,14 @@ namespace Chemiklani.BL.DTO
         {
             throw new System.NotImplementedException();
         }
+    }
+
+    public class NewScoreDTO : BaseDTO
+    {
+        public List<TaskDTO> Tasks { get; set; }
+        [Required(ErrorMessage = "Musíte zvolit úlohu")]
+        public TaskDTO SelectedTask { get; set; }
+        public TeamDTO SelectedTeam { get; set; }
+        public int Points { get; set; }
     }
 }

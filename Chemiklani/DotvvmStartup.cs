@@ -33,11 +33,11 @@ namespace Chemiklani
         {
             config.AddBootstrapConfiguration(new DotvvmBootstrapOptions
             {
-                BootstrapJsUrl = "~/lib/bootstrap/dist/js/bootstrap.min.js",
-                BootstrapCssUrl = "~/lib/bootstrap/dist/css/bootstrap.min.css",
+                BootstrapJsUrl = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js",
+                BootstrapCssUrl = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",
                 IncludeBootstrapResourcesInPage = true,
                 IncludeJQueryResourceInPage = true,
-                JQueryUrl = "~/lib/jquery/dist/jquery.js"
+                JQueryUrl = "https://code.jquery.com/jquery-3.2.1.js"
             });
 
             // register code-only controls and markup controls
