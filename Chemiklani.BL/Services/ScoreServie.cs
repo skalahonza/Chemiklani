@@ -3,6 +3,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using Chemiklani.BL.DTO;
+using Chemiklani.DAL.Entities;
 
 namespace Chemiklani.BL.Services
 {
@@ -35,8 +36,10 @@ namespace Chemiklani.BL.Services
                     throw new InvalidDataException("Body pøekraèují bodové maximum úlohy.");
                 }
 
-                var score = dc.Scores.First(s => s.Team == team && s.Task == task);
-                //update existing
+                Score score = null;
+                if (dc.Scores.Any())
+                    score = dc.Scores.FirstOrDefault(s => s.Team.Id == team.Id && s.Task.Id == task.Id);
+                 //update existing
                 if (score != null)
                 {
                     score.Points = points;
@@ -70,12 +73,15 @@ namespace Chemiklani.BL.Services
                     throw new InvalidDataException("Vybraný tým neexistuje.");
                 }
 
-                return dc.Scores.Where(s => s.Team == team).ToList().Select(x =>
-                {
-                    var dto = new ScoreDTO();
-                    dto.MapFrom(x);
-                    return dto;
-                }).ToList();
+                return dc.Scores.Where(s => s.Team == team)
+                    .ToList()
+                    .Select(x =>
+                    {
+                        var dto = new ScoreDTO();
+                        dto.MapFrom(x);
+                        return dto;
+                    })
+                    .ToList();
             }
         }
 
@@ -94,7 +100,7 @@ namespace Chemiklani.BL.Services
                     throw new DataException("Vybraný tým neexistuje.");
                 }
 
-                var scores = dc.Scores.Where(x => x.Team.Id == team.Id);                
+                var scores = dc.Scores.Where(x => x.Team.Id == team.Id);
                 if (!scores.Any())
                     return null;
                 return scores.ToList().Select(x => x.Points).Sum();

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Chemiklani.BL.DTO;
@@ -5,53 +6,70 @@ using Chemiklani.BL.Services;
 
 namespace Chemiklani.ViewModels
 {
-	public class ScoreViewModel : MasterPageViewModel
-	{
+    public class ScoreViewModel : MasterPageViewModel
+    {
         private readonly ScoreServie scoreServie = new ScoreServie();
         private readonly TeamService teamService = new TeamService();
         private readonly TaskService taskService = new TaskService();
 
-	    public override string PageTitle => "Hodnocení";
-	    public override string PageDescription => "Hodnocení týmù v jednotlivých úlohách.";
+        public override string PageTitle => "Hodnocení";
+        public override string PageDescription => "Hodnocení týmù v jednotlivých úlohách.";
 
-	    public List<TeamDTO> Teams { get; set; } = new List<TeamDTO>();
-	    public List<string> Rooms { get; set; } = new List<string>();
-	    public string SelectedRoom { get; set; }
+        public List<TeamDTO> Teams { get; set; } = new List<TeamDTO>();
+        public List<string> Rooms { get; set; } = new List<string>();
+        public string SelectedRoom { get; set; }
         public NewScoreDTO NewScore { get; set; } = new NewScoreDTO();
 
-	    public bool Displayed { get; set; } = false;
+        public bool Displayed { get; set; } = false;
 
         public override Task PreRender()
-	    {
-	        Rooms = scoreServie.GetRooms();
-	        NewScore.Tasks = taskService.LoadTasks();
+        {
+            Rooms = scoreServie.GetRooms();
+            NewScore.Tasks = taskService.LoadTasks();
             return base.PreRender();
-	    }	    
+        }
 
-	    public void LoadAllTeams()
-	    {
+        public void LoadAllTeams()
+        {
             SelectedRoom = default(string);
-	        Teams = teamService.LoadTeams();
+            Teams = teamService.LoadTeams();
             Teams.ForEach(dto => dto.Points = scoreServie.GetPointsOfTeam(dto.Id));
-	    }
+        }
 
-	    public void FilterTeams()
-	    {
-	        Teams = teamService.LoadTeams(SelectedRoom);
-	    }
+        public void FilterTeams()
+        {
+            Teams = teamService.LoadTeams(SelectedRoom);
+            Teams.ForEach(dto => dto.Points = scoreServie.GetPointsOfTeam(dto.Id));
+        }
 
-	    public void EvaluateTeam(TeamDTO team)
-	    {
-	        NewScore.SelectedTeam = team;	        
+        public void EvaluateTeam(TeamDTO team)
+        {
+            NewScore.SelectedTeam = team;
+            Displayed = true;
+        }
 
+        public void Evaluate()
+        {
+            try
+            {
+                scoreServie.ScoreTeam(NewScore.SelectedTeam.Id, NewScore.SelectedTask.Id, NewScore.Points);
+                SetSuccess("Ohodnoceno.");
+                //refresh dataset
+                if (SelectedRoom == null)
+                    LoadAllTeams();
+                else
+                    FilterTeams();
+            }
+            catch (Exception e)
+            {
+                SetError(e.Message);
+            }
 
-	        Displayed = true;
-	    }
-
-	    public void Evaluate()
-	    {
-	        NewScore.SelectedTeam = null;
-	    }
-	}
+            finally
+            {
+                Displayed = false;
+                NewScore.SelectedTeam = null;
+            }
+        }
+    }
 }
-
