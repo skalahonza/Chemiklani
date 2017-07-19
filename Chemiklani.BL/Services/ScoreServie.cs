@@ -36,10 +36,8 @@ namespace Chemiklani.BL.Services
                     throw new InvalidDataException("Body pøekraèují bodové maximum úlohy.");
                 }
 
-                Score score = null;
-                if (dc.Scores.Any())
-                    score = dc.Scores.FirstOrDefault(s => s.Team.Id == team.Id && s.Task.Id == task.Id);
-                 //update existing
+                var score = dc.Scores.FirstOrDefault(s => s.Team.Id == team.Id && s.Task.Id == task.Id);
+                //update existing
                 if (score != null)
                 {
                     score.Points = points;
