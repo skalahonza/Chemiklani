@@ -10,6 +10,10 @@ namespace Chemiklani.BL.Services
 {
     public class TaskService:BaseService
     {
+        /// <summary>
+        /// Add new task to the database
+        /// </summary>
+        /// <param name="task">Task to be added</param>
         public void AddTask(TaskDTO task)
         {
             using (var dc = CreateDbContext())
@@ -26,6 +30,10 @@ namespace Chemiklani.BL.Services
             }
         }
 
+        /// <summary>
+        /// Delete team from database
+        /// </summary>
+        /// <param name="id">Team to be deleted</param>
         public void Delete(int id)
         {
             using (var dc = CreateDbContext())
@@ -39,12 +47,16 @@ namespace Chemiklani.BL.Services
             }
         }
 
+        /// <summary>
+        /// Load all tasks from database
+        /// </summary>
+        /// <returns>List of all tasks</returns>
         public List<TaskDTO> LoadTasks()
         {
             using (var dc = CreateDbContext())
             {
                 IQueryable<Task> tasks = dc.Tasks;
-                var queryable = tasks.Select(t => new TaskDTO()
+                var queryable = tasks.Select(t => new TaskDTO
                 {
                     Id = t.Id,
                     Name = t.Name,
@@ -56,7 +68,12 @@ namespace Chemiklani.BL.Services
             }
         }
 
-        public List<TaskDTO> GetTeamsFromCsv(Stream stream)
+        /// <summary>
+        /// Parse tasks from csv file
+        /// </summary>
+        /// <param name="stream">Stram of csv file</param>
+        /// <returns>Collection of parsed tasks</returns>
+        public List<TaskDTO> GetTasksFromCsv(Stream stream)
         {
             var parser = new CsvParser();
             parser.ParseDtos(stream, row =>
@@ -74,6 +91,10 @@ namespace Chemiklani.BL.Services
             return dtos;
         }
 
+        /// <summary>
+        /// Add new tasks to the database
+        /// </summary>
+        /// <param name="tasks">List of tasks to be added</param>
         public void AddTasks(List<TaskDTO> tasks)
         {
             using (var dc = CreateDbContext())

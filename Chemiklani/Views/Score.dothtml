@@ -2,10 +2,87 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-    <bs:HelpText>
-        <h2>
-            Coming soon...
-        </h2>
+    <h2>Týmy k hodnocení</h2>
+
+    <bs:ComboBoxGroup LabelText="Místnost"
+                      DataSource="{value: Rooms}" EmptyItemText="Vyberte místnost..."
+                      SelectedValue="{value: SelectedRoom}" />
+
+    <bs:HelpText Visible="{value: Teams.Count == 0}">
+        <h3 class="text-center">
+            Zatím zde nejsou žádné týmy, načtěte si je, abyste mohli začít hodnotit. Vyberte místnost, abyste mohli spustit filtr. Nebo si zobrazte všechny týmy, je to na Vás.
+        </h3>
     </bs:HelpText>
+    <div class="text-center">
+        <bs:ButtonGroup>
+            <bs:Button Text="Všechny týmy" Type="Success" Click="{command: LoadAllTeams()}" Validation.Enabled="false" />
+            <bs:Button Text="Filtrovat" Type="Primary" Click="{command: FilterTeams()}" Validation.Enabled="false" Enabled="{value: SelectedRoom != null}"/>
+        </bs:ButtonGroup>
+    </div>
+    <table class="table" Visible="{value: Teams.Count != 0}">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Název týmu</th>
+                <th>Místnost</th>
+                <th>Body</th>
+            </tr>
+        </thead>
+        <tbody>
+            <dot:Repeater DataSource="{value: Teams}" WrapperTagName="table" RenderWrapperTag="false"
+                          Validation.Enabled="false">
+                <ItemTemplate>
+                    <tr>
+                        <td>
+                            <bs:LinkButton Text="Hodnotit" Click="{command: _parent.EvaluateTeam(_this)}" Validation.Enabled="false" />
+                        </td>
+                        <td class="col-md-10">{{value: Name}}</td>
+                        <td class="col-md-10">{{value: Room}}</td>
+                        <td class="col-md-10">{{value: Points}}</td>
+                    </tr>
+                </ItemTemplate>
+            </dot:Repeater>
+        </tbody>
+    </table>
+
+    <bs:ModalDialog HeaderText="Hodnocení týmu"
+                    DataContext="{value: _this}"
+                    IsDisplayed="{value: Displayed}"
+                    Size="Large">
+        <ContentTemplate>
+            <div DataContext="{value: NewScore}">
+                <h3>Tým: {{value: SelectedTeam.Name}}</h3>
+                <bs:ComboBoxGroup LabelText="Úloha" DataSource="{value: Tasks}"
+                                  SelectionChanged="{command: _parent.TaskChanged()}"
+                                  DisplayMember="Name"
+                                  SelectedValue="{value: SelectedTask}" />
+                <bs:Label Text="Body" />
+
+                    <dot:Repeater Visible="{value: _root.MiniScoreDisplayed}"
+                                  DataSource="{value: PointOptions}">
+                        <ItemTemplate>
+                            <dot:RadioButton Text="{value: _this}" 
+                                            CheckedItem="{value: _parent.Points}"
+                                            CheckedValue="{value: _this}" />
+                        </ItemTemplate>
+                    </dot:Repeater>
+
+                <dot:TextBox Visible="{value: !_root.MiniScoreDisplayed}"
+                             Type="Number" class="form-control" 
+                             max="{value: SelectedTask.MaximumPoints}" 
+                             Text="{value: Points}" />
+            </div>
+        </ContentTemplate>
+        <FooterTemplate>
+            <div class="text-center">
+                <bs:Button ButtonTagName="button" Type="Danger" Click="{staticCommand: Displayed = false}" >
+                    <bs:GlyphIcon Icon="Ban_circle" /> Zrušit
+                </bs:Button>
+                <bs:Button ButtonTagName="button" Type="Success" Click="{command: Evaluate()}" >
+                    <bs:GlyphIcon Icon="Ok" /> Ohodnotit
+                </bs:Button>                
+            </div>
+        </FooterTemplate>
+    </bs:ModalDialog>
 </dot:Content>
 

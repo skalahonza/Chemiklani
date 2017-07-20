@@ -37,7 +37,19 @@ namespace Chemiklani.ViewModels
 
         public void DeleteTeam(int id)
         {
-            service.DeleteTeam(id);
+            try
+            {
+                service.DeleteTeam(id);
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException)
+            {
+                SetError("Tým nelze vymazat pokud již byl hodnocen.");
+            }
+
+            catch (Exception e)
+            {
+                SetError(e.Message);
+            }
         }
 
         public void ProcessFile()

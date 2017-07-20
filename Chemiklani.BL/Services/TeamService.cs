@@ -40,12 +40,7 @@ namespace Chemiklani.BL.Services
         {
             using (var dc = CreateDbContext())
             {
-                dc.Teams.AddRange(teams.Select(x => new Team
-                {
-                    Members = x.Members,
-                    Name = x.Name,
-                    Room = x.Room
-                }));
+                dc.Teams.AddRange(teams.Select(dto => dto.MapTo(dto)));
                 dc.SaveChanges();
             }
         }
@@ -58,17 +53,38 @@ namespace Chemiklani.BL.Services
         {
             using (var dc = CreateDbContext())
             {
-                IQueryable<Team> teams = dc.Teams;
-                var queryable = teams.Select(t => new TeamDTO
+                return dc.Teams.ToList().Select(t =>
                 {
-                    Id = t.Id,
-                    Name = t.Name,
-                    Room = t.Room,
-                });
-
-                return queryable.ToList();
+                    var team = new TeamDTO();
+                    team.MapFrom(t);
+                    return team;
+                }).ToList();
             }
         }
+
+        /// <summary>
+        /// Search for teams that are in given room
+        /// </summary>
+        /// <param name="room">Room to filter</param>
+        /// <param name="fulltext">Set false if you want the exact match, true if you wnat fulltext comparison</param>
+        /// <returns></returns>
+        public List<TeamDTO> LoadTeams(string room, bool fulltext = false)
+        {
+            using (var dc = CreateDbContext())
+            {
+                return dc.Teams
+                    .Where(t => t.Room == room || fulltext && t.Room.Contains(room))
+                    .ToList()
+                    .Select(t =>
+                {
+                    var team = new TeamDTO();
+                    team.MapFrom(t);
+                    return team;
+                }).ToList();
+            }
+        }
+
+
 
         /// <summary>
         /// Delete team from database

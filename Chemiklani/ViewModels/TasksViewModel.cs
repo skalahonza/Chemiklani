@@ -37,8 +37,20 @@ namespace Chemiklani.ViewModels
 
 	    public void DeleteTask(int id)
 	    {
-	        service.Delete(id);
-	    }
+	        try
+	        {
+	            service.Delete(id);
+	        }
+	        catch (System.Data.Entity.Infrastructure.DbUpdateException)
+	        {
+	            SetError("Úlohu nelze vymazat pokud byla použita v hodnocení.");
+	        }
+
+	        catch (Exception e)
+	        {
+	            SetError(e.Message);
+	        }
+        }
 
 	    public void ProcessFile()
 	    {
@@ -50,7 +62,7 @@ namespace Chemiklani.ViewModels
 	            var stream = storage.GetFile(file.FileId);
 	            try
 	            {
-	                var tasks = service.GetTeamsFromCsv(stream);
+	                var tasks = service.GetTasksFromCsv(stream);
 	                service.AddTasks(tasks);
 	                SetSuccess("Úlohy úspìšnì naèteny z csv.");
 	            }
