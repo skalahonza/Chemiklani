@@ -53,10 +53,24 @@
             <div DataContext="{value: NewScore}">
                 <h3>Tým: {{value: SelectedTeam.Name}}</h3>
                 <bs:ComboBoxGroup LabelText="Úloha" DataSource="{value: Tasks}"
+                                  SelectionChanged="{command: _parent.TaskChanged()}"
                                   DisplayMember="Name"
                                   SelectedValue="{value: SelectedTask}" />
                 <bs:Label Text="Body" />
-                <dot:TextBox Type="Number" max="{value: SelectedTask.MaximumPoints}" Text="{value: Points}" />
+
+                    <dot:Repeater Visible="{value: _root.MiniScoreDisplayed}"
+                                  DataSource="{value: PointOptions}">
+                        <ItemTemplate>
+                            <dot:RadioButton Text="{value: _this}" 
+                                            CheckedItem="{value: _parent.Points}"
+                                            CheckedValue="{value: _this}" />
+                        </ItemTemplate>
+                    </dot:Repeater>
+
+                <dot:TextBox Visible="{value: !_root.MiniScoreDisplayed}"
+                             Type="Number" class="form-control" 
+                             max="{value: SelectedTask.MaximumPoints}" 
+                             Text="{value: Points}" />
             </div>
         </ContentTemplate>
         <FooterTemplate>

@@ -15,12 +15,17 @@ namespace Chemiklani.ViewModels
         public override string PageTitle => "Hodnocení";
         public override string PageDescription => "Hodnocení týmù v jednotlivých úlohách.";
 
+        //Value from which, the points will turn form series of radiobuttons into numberpicker
+        public int MiniSore => 20;
+
         public List<TeamDTO> Teams { get; set; } = new List<TeamDTO>();
         public List<string> Rooms { get; set; } = new List<string>();
         public string SelectedRoom { get; set; }
         public NewScoreDTO NewScore { get; set; } = new NewScoreDTO();
 
-        public bool Displayed { get; set; } = false;
+        public bool Displayed { get; set; }
+        public bool MiniScoreDisplayed { get; set; }
+
 
         public override Task PreRender()
         {
@@ -45,7 +50,15 @@ namespace Chemiklani.ViewModels
         public void EvaluateTeam(TeamDTO team)
         {
             NewScore.SelectedTeam = team;
+            TaskChanged();
             Displayed = true;
+        }
+
+        public void TaskChanged()
+        {
+            MiniScoreDisplayed = (NewScore.SelectedTask.MaximumPoints < MiniSore);
+            if (MiniScoreDisplayed)
+                NewScore.PointOptions = InitializePoints(NewScore.SelectedTask.MaximumPoints);
         }
 
         public void Evaluate()
@@ -70,6 +83,15 @@ namespace Chemiklani.ViewModels
                 Displayed = false;
                 NewScore.SelectedTeam = null;
             }
+        }
+
+        private List<int> InitializePoints(int maximum)
+        {
+            var list = new List<int>();
+            //add points for checkboxes
+            for (int i = 0; i <= maximum; i++)
+                list.Add(i);
+            return list;
         }
     }
 }
