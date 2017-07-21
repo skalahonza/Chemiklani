@@ -13,6 +13,7 @@
             </IsNotMemberTemplate>            
         </dot:RoleView>        
         <bs:NavigationItem RouteName="Score" Text="Hodnocení" IsSelected="{value: CurrentRoute=='Score'}" />
+        <bs:NavigationItem RouteName="AllResults" Text="Výsledky" IsSelected="{value: CurrentRoute=='AllResults'}" />
     </LeftAlignedItemsTemplate>
     <RightAlignedItemsTemplate>
         <bs:DropDownButton Text="{value: "Přihlášen jako: " + CurrentUserName}">
