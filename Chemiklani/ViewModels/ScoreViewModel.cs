@@ -58,7 +58,10 @@ namespace Chemiklani.ViewModels
         {
             MiniScoreDisplayed = (NewScore.SelectedTask.MaximumPoints < MiniSore);
             if (MiniScoreDisplayed)
+            {
                 NewScore.PointOptions = InitializePoints(NewScore.SelectedTask.MaximumPoints);
+                NewScore.Points = -1;
+            }
         }
 
         public void Evaluate()
@@ -81,7 +84,7 @@ namespace Chemiklani.ViewModels
             finally
             {
                 Displayed = false;
-                NewScore.SelectedTeam = null;
+                NewScore.SelectedTeam = null;                
             }
         }
 
