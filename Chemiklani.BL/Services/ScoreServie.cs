@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using Chemiklani.BL.DTO;
+using Chemiklani.DAL;
 using Chemiklani.DAL.Entities;
 
 namespace Chemiklani.BL.Services
@@ -57,33 +59,6 @@ namespace Chemiklani.BL.Services
         }
 
         /// <summary>
-        /// Get all scores for given team
-        /// </summary>
-        /// <param name="teamId">Team for filtering</param>
-        /// <returns>List of scores</returns>
-        public List<ScoreDTO> GetScoresForTeam(int teamId)
-        {
-            using (var dc = CreateDbContext())
-            {
-                var team = dc.Teams.Find(teamId);
-                if (team == null)
-                {
-                    throw new InvalidDataException("Vybraný tým neexistuje.");
-                }
-
-                return dc.Scores.Where(s => s.Team == team)
-                    .ToList()
-                    .Select(x =>
-                    {
-                        var dto = new ScoreDTO();
-                        dto.MapFrom(x);
-                        return dto;
-                    })
-                    .ToList();
-            }
-        }
-
-        /// <summary>
         /// Sum points of given
         /// </summary>
         /// <param name="teamId">Team id to examine</param>
@@ -116,5 +91,100 @@ namespace Chemiklani.BL.Services
                 return dc.Teams.GroupBy(x => x.Room).Select(x => x.Key).ToList();
             }
         }
+
+        /// <summary>
+        /// Get sore dataset for given list of teams
+        /// </summary>
+        /// <param name="room"></param>
+        /// <returns></returns>
+        public List<TeamScoreDTO> GetResults(string room = "")
+        {
+            var result = new List<TeamScoreDTO>();
+            using (var dc = CreateDbContext())
+            {
+                //get all teams
+                IQueryable<Team> teamsQuerry = dc.Scores
+                    .Select(x => x.Team)
+                    .Distinct();
+
+                //filter by room if required
+                if (!string.IsNullOrEmpty(room))
+                    teamsQuerry = teamsQuerry.Where(t => t.Room == room);
+
+                //transfer to dto
+                var teams = teamsQuerry.ToList()
+                    .Select(team =>
+                    {
+                        var tmp = new TeamDTO();
+                        tmp.MapFrom(team);
+                        return tmp;
+                    })
+                    .ToList();
+
+                //get score for each team
+                teams.ForEach(t =>
+                {
+                    //get collection containing tasks and points the team gained
+
+                    result.Add(new TeamScoreDTO
+                    {
+                        Team = t,
+                        TasksScores = TaskScores(t.Id, dc),
+                        TotalPoints = GetPointsOfTeam(t.Id),
+                    });
+                });
+            }
+
+            result = result
+                .OrderByDescending(x => x.TotalPoints)
+                .ThenBy(x => GetHighestScoredTask(x.TasksScores))
+                .ToList();
+
+            //fill in placings
+            for (var i = 0; i < result.Count; i++)
+                result[i].Placings = i + 1;
+            return result;
+        }
+
+        private List<TaskScoreDTO> TaskScores(int teamId)
+        {
+            using (var dc = CreateDbContext())
+            {
+                return TaskScores(teamId, dc);
+            }
+        }
+
+        private List<TaskScoreDTO> TaskScores(int teamId, AppDbContext dc)
+        {
+            return dc.Scores
+                .Where(x => x.Team.Id == teamId)
+                .Include(x => x.Task)
+                .ToList()
+                .Select(score => new TaskScoreDTO
+                {
+                    TaskName = score.Task.Name,
+                    TaskDescription = score.Task.Description
+                })
+                .ToList();
+        }
+
+        /// <summary>
+        /// Get highest solved task for given teamid
+        /// </summary>
+        /// <param name="completedTasks">Task completed by the team</param>
+        /// <returns>Nuber name of the highest task the team solved</returns>
+        private double GetHighestScoredTask(IEnumerable<TaskScoreDTO> completedTasks)
+        {
+            var tasks = completedTasks.Where(x => x.Points > 0);
+            double max = 0;
+
+            foreach (var task in tasks)
+            {
+                if (double.TryParse(task.TaskName, out double tmp))
+                    if (tmp > max)
+                        max = tmp;
+            }
+            return max;
+        }       
     }
 }

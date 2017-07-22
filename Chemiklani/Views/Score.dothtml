@@ -53,12 +53,14 @@
             <div DataContext="{value: NewScore}">
                 <h3>Tým: {{value: SelectedTeam.Name}}</h3>
                 <bs:ComboBoxGroup LabelText="Úloha" DataSource="{value: Tasks}"
-                                  SelectionChanged="{command: _parent.TaskChanged()}"
+                                  SelectionChanged="{command: _parent.TaskChanged()}"                                                                   
+                                  Validation.Enabled="false"                                  
                                   DisplayMember="Name"
+                                  EmptyItemText="Vyberte úlohu"
                                   SelectedValue="{value: SelectedTask}" />
                 <bs:Label Text="Body" />
 
-                    <dot:Repeater Visible="{value: _root.MiniScoreDisplayed}"
+                    <dot:Repeater Visible="{value: _root.MiniScoreDisplayed && SelectedTask != null}"
                                   DataSource="{value: PointOptions}">
                         <ItemTemplate>
                             <dot:RadioButton Text="{value: _this}" 
@@ -67,7 +69,7 @@
                         </ItemTemplate>
                     </dot:Repeater>
 
-                <dot:TextBox Visible="{value: !_root.MiniScoreDisplayed}"
+                <dot:TextBox Visible="{value: !_root.MiniScoreDisplayed && SelectedTask != null}"
                              Type="Number" class="form-control" 
                              max="{value: SelectedTask.MaximumPoints}" 
                              Text="{value: Points}" />
@@ -78,7 +80,7 @@
                 <bs:Button ButtonTagName="button" Type="Danger" Click="{staticCommand: Displayed = false}" >
                     <bs:GlyphIcon Icon="Ban_circle" /> Zrušit
                 </bs:Button>
-                <bs:Button ButtonTagName="button" Type="Success" Click="{command: Evaluate()}" >
+                <bs:Button ButtonTagName="button" Type="Success" Validation.Enabled="true" Validation.Target="{value: _root.NewScore}" Click="{command: Evaluate()}" >
                     <bs:GlyphIcon Icon="Ok" /> Ohodnotit
                 </bs:Button>                
             </div>

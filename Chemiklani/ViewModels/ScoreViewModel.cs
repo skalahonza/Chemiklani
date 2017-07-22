@@ -52,13 +52,18 @@ namespace Chemiklani.ViewModels
             NewScore.SelectedTeam = team;
             TaskChanged();
             Displayed = true;
+            NewScore.SelectedTask = null;
+            NewScore.Points = -1;
         }
 
         public void TaskChanged()
         {
-            MiniScoreDisplayed = (NewScore.SelectedTask.MaximumPoints < MiniSore);
-            if (MiniScoreDisplayed)
-                NewScore.PointOptions = InitializePoints(NewScore.SelectedTask.MaximumPoints);
+            if (NewScore.SelectedTask != null)
+            {
+                MiniScoreDisplayed = NewScore.SelectedTask.MaximumPoints < MiniSore;
+                if (MiniScoreDisplayed)
+                    NewScore.PointOptions = InitializePoints(NewScore.SelectedTask.MaximumPoints);
+            }
         }
 
         public void Evaluate()

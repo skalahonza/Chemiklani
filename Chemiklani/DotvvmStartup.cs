@@ -24,12 +24,20 @@ namespace Chemiklani
             config.RouteTable.Add("SignIn", "sign-in", "Views/SignIn.dothtml");
             config.RouteTable.Add("Users", "users", "Views/Users.dothtml");
             config.RouteTable.Add("Score", "score", "Views/Score.dothtml");
+            config.RouteTable.Add("Results", "results/{Room}", "Views/Results.dothtml");
+            config.RouteTable.Add("AllResults", "results", "Views/Results.dothtml");
 
             // Uncomment the following line to auto-register all dothtml files in the Views folder
             // config.RouteTable.AutoDiscoverRoutes(new DefaultRouteStrategy(config));    
         }
 
         private void ConfigureControls(DotvvmConfiguration config, string applicationPath)
+        {
+            // register code-only controls and markup controls
+            config.Markup.AddMarkupControl("cc", "Menu", "Controls/Menu.dotcontrol");            
+        }
+
+        private void ConfigureResources(DotvvmConfiguration config, string applicationPath)
         {
             config.AddBootstrapConfiguration(new DotvvmBootstrapOptions
             {
@@ -39,14 +47,6 @@ namespace Chemiklani
                 IncludeJQueryResourceInPage = true,
                 JQueryUrl = "https://code.jquery.com/jquery-3.2.1.js"
             });
-
-            // register code-only controls and markup controls
-            config.Markup.AddMarkupControl("cc", "Menu", "Controls/Menu.dotcontrol");            
-        }
-
-        private void ConfigureResources(DotvvmConfiguration config, string applicationPath)
-        {
-
         }
     }
 }
