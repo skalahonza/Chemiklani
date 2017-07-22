@@ -52,15 +52,17 @@ namespace Chemiklani.ViewModels
             NewScore.SelectedTeam = team;
             TaskChanged();
             Displayed = true;
+            NewScore.SelectedTask = null;
+            NewScore.Points = -1;
         }
 
         public void TaskChanged()
         {
-            MiniScoreDisplayed = (NewScore.SelectedTask.MaximumPoints < MiniSore);
-            if (MiniScoreDisplayed)
+            if (NewScore.SelectedTask != null)
             {
-                NewScore.PointOptions = InitializePoints(NewScore.SelectedTask.MaximumPoints);
-                NewScore.Points = -1;
+                MiniScoreDisplayed = NewScore.SelectedTask.MaximumPoints < MiniSore;
+                if (MiniScoreDisplayed)
+                    NewScore.PointOptions = InitializePoints(NewScore.SelectedTask.MaximumPoints);
             }
         }
 
@@ -84,7 +86,7 @@ namespace Chemiklani.ViewModels
             finally
             {
                 Displayed = false;
-                NewScore.SelectedTeam = null;                
+                NewScore.SelectedTeam = null;
             }
         }
 
