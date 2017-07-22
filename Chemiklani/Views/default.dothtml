@@ -3,6 +3,15 @@
 
 <dot:Content ContentPlaceHolderID="MainContent">
     <bs:Container>
+        <dot:RoleView Roles="Admin">
+            <bs:Panel>
+                <h2>Nová soutěž</h2>
+                <div>
+                    Klepnutím na tlačítko se zahájí nová soutěž. Smažou se všechny týmy, úlohy a hodnocení.
+                </div>
+                <bs:Button Text="" />
+            </bs:Panel>
+        </dot:RoleView>
         <div class="row">
             <div class="col-sm-6 text-center">
                 <h2>Týmy</h2>

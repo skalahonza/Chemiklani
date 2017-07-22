@@ -49,11 +49,14 @@ namespace Chemiklani
             {
                 options.AddDefaultTempStorages("temp");
                 
-                //Register uplad service
+                //Register upload service
                 var uploadPath = Path.Combine(applicationPhysicalPath, "App_Data\\UploadTemp");
                 options.Services.AddSingleton<IUploadedFileStorage>(
                     new FileSystemUploadedFileStorage(uploadPath, TimeSpan.FromMinutes(30))
                 );
+
+                //register download service
+                //options.Services.AddSingleton<IReturnedFileStorage>();
             });
 #if !DEBUG
             dotvvmConfiguration.Debug = false;
