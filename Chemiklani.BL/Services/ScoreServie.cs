@@ -137,12 +137,23 @@ namespace Chemiklani.BL.Services
                 });
             }
 
-            result.Sort((a, b) => b.TotalPoints.Value.CompareTo(a.TotalPoints.Value));
+            result = result
+                .OrderByDescending(x => x.TotalPoints)
+                .ThenBy(x => GetHighestScoredTask(x.TasksScores))
+                .ToList();
 
             //fill in placings
             for (var i = 0; i < result.Count; i++)
                 result[i].Placings = i + 1;
             return result;
+        }
+
+        private List<TaskScoreDTO> TaskScores(int teamId)
+        {
+            using (var dc = CreateDbContext())
+            {
+                return TaskScores(teamId, dc);
+            }
         }
 
         private List<TaskScoreDTO> TaskScores(int teamId, AppDbContext dc)
@@ -158,5 +169,24 @@ namespace Chemiklani.BL.Services
                 })
                 .ToList();
         }
+
+        /// <summary>
+        /// Get highest solved task for given teamid
+        /// </summary>
+        /// <param name="completedTasks">Task completed by the team</param>
+        /// <returns>Nuber name of the highest task the team solved</returns>
+        private double GetHighestScoredTask(IEnumerable<TaskScoreDTO> completedTasks)
+        {
+            var tasks = completedTasks.Where(x => x.Points > 0);
+            double max = 0;
+
+            foreach (var task in tasks)
+            {
+                if (double.TryParse(task.TaskName, out double tmp))
+                    if (tmp > max)
+                        max = tmp;
+            }
+            return max;
+        }       
     }
 }

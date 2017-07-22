@@ -29,26 +29,44 @@
             <h2 Visible="{value: Room.Length != 0}">Místnost {{value: Room}}</h2>
         </bs:Jumbotron>
 
-        <bs:Table Type="Striped">
-            <thead>
-                <tr>
-                    <th>Pořadí</th>
-                    <th>Název Týmu</th>
-                    <th>Místnost</th>
-                    <th>Body celkem</th>
-                </tr>
-            </thead>
-            <dot:Repeater DataSource="{value: Scores}" WrapperTagName="tbody">
-                <ItemTemplate>
+        <bs:Row class="text-center">
+            <h3>Místnosti</h3>
+            <bs:ButtonGroup>
+                <bs:Button Click="{command: RoomChanged("")}"
+                           Text="Všechny"
+                           Type="Primary" />
+                <dot:Repeater DataSource="{value: Rooms}" RenderWrapperTag="false">
+                    <ItemTemplate>
+                        <bs:Button  Click="{command: _root.RoomChanged(_this)}"
+                                    Text="{value: _this}"
+                                    Type="Primary" />
+                    </ItemTemplate>
+                </dot:Repeater>
+            </bs:ButtonGroup>
+        </bs:Row>
+
+        <bs:Row>
+            <bs:Table Type="Striped">
+                <thead>
                     <tr>
-                        <td>{{value: Placings}}</td>
-                        <td>{{value: Team.Name}}</td>
-                        <td>{{value: Team.Room}}</td>
-                        <td>{{value: TotalPoints}}</td>
+                        <th>Pořadí</th>
+                        <th>Název Týmu</th>
+                        <th>Místnost</th>
+                        <th>Body celkem</th>
                     </tr>
-                </ItemTemplate>
-            </dot:Repeater>
-        </bs:Table>
+                </thead>
+                <dot:Repeater DataSource="{value: Scores}" WrapperTagName="tbody">
+                    <ItemTemplate>
+                        <tr>
+                            <td>{{value: Placings}}</td>
+                            <td>{{value: Team.Name}}</td>
+                            <td>{{value: Team.Room}}</td>
+                            <td>{{value: TotalPoints}}</td>
+                        </tr>
+                    </ItemTemplate>
+                </dot:Repeater>
+            </bs:Table>
+        </bs:Row>
     </bs:Container>
 </body>
 </html>
