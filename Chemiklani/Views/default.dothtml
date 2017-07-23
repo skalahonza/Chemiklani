@@ -20,7 +20,7 @@
             Opravdu chcete zahájít novou soutěž? Smažou se všechny týmy, úlohy a hodnocení.
         </ContentTemplate>
         <FooterTemplate>
-            <bs:Button Text="Ano" Type="Danger"/>
+            <bs:Button Text="Ano" Type="Danger" Click="{command: ConfirmNewContest()}"/>
             <bs:Button Text="Ne" Click="{staticCommand: NewContestDialogVisible=false}"/>
         </FooterTemplate>
     </bs:ModalDialog>

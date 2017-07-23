@@ -15,7 +15,7 @@ namespace Chemiklani.ViewModels
 	    {
 	        scoreServie.NewGame();
 	        NewContestDialogVisible = false;
-            SetSuccess("Nová hra vytvoøena, všechna stará data vymazány.");
+            SetSuccess("Nová hra vytvoøena, všechna stará data vymazána.");
 	    }
     }    
 }
