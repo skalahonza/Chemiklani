@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
 using Chemiklani.BL.DTO;
@@ -29,6 +30,18 @@ namespace Chemiklani.BL.Services
 
                 dc.Teams.Add(tmp);
                 dc.SaveChanges();
+            }
+        }
+
+        public void UpdateTeam(TeamDTO dto)
+        {
+            using (var dc = CreateDbContext())
+            {
+                if (dc.Teams.Any(t => t.Id == dto.Id))
+                {
+                    dc.Teams.AddOrUpdate(dto.MapTo(dto));
+                    dc.SaveChanges();
+                }
             }
         }
 
