@@ -40,8 +40,11 @@ namespace Chemiklani.ViewModels
         {
             const string delimiter = ", ";
             var parser = new CsvParser();
+            //serialize results into csv
             string csv = parser.ExportDtos(
                 dto => string.Join(delimiter, dto.Placings, dto.Team.Name, dto.Team.Room, dto.TotalPoints), Scores);
+
+            //return csv as file
             Context.ReturnFile(Encoding.Default.GetBytes(csv), "vysledky.csv", "application/csv");
         }
     }

@@ -78,15 +78,18 @@ window.cookieconsent.initialise({
 <body>
     <bs:Container>
         <cc:Menu />
+        <br />
 
         <bs:Jumbotron>
-            <h1>{{value: PageTitle}}</h1>
-            <h2>{{value: PageDescription}}</h2>
+                <h1>{{value: PageTitle}}</h1>
+            <bs:HelpText>
+                <h2>{{value: PageDescription}}</h2>
+            </bs:HelpText>
         </bs:Jumbotron>
 
         <bs:Alert Type="{value: AlertType}" Visible="{value: IsDialogDisplayed}">
             {{value: AlertText}}
-            <bs:Button Text="OK" 
+            <bs:Button Text="OK"
                        Validation.Enabled="false"
                        Click="{command: DialogAction()}" />
         </bs:Alert>

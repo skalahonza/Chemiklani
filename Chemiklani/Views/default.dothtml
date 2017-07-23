@@ -4,26 +4,25 @@
 <dot:Content ContentPlaceHolderID="MainContent">
     <bs:Container>
         <dot:RoleView Roles="Admin">
-            <bs:Panel>
+            <bs:Panel class="text-center">
                 <h2>Nová soutěž</h2>
-                <div>
+                <p>
                     Klepnutím na tlačítko se zahájí nová soutěž. Smažou se všechny týmy, úlohy a hodnocení.
-                </div>
-                <bs:Button Text="" />
+                </p>
+                <bs:Button Text="Nová soutěž" Type="Primary" Click="{staticCommand: NewContestDialogVisible=true}"/>
             </bs:Panel>
         </dot:RoleView>
-        <div class="row">
-            <div class="col-sm-6 text-center">
-                <h2>Týmy</h2>
-                <p>Na kartě <b>Týmy</b> můžete spravovat jednotlivé týmy, přidat mazat, upravovat.</p>
-                <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-            </div>
-            <div class="col-sm-6 text-center">
-                <h2>Úlohy</h2>
-                <p>Na kartě <b>Úlohy</b> můžete spravovat jednotlivé úlohy.</p>
-                <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-            </div>
-        </div>
     </bs:Container>
+
+    <!-- New contest dialog -->
+    <bs:ModalDialog HeaderText="Nová soutěž" IsDisplayed="{value NewContestDialogVisible}">
+        <ContentTemplate>
+            Opravdu chcete zahájít novou soutěž? Smažou se všechny týmy, úlohy a hodnocení.
+        </ContentTemplate>
+        <FooterTemplate>
+            <bs:Button Text="Ano" Type="Danger"/>
+            <bs:Button Text="Ne" Click="{staticCommand: NewContestDialogVisible=false}"/>
+        </FooterTemplate>
+    </bs:ModalDialog>
 </dot:Content>
 
