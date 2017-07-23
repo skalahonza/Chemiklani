@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
 using Chemiklani.BL.DTO;
@@ -8,7 +9,7 @@ using Chemiklani.DAL.Entities;
 
 namespace Chemiklani.BL.Services
 {
-    public class TaskService:BaseService
+    public class TaskService : BaseService
     {
         /// <summary>
         /// Add new task to the database
@@ -19,7 +20,7 @@ namespace Chemiklani.BL.Services
             using (var dc = CreateDbContext())
             {
                 var tmp = new Task
-                {                    
+                {
                     Name = task.Name,
                     Description = task.Description,
                     MaximumPoints = task.MaximumPoints,
@@ -100,12 +101,29 @@ namespace Chemiklani.BL.Services
             using (var dc = CreateDbContext())
             {
                 dc.Tasks.AddRange(tasks.Select(x => new Task
-                {                    
+                {
                     Name = x.Name,
                     Description = x.Description,
                     MaximumPoints = x.MaximumPoints
                 }));
                 dc.SaveChanges();
+            }
+        }
+
+        public void UpdateTask(TaskDTO dto)
+        {
+            using (var dc = CreateDbContext())
+            {
+                var task = dc.Tasks.SingleOrDefault(t => t.Id == dto.Id);
+                if (task != null)
+                {
+                    dto.MapTo(task);
+                    dc.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("Úloha nenalezena.");
+                }
             }
         }
     }

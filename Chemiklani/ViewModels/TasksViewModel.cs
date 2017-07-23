@@ -20,6 +20,7 @@ namespace Chemiklani.ViewModels
 	    public List<TaskDTO>Tasks { get; set; } = new List<TaskDTO>();
 	    public TaskDTO NewTask { get; set; } = new TaskDTO();
 	    public UploadedFilesCollection Files { get; set; } = new UploadedFilesCollection();
+	    public bool EditTaskDialogDisplayed { get; set; }
 
         private readonly TaskService service = new TaskService();
 
@@ -85,6 +86,30 @@ namespace Chemiklani.ViewModels
 	        else
 	        {
 	            SetError("CSV soubor není validní.");
+	        }
+	    }
+
+	    public void EditTask(TaskDTO task)
+	    {
+	        NewTask = task;
+	        EditTaskDialogDisplayed = true;
+	    }
+
+	    public void Save()
+	    {
+	        try
+	        {
+	            service.UpdateTask(NewTask);
+                SetSuccess("Uloženo.");
+	        }
+	        catch (Exception e)
+	        {
+	            SetError(e.Message);
+	        }
+	        finally
+	        {
+	            EditTaskDialogDisplayed = false;
+                NewTask = new TaskDTO();
 	        }
 	    }
     }

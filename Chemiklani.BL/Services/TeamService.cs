@@ -39,7 +39,8 @@ namespace Chemiklani.BL.Services
             {
                 if (dc.Teams.Any(t => t.Id == dto.Id))
                 {
-                    dc.Teams.AddOrUpdate(dto.MapTo(dto));
+                    //TODO REMAKE THIS
+                    //dc.Teams.AddOrUpdate(dto.MapTo(dto));
                     dc.SaveChanges();
                 }
             }
@@ -53,7 +54,12 @@ namespace Chemiklani.BL.Services
         {
             using (var dc = CreateDbContext())
             {
-                dc.Teams.AddRange(teams.Select(dto => dto.MapTo(dto)));
+                dc.Teams.AddRange(teams.Select(dto =>
+                {
+                    var team = new Team();
+                    dto.MapTo(team);
+                    return team;
+                }));
                 dc.SaveChanges();
             }
         }

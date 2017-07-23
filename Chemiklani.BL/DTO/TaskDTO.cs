@@ -4,7 +4,7 @@ using Chemiklani.DAL.Entities;
 
 namespace Chemiklani.BL.DTO
 {
-    public class TaskDTO : BaseDTO, IMappable<Task, TaskDTO>
+    public class TaskDTO : BaseDTO, IMappable<Task>
     {
         [Required(ErrorMessage = "Musíte vyplnit název úlohy.")]
         public string Name { get; set; }
@@ -20,14 +20,11 @@ namespace Chemiklani.BL.DTO
             MaximumPoints = entity.MaximumPoints;
         }
 
-        public Task MapTo(TaskDTO dto)
+        public void MapTo(Task entity)
         {
-            return new Task
-            {
-                Name = dto.Name,
-                Description = dto.Description,
-                MaximumPoints = dto.MaximumPoints,
-            };
-        }
+            entity.Name = Name;
+            entity.Description = Description;
+            entity.MaximumPoints = MaximumPoints;
+        }    
     }
 }
