@@ -185,6 +185,17 @@ namespace Chemiklani.BL.Services
                         max = tmp;
             }
             return max;
-        }       
+        }
+
+        public void NewGame()
+        {
+            using (var dc = CreateDbContext())
+            {
+                dc.Scores.RemoveRange(dc.Scores);
+                dc.Tasks.RemoveRange(dc.Tasks);
+                dc.Teams.RemoveRange(dc.Teams);
+                dc.SaveChanges();
+            }
+        }
     }
 }

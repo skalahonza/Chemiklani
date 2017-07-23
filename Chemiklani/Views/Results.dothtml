@@ -42,6 +42,11 @@
                                     Type="Primary" />
                     </ItemTemplate>
                 </dot:Repeater>
+                <dot:AuthenticatedView>
+                    <AuthenticatedTemplate>
+                        <bs:Button Type="Success" Text="Export CSV" Click="{command: ExportCSV()}"/>
+                    </AuthenticatedTemplate>
+                </dot:AuthenticatedView>
             </bs:ButtonGroup>
         </bs:Row>
 

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
 using Chemiklani.BL.DTO;
@@ -32,6 +34,23 @@ namespace Chemiklani.BL.Services
             }
         }
 
+        public void UpdateTeam(TeamDTO dto)
+        {
+            using (var dc = CreateDbContext())
+            {
+                var team = dc.Teams.SingleOrDefault(t => t.Id == dto.Id);
+                if(team != null)
+                {
+                    dto.MapTo(team);
+                    dc.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("Tým nenalezen.");
+                }
+            }
+        }
+
         /// <summary>
         /// Add multiple teams to database
         /// </summary>
@@ -40,7 +59,12 @@ namespace Chemiklani.BL.Services
         {
             using (var dc = CreateDbContext())
             {
-                dc.Teams.AddRange(teams.Select(dto => dto.MapTo(dto)));
+                dc.Teams.AddRange(teams.Select(dto =>
+                {
+                    var team = new Team();
+                    dto.MapTo(team);
+                    return team;
+                }));
                 dc.SaveChanges();
             }
         }

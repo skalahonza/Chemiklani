@@ -45,6 +45,7 @@
         </tbody>
     </table>
 
+    <!-- Score a team Dialog-->
     <bs:ModalDialog HeaderText="Hodnocení týmu"
                     DataContext="{value: _this}"
                     IsDisplayed="{value: Displayed}"

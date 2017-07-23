@@ -4,7 +4,7 @@ using Chemiklani.DAL.Entities;
 
 namespace Chemiklani.BL.DTO
 {
-    public class TeamDTO : BaseDTO,IMappable<Team,TeamDTO>
+    public class TeamDTO : BaseDTO,IMappable<Team>
     {
         [Required(ErrorMessage = "Musíte vyplnit název týmu.")]
         public string Name { get; set; }
@@ -22,14 +22,10 @@ namespace Chemiklani.BL.DTO
             Room = entity.Room;
         }
 
-        public Team MapTo(TeamDTO dto)
+        public void MapTo(Team entity)
         {
-            return new Team
-            {
-                Id = dto.Id,
-                Name = dto.Name,
-                Room = dto.Room
-            };
+            entity.Name = Name;
+            entity.Room = Room;
         }
     }
 }
