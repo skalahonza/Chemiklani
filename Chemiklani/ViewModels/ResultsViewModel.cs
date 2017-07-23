@@ -38,7 +38,7 @@ namespace Chemiklani.ViewModels
 
         public void ExportCSV()
         {
-            const string delimiter = ", ";
+            const string delimiter = ",";
             var parser = new CsvParser();
             //serialize results into csv
             string csv = parser.ExportDtos(
