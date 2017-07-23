@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
@@ -37,11 +38,15 @@ namespace Chemiklani.BL.Services
         {
             using (var dc = CreateDbContext())
             {
-                if (dc.Teams.Any(t => t.Id == dto.Id))
+                var team = dc.Teams.SingleOrDefault(t => t.Id == dto.Id);
+                if(team != null)
                 {
-                    //TODO REMAKE THIS
-                    //dc.Teams.AddOrUpdate(dto.MapTo(dto));
+                    dto.MapTo(team);
                     dc.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("Tým nenalezen.");
                 }
             }
         }
