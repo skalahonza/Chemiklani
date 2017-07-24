@@ -2,7 +2,6 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-    <bs:Container>
         <h2>Seznam týmů</h2>
         <table class="table" Visible="{value: Teams.Count != 0}">
             <thead>
@@ -99,6 +98,5 @@
             nazevtymu,mistnost <br />
             nazevtymu,mistnost
         </bs:Well>
-    </bs:Container>
 </dot:Content>
 
