@@ -37,8 +37,8 @@ namespace Chemiklani.ViewModels
         }
 
         public void ExportCSV()
-        {
-            const string delimiter = ",";
+        {           
+            const string delimiter = ";";
             var parser = new CsvParser();
             //serialize results into csv
             string csv = parser.ExportDtos(
@@ -46,6 +46,14 @@ namespace Chemiklani.ViewModels
 
             //return csv as file
             Context.ReturnFile(Encoding.Default.GetBytes(csv), "vysledky.csv", "application/csv");
+        }
+
+        public void ExportFullCsv()
+        {
+            string csv = Results.GenerateCompleteCsv(Scores);
+
+            //return csv as file
+            Context.ReturnFile(Encoding.Default.GetBytes(csv), "vysledkyCompleteDataset.csv", "application/csv");
         }
     }
 }

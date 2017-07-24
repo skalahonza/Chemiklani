@@ -121,6 +121,8 @@ namespace Chemiklani.BL.Services
                     })
                     .ToList();
 
+                var competedTasks = dc.Tasks.ToList();
+
                 //get score for each team
                 teams.ForEach(t =>
                 {
@@ -129,7 +131,8 @@ namespace Chemiklani.BL.Services
                     result.Add(new TeamScoreDTO
                     {
                         Team = t,
-                        TasksScores = TaskScores(t.Id, dc),
+                        TasksScores =
+                            new List<TaskScoreDTO>(TaskScores(t.Id, competedTasks).OrderBy(x => x.TaskNumber)),
                         TotalPoints = GetPointsOfTeam(t.Id),
                     });
                 });
@@ -146,26 +149,38 @@ namespace Chemiklani.BL.Services
             return result;
         }
 
-        private List<TaskScoreDTO> TaskScores(int teamId)
+        /// <summary>
+        /// Get tass with points for given team
+        /// </summary>
+        /// <param name="teamId">Team to be examined</param>
+        /// <param name="competedTasks">Tasks the team competed in</param>
+        /// <returns></returns>
+        private List<TaskScoreDTO> TaskScores(int teamId, List<Task> competedTasks)
         {
             using (var dc = CreateDbContext())
             {
-                return TaskScores(teamId, dc);
-            }
-        }
+                var result = new List<TaskScoreDTO>();
 
-        private List<TaskScoreDTO> TaskScores(int teamId, AppDbContext dc)
-        {
-            return dc.Scores
-                .Where(x => x.Team.Id == teamId)
-                .Include(x => x.Task)
-                .ToList()
-                .Select(score => new TaskScoreDTO
+                //get all tasks, team was evaluated in
+                var scores = dc.Scores
+                    .Where(x => x.Team.Id == teamId)
+                    .Include(x => x.Task);        
+
+                //add points where the team competed
+                foreach (var competedTask in competedTasks)
                 {
-                    TaskName = score.Task.Name,
-                    TaskDescription = score.Task.Description
-                })
-                .ToList();
+                    var score = scores.FirstOrDefault(x => x.Task.Id == competedTask.Id);
+                    var dto = new TaskScoreDTO();
+                    dto.MapFrom(competedTask);
+                    if (score != null)
+                    {
+                        dto.Points = score.Points;
+                    }
+                    result.Add(dto);
+                }
+
+                return result;
+            }
         }
 
         /// <summary>
@@ -176,7 +191,7 @@ namespace Chemiklani.BL.Services
         private double GetHighestScoredTask(IEnumerable<TaskScoreDTO> completedTasks)
         {
             var tasks = completedTasks.Where(x => x.Points > 0);
-            double max = 0;
+            double max = double.MinValue;
 
             foreach (var task in tasks)
             {
