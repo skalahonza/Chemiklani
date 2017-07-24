@@ -95,8 +95,9 @@ namespace Chemiklani.BL.Services
         /// Get sore dataset for given list of teams
         /// </summary>
         /// <param name="room"></param>
+        /// <param name="completeDataset">True: you can view points for each task</param>
         /// <returns></returns>
-        public List<TeamScoreDTO> GetResults(string room = "")
+        public List<TeamScoreDTO> GetResults(string room = "", bool completeDataset = false)
         {
             var result = new List<TeamScoreDTO>();
             using (var dc = CreateDbContext())
@@ -131,7 +132,7 @@ namespace Chemiklani.BL.Services
                     {
                         Team = t,
                         TasksScores =
-                            new List<TaskScoreDTO>(TaskScores(t.Id, competedTasks).OrderBy(x => x.TaskNumber)),
+                            completeDataset ? new List<TaskScoreDTO>(TaskScores(t.Id, competedTasks).OrderBy(x => x.TaskNumber)) : new List<TaskScoreDTO>(),
                         TotalPoints = GetPointsOfTeam(t.Id),
                     });
                 });

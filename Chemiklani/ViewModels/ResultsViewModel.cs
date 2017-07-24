@@ -50,7 +50,7 @@ namespace Chemiklani.ViewModels
 
         public void ExportFullCsv()
         {
-            string csv = Results.GenerateCompleteCsv(Scores);
+            string csv = Results.GenerateCompleteCsv(scoreServie.GetResults(Room,true));
 
             //return csv as file
             Context.ReturnFile(Encoding.Default.GetBytes(csv), "vysledkyCompleteDataset.csv", "application/csv");
