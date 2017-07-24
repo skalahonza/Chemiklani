@@ -61,14 +61,17 @@
                                   SelectedValue="{value: SelectedTask}" />
                 <bs:Label Text="Body" />
 
-                    <dot:Repeater Visible="{value: _root.MiniScoreDisplayed && SelectedTask != null}"
+                <bs:ButtonGroup Visible="{value: _root.MiniScoreDisplayed && SelectedTask != null}"
+                                IsJustified="true">
+                    <dot:Repeater RenderWrapperTag="false"
                                   DataSource="{value: PointOptions}">
                         <ItemTemplate>
-                            <dot:RadioButton Text="{value: _this}" 
-                                            CheckedItem="{value: _parent.Points}"
-                                            CheckedValue="{value: _this}" />
+                            <bs:Button Validation.Enabled="false"
+                                       Click="{command: _root.PointsChanged(_this)}"
+                                       Text="{value: _this}"/>
                         </ItemTemplate>
                     </dot:Repeater>
+                </bs:ButtonGroup>
 
                 <dot:TextBox Visible="{value: !_root.MiniScoreDisplayed && SelectedTask != null}"
                              Type="Number" class="form-control" 

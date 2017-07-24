@@ -90,6 +90,11 @@ namespace Chemiklani.ViewModels
             }
         }
 
+        public void PointsChanged(int points)
+        {
+            NewScore.Points = points;
+        }
+
         private List<int> InitializePoints(int maximum)
         {
             var list = new List<int>();
