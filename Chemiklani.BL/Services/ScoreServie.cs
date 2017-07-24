@@ -4,7 +4,6 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using Chemiklani.BL.DTO;
-using Chemiklani.DAL;
 using Chemiklani.DAL.Entities;
 
 namespace Chemiklani.BL.Services
