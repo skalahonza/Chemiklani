@@ -93,7 +93,7 @@ namespace Chemiklani.ViewModels
         {
             var list = new List<int>();
             //add points for checkboxes
-            for (int i = 0; i <= maximum; i++)
+            for (int i = 1; i <= maximum; i++)
                 list.Add(i);
             return list;
         }

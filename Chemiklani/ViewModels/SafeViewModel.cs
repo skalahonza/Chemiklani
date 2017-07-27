@@ -3,7 +3,6 @@ using Chemiklani.BL.Exceptions;
 using DotVVM.Framework.Controls.Bootstrap;
 using DotVVM.Framework.Hosting;
 using DotVVM.Framework.ViewModel;
-using Microsoft.ApplicationInsights;
 
 namespace Chemiklani.ViewModels
 {
