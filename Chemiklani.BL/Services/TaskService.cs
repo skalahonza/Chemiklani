@@ -37,14 +37,21 @@ namespace Chemiklani.BL.Services
         /// <param name="id">Team to be deleted</param>
         public void Delete(int id)
         {
-            using (var dc = CreateDbContext())
+            try
             {
-                var entity = dc.Tasks.FirstOrDefault(x => x.Id == id);
-                if (entity != null)
+                using (var dc = CreateDbContext())
                 {
-                    dc.Tasks.Remove(entity);
-                    dc.SaveChanges();
+                    var entity = dc.Tasks.FirstOrDefault(x => x.Id == id);
+                    if (entity != null)
+                    {
+                        dc.Tasks.Remove(entity);
+                        dc.SaveChanges();
+                    }
                 }
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException)
+            {
+                throw new InvalidDeleteRequest("Úlohu nelze vymazat pokud byla použita v hodnocení.");
             }
         }
 

@@ -1,6 +1,5 @@
-using System.Data;
-using System.Security.Authentication;
 using Chemiklani.BL.DTO;
+using Chemiklani.BL.Exceptions;
 using Chemiklani.BL.Services;
 using DotVVM.Framework.Hosting;
 using DotVVM.Framework.ViewModel;
@@ -22,15 +21,10 @@ namespace Chemiklani.ViewModels
 	            Context.GetAuthentication().SignIn(claim);
 	            Context.RedirectToRoute("Default");
 	        }
-	        catch (AuthenticationException e)
+	        catch (AppLogicException e)
 	        {
 	            ErrorMessage = e.Message;
 	        }
-
-	        catch (DataException e)
-	        {
-	            ErrorMessage = e.Message;
-            }
 	    }
 	}
 }
