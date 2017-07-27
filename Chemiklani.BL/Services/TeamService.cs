@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Chemiklani.BL.DTO;
+using Chemiklani.BL.Exceptions;
 using Chemiklani.BL.Utils;
 using Chemiklani.DAL.Entities;
 
@@ -45,7 +46,7 @@ namespace Chemiklani.BL.Services
                 }
                 else
                 {
-                    throw new Exception("Tým nenalezen.");
+                    throw new AppDataNotFound("Tým nenalezen.");
                 }
             }
         }
@@ -115,14 +116,21 @@ namespace Chemiklani.BL.Services
         /// <param name="id">Id to be deleted</param>
         public void DeleteTeam(int id)
         {
-            using (var dc = CreateDbContext())
+            try
             {
-                var entity = dc.Teams.FirstOrDefault(x => x.Id == id);
-                if (entity != null)
+                using (var dc = CreateDbContext())
                 {
-                    dc.Teams.Remove(entity);
-                    dc.SaveChanges();
+                    var entity = dc.Teams.FirstOrDefault(x => x.Id == id);
+                    if (entity != null)
+                    {
+                        dc.Teams.Remove(entity);
+                        dc.SaveChanges();
+                    }
                 }
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException)
+            {
+                throw new InvalidDeleteRequest("Tým nelze vymazat pokud již byl hodnocen.");
             }
         }
 
@@ -136,8 +144,8 @@ namespace Chemiklani.BL.Services
             var parser = new CsvParser();
             parser.ParseDtos(stream, row =>
             {
-                if (row.Length < 2)
-                    throw new InvalidDataException("Neplatný formát csv.");
+                if (row.Length != 2)
+                    throw new InvalidAppData("Neplatný formát csv.");
 
                 return new TeamDTO
                 {

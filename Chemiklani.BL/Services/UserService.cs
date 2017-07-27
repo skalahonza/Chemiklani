@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Security.Authentication;
 using System.Security.Claims;
 using Chemiklani.BL.DTO;
+using Chemiklani.BL.Exceptions;
 using Chemiklani.DAL;
 using Chemiklani.DAL.Entities;
 using Microsoft.AspNet.Identity;
@@ -37,14 +36,14 @@ namespace Chemiklani.BL.Services
                                 userManager.GeneratePasswordResetToken(user.Id), data.Password);
                             if (!result.Succeeded)
                             {
-                                throw new DataException("Heslo je příliš krátké.");
+                                throw new InvalidAppData("Heslo je příliš krátké.");
                             }
                             userManager.Update(user);
                             dc.SaveChanges();
                         }
                         else
                         {
-                            throw new AuthenticationException("Špatné uživatelské jméno nebo heslo.");
+                            throw new AppAuthenticationException("Špatné uživatelské jméno nebo heslo.");
                         }
                     }
                     return userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);

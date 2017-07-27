@@ -6,42 +6,41 @@ using DotVVM.Framework.Runtime.Filters;
 
 namespace Chemiklani.ViewModels
 {
-    [Authorize(Roles = new[] { "Admin" })]
+    [Authorize(Roles = new[] {"Admin"})]
     public class UsersViewModel : MasterPageViewModel
-	{
-	    public override string PageTitle => "Uživatelé";
-	    public override string PageDescription => "Správa uživatelù. Uživatele lze libovolnì pøidávat a odebírat.";
+    {
+        public override string PageTitle => "Uživatelé";
+        public override string PageDescription => "Správa uživatelù. Uživatele lze libovolnì pøidávat a odebírat.";
 
-	    public List<UserDto> Users { get; set; } = new List<UserDto>();
-	    public AddUserDTO NewUser { get; set; } = new AddUserDTO();
+        public List<UserDto> Users { get; set; } = new List<UserDto>();
+        public AddUserDTO NewUser { get; set; } = new AddUserDTO();
 
         private readonly UserService service = new UserService();
 
-	    public override Task PreRender()
-	    {
+        public override Task PreRender()
+        {
             Users = service.GetUsers(CurrentUserName);
-	        return base.PreRender();
-	    }
+            return base.PreRender();
+        }
 
-	    public void AddUser()
-	    {
-	        if (NewUser.Password == NewUser.PasswordConfirm)
-	        {
-	            var result = service.AddNewUser(NewUser,NewUser.Password);
+        public void AddUser()
+        {
+            if (NewUser.Password == NewUser.PasswordConfirm)
+            {
+                var result = service.AddNewUser(NewUser, NewUser.Password);
                 //TODO RESOLVE RESULT
-	            NewUser = new AddUserDTO();
-	        }
-	    }
+                NewUser = new AddUserDTO();
+            }
+        }
 
-	    public void DeleteUser(int id)
-	    {
-	        service.DeleteUser(id);
-	    }
+        public void DeleteUser(int id)
+        {
+            ExecuteSafe(() => service.DeleteUser(id));
+        }
 
-	    public void ChangeAdmin(int id, bool isAdmin)
-	    {
-	        service.ChangeAdmin(id, isAdmin);
-	    }
-	}
+        public void ChangeAdmin(int id, bool isAdmin)
+        {
+            ExecuteSafe(() => service.ChangeAdmin(id, isAdmin));
+        }
+    }
 }
-

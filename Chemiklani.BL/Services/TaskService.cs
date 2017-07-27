@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Chemiklani.BL.DTO;
+using Chemiklani.BL.Exceptions;
 using Chemiklani.BL.Utils;
 using Chemiklani.DAL.Entities;
 
@@ -36,14 +37,21 @@ namespace Chemiklani.BL.Services
         /// <param name="id">Team to be deleted</param>
         public void Delete(int id)
         {
-            using (var dc = CreateDbContext())
+            try
             {
-                var entity = dc.Tasks.FirstOrDefault(x => x.Id == id);
-                if (entity != null)
+                using (var dc = CreateDbContext())
                 {
-                    dc.Tasks.Remove(entity);
-                    dc.SaveChanges();
+                    var entity = dc.Tasks.FirstOrDefault(x => x.Id == id);
+                    if (entity != null)
+                    {
+                        dc.Tasks.Remove(entity);
+                        dc.SaveChanges();
+                    }
                 }
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException)
+            {
+                throw new InvalidDeleteRequest("Úlohu nelze vymazat pokud byla použita v hodnocení.");
             }
         }
 
@@ -79,7 +87,7 @@ namespace Chemiklani.BL.Services
             parser.ParseDtos(stream, row =>
             {
                 if (row.Length < 3)
-                    throw new InvalidDataException("Neplatný formát csv.");
+                    throw new InvalidAppData("Neplatný formát csv.");
 
                 return new TaskDTO
                 {
@@ -121,7 +129,7 @@ namespace Chemiklani.BL.Services
                 }
                 else
                 {
-                    throw new Exception("Úloha nenalezena.");
+                    throw new AppDataNotFound("Úloha nenalezena.");
                 }
             }
         }

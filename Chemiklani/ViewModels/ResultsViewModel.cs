@@ -4,11 +4,10 @@ using System.Threading.Tasks;
 using Chemiklani.BL.DTO;
 using Chemiklani.BL.Services;
 using Chemiklani.BL.Utils;
-using DotVVM.Framework.ViewModel;
 
 namespace Chemiklani.ViewModels
 {
-    public class ResultsViewModel : DotvvmViewModelBase
+    public class ResultsViewModel : SafeViewModel
     {
         private readonly ScoreServie scoreServie = new ScoreServie();
         private readonly TaskService taskService = new TaskService();
@@ -37,23 +36,29 @@ namespace Chemiklani.ViewModels
         }
 
         public void ExportCSV()
-        {           
-            const string delimiter = ";";
-            var parser = new CsvParser();
-            //serialize results into csv
-            string csv = parser.ExportDtos(
-                dto => string.Join(delimiter, dto.Placings, dto.Team.Name, dto.Team.Room, dto.TotalPoints), Scores);
+        {
+            ExecuteSafe(() =>
+            {
+                const string delimiter = ";";
+                var parser = new CsvParser();
+                //serialize results into csv
+                string csv = parser.ExportDtos(
+                    dto => string.Join(delimiter, dto.Placings, dto.Team.Name, dto.Team.Room, dto.TotalPoints), Scores);
 
-            //return csv as file
-            Context.ReturnFile(Encoding.Default.GetBytes(csv), "vysledky.csv", "application/csv");
+                //return csv as file
+                Context.ReturnFile(Encoding.Default.GetBytes(csv), "vysledky.csv", "application/csv");
+            });
         }
 
         public void ExportFullCsv()
         {
-            string csv = Results.GenerateCompleteCsv(scoreServie.GetResults(Room,true));
+            ExecuteSafe(() =>
+            {
+                string csv = Results.GenerateCompleteCsv(scoreServie.GetResults(Room, true));
 
-            //return csv as file
-            Context.ReturnFile(Encoding.Default.GetBytes(csv), "vysledkyCompleteDataset.csv", "application/csv");
+                //return csv as file
+                Context.ReturnFile(Encoding.Default.GetBytes(csv), "vysledkyCompleteDataset.csv", "application/csv");
+            });
         }
     }
 }

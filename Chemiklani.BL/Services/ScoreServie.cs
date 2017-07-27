@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
 using Chemiklani.BL.DTO;
+using Chemiklani.BL.Exceptions;
 using Chemiklani.DAL.Entities;
 
 namespace Chemiklani.BL.Services
@@ -25,16 +24,16 @@ namespace Chemiklani.BL.Services
 
                 if (team == null)
                 {
-                    throw new InvalidDataException("Vybraný tým neexistuje.");
+                    throw new AppDataNotFound("Vybraný tým neexistuje.");
                 }
                 if (task == null)
                 {
-                    throw new InvalidDataException("Vybraná úloha neexistuje.");
+                    throw new AppDataNotFound("Vybraná úloha neexistuje.");
                 }
 
                 if (points > task.MaximumPoints)
                 {
-                    throw new InvalidDataException("Body pøekraèují bodové maximum úlohy.");
+                    throw new InvalidAppData("Body pøekraèují bodové maximum úlohy.");
                 }
 
                 var score = dc.Scores.FirstOrDefault(s => s.Team.Id == team.Id && s.Task.Id == task.Id);
@@ -69,7 +68,7 @@ namespace Chemiklani.BL.Services
                 var team = dc.Teams.Find(teamId);
                 if (team == null)
                 {
-                    throw new DataException("Vybraný tým neexistuje.");
+                    throw new AppDataNotFound("Vybraný tým neexistuje.");
                 }
 
                 var scores = dc.Scores.Where(x => x.Team.Id == team.Id);

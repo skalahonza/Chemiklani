@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Chemiklani.BL.DTO;
@@ -38,19 +36,7 @@ namespace Chemiklani.ViewModels
 
         public void DeleteTeam(int id)
         {
-            try
-            {
-                service.DeleteTeam(id);
-            }
-            catch (System.Data.Entity.Infrastructure.DbUpdateException)
-            {
-                SetError("Tým nelze vymazat pokud již byl hodnocen.");
-            }
-
-            catch (Exception e)
-            {
-                SetError(e.Message);
-            }
+            ExecuteSafe(() => service.DeleteTeam(id));
         }
 
         public void ProcessFile()
@@ -61,27 +47,17 @@ namespace Chemiklani.ViewModels
             {
                 // get the stream of the uploaded file and do whatever you need to do
                 var stream = storage.GetFile(file.FileId);
-                try
+                if (ExecuteSafe(() =>
                 {
                     var teams = service.GetTeamsFromCsv(stream);
                     service.AddTeams(teams);
+                }))
+                {
                     SetSuccess("Týmy úspìšnì naèteny z csv.");
                 }
 
-                catch (InvalidDataException e)
-                {
-                    SetError(e.Message);
-                }
-
-                catch (Exception)
-                {
-                    SetError("V aplikaci došlo k neznámé chybì.");
-                }
-                finally
-                {
-                    storage.DeleteFile(file.FileId);
-                    Files.Clear();
-                }
+                storage.DeleteFile(file.FileId);
+                Files.Clear();
             }
             else
             {
@@ -97,19 +73,11 @@ namespace Chemiklani.ViewModels
 
         public void Save()
         {
-            try
-            {
-                service.UpdateTeam(NewTeamData);
+            if (ExecuteSafe(() => service.UpdateTeam(NewTeamData)))
                 SetSuccess("Uloženo");
-            }
-            catch (Exception e)
-            {
-                SetError(e.Message);
-            }
-            finally {
-                NewTeamData = new TeamDTO();
-                EditTeamDialogDisplayed = false;
-            }
+
+            NewTeamData = new TeamDTO();
+            EditTeamDialogDisplayed = false;
         }
     }
 }

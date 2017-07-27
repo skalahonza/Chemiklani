@@ -68,26 +68,20 @@ namespace Chemiklani.ViewModels
 
         public void Evaluate()
         {
-            try
+            if (ExecuteSafe(() => scoreServie.ScoreTeam(NewScore.SelectedTeam.Id, NewScore.SelectedTask.Id,
+                NewScore.Points)))
             {
-                scoreServie.ScoreTeam(NewScore.SelectedTeam.Id, NewScore.SelectedTask.Id, NewScore.Points);
                 SetSuccess("Ohodnoceno.");
+
                 //refresh dataset
                 if (SelectedRoom == null)
                     LoadAllTeams();
                 else
                     FilterTeams();
             }
-            catch (Exception e)
-            {
-                SetError(e.Message);
-            }
 
-            finally
-            {
-                Displayed = false;
-                NewScore.SelectedTeam = null;
-            }
+            Displayed = false;
+            NewScore.SelectedTeam = null;
         }
 
         public void PointsChanged(int points)
