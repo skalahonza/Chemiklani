@@ -4,6 +4,7 @@ using DotVVM.Framework.Controls.Bootstrap;
 using DotVVM.Framework.Hosting;
 using DotVVM.Framework.Runtime.Filters;
 using DotVVM.Framework.ViewModel;
+using Microsoft.ApplicationInsights;
 
 namespace Chemiklani.ViewModels
 {
@@ -57,13 +58,25 @@ namespace Chemiklani.ViewModels
 	            action.Invoke();
 	            return true;
 	        }
-
-	        catch (AppLogicException e)
+	        catch (DotvvmInterruptRequestExecutionException)
+	        {
+	            throw;
+	        }
+	        
+            catch (AppLogicException e)
 	        {
 	            SetError(e.Message);
 	            return false;
 	        }
-	    }
+
+	        catch (Exception ex)
+	        {
+	            var telemetry = new TelemetryClient();
+                SetError("V aplikaci došlo k neznámé chybì. Chyba byla zaznamenána, ale mùžete kontaktovat správce a popsat mu jak k ní došlo.");
+                telemetry.TrackException(ex);
+	            return false;
+	        }
+        }
 
 	    public virtual void DialogAction()
 	    {

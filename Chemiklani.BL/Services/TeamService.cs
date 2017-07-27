@@ -116,14 +116,21 @@ namespace Chemiklani.BL.Services
         /// <param name="id">Id to be deleted</param>
         public void DeleteTeam(int id)
         {
-            using (var dc = CreateDbContext())
+            try
             {
-                var entity = dc.Teams.FirstOrDefault(x => x.Id == id);
-                if (entity != null)
+                using (var dc = CreateDbContext())
                 {
-                    dc.Teams.Remove(entity);
-                    dc.SaveChanges();
+                    var entity = dc.Teams.FirstOrDefault(x => x.Id == id);
+                    if (entity != null)
+                    {
+                        dc.Teams.Remove(entity);
+                        dc.SaveChanges();
+                    }
                 }
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException)
+            {
+                throw new InvalidDeleteRequest("Tým nelze vymazat pokud již byl hodnocen.");
             }
         }
 
@@ -137,7 +144,7 @@ namespace Chemiklani.BL.Services
             var parser = new CsvParser();
             parser.ParseDtos(stream, row =>
             {
-                if (row.Length < 2)
+                if (row.Length != 2)
                     throw new InvalidAppData("Neplatný formát csv.");
 
                 return new TeamDTO
