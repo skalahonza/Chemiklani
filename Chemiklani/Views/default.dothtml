@@ -2,7 +2,6 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-    <bs:Container>
         <dot:RoleView Roles="Admin">
             <bs:Panel class="text-center">
                 <h2>Nová soutěž</h2>
@@ -12,7 +11,6 @@
                 <bs:Button Text="Nová soutěž" Type="Primary" Click="{staticCommand: NewContestDialogVisible=true}"/>
             </bs:Panel>
         </dot:RoleView>
-    </bs:Container>
 
     <!-- New contest dialog -->
     <bs:ModalDialog HeaderText="Nová soutěž" IsDisplayed="{value NewContestDialogVisible}">

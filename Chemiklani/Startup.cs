@@ -32,8 +32,9 @@ namespace Chemiklani
                     OnApplyRedirect = context =>
                     {
                         DotvvmAuthenticationHelper.ApplyRedirectResponse(context.OwinContext, context.RedirectUri);
-                    }
-                }
+                    }                    
+                },
+                ExpireTimeSpan = TimeSpan.FromHours(1)                
             });
 
             //Add default users and roles

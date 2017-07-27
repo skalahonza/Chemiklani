@@ -45,6 +45,7 @@
                 <dot:AuthenticatedView>
                     <AuthenticatedTemplate>
                         <bs:Button Type="Success" Text="Export CSV" Click="{command: ExportCSV()}"/>
+                        <bs:Button Type="Warning" Text="Export CSV (kompletní)" Click="{command: ExportFullCsv()}"/>
                     </AuthenticatedTemplate>
                 </dot:AuthenticatedView>
             </bs:ButtonGroup>

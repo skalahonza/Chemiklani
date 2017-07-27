@@ -2,7 +2,6 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-    <bs:Container>
         <h2>Seznam Úloh</h2>
         <table class="table" Visible="{value: Tasks.Count != 0}">
             <thead>
@@ -108,5 +107,4 @@
             nazevUlohy,popisek,maximumBodu<br />
             nazevUlohy,popisek,maximumBodu<br />
         </bs:Well>
-    </bs:Container>
 </dot:Content>
