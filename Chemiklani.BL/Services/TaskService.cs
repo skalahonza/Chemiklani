@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Chemiklani.BL.DTO;
+using Chemiklani.BL.Exceptions;
 using Chemiklani.BL.Utils;
 using Chemiklani.DAL.Entities;
 
@@ -79,7 +80,7 @@ namespace Chemiklani.BL.Services
             parser.ParseDtos(stream, row =>
             {
                 if (row.Length < 3)
-                    throw new InvalidDataException("Neplatný formát csv.");
+                    throw new InvalidAppData("Neplatný formát csv.");
 
                 return new TaskDTO
                 {
@@ -121,7 +122,7 @@ namespace Chemiklani.BL.Services
                 }
                 else
                 {
-                    throw new Exception("Úloha nenalezena.");
+                    throw new AppDataNotFound("Úloha nenalezena.");
                 }
             }
         }

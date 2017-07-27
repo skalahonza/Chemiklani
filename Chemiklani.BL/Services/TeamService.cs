@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Chemiklani.BL.DTO;
+using Chemiklani.BL.Exceptions;
 using Chemiklani.BL.Utils;
 using Chemiklani.DAL.Entities;
 
@@ -45,7 +46,7 @@ namespace Chemiklani.BL.Services
                 }
                 else
                 {
-                    throw new Exception("Tým nenalezen.");
+                    throw new AppDataNotFound("Tým nenalezen.");
                 }
             }
         }
@@ -137,7 +138,7 @@ namespace Chemiklani.BL.Services
             parser.ParseDtos(stream, row =>
             {
                 if (row.Length < 2)
-                    throw new InvalidDataException("Neplatný formát csv.");
+                    throw new InvalidAppData("Neplatný formát csv.");
 
                 return new TeamDTO
                 {

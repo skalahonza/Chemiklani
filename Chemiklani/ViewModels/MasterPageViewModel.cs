@@ -1,3 +1,5 @@
+using System;
+using Chemiklani.BL.Exceptions;
 using DotVVM.Framework.Controls.Bootstrap;
 using DotVVM.Framework.Hosting;
 using DotVVM.Framework.Runtime.Filters;
@@ -46,6 +48,21 @@ namespace Chemiklani.ViewModels
 	        IsDialogDisplayed = true;
 	        AlertText = message;
 	        AlertType = AlertType.Warning;
+	    }
+
+	    protected bool ExecuteSafe(Action action)
+	    {
+	        try
+	        {
+	            action.Invoke();
+	            return true;
+	        }
+
+	        catch (AppLogicException e)
+	        {
+	            SetError(e.Message);
+	            return false;
+	        }
 	    }
 
 	    public virtual void DialogAction()
