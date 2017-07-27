@@ -102,9 +102,7 @@ namespace Chemiklani.BL.Services
             using (var dc = CreateDbContext())
             {
                 //get all teams
-                IQueryable<Team> teamsQuerry = dc.Scores
-                    .Select(x => x.Team)
-                    .Distinct();
+                IQueryable<Team> teamsQuerry = dc.Teams;
 
                 //filter by room if required
                 if (!string.IsNullOrEmpty(room))

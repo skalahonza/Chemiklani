@@ -9,7 +9,7 @@ namespace Chemiklani.BL.DTO
         [Required(ErrorMessage = "Musíte zvolit úlohu")]
         public TaskDTO SelectedTask { get; set; }
         public TeamDTO SelectedTeam { get; set; }
-        [Range(0,int.MaxValue,ErrorMessage = "Musíte vyplnit body.")]
+        [Range(1,int.MaxValue,ErrorMessage = "Musíte vyplnit body.")]
         public int Points { get; set; }
         public List<int> PointOptions { get; set; }
     }

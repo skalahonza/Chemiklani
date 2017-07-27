@@ -155,6 +155,7 @@
     <Compile Include="ViewModels\DefaultViewModel.cs" />
     <Compile Include="ViewModels\MasterPageViewModel.cs" />
     <Compile Include="ViewModels\ResultsViewModel.cs" />
+    <Compile Include="ViewModels\SafeViewModel.cs" />
     <Compile Include="ViewModels\ScoreViewModel.cs" />
     <Compile Include="ViewModels\SignInViewModel.cs" />
     <Compile Include="ViewModels\SignOutViewModel.cs" />
