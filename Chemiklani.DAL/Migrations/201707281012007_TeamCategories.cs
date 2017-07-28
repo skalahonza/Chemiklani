@@ -7,7 +7,7 @@ namespace Chemiklani.DAL.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.Teams", "Category", c => c.Int(nullable: false));
+            AddColumn("dbo.Teams", "Category", c => c.Int());
         }
         
         public override void Down()

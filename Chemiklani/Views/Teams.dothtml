@@ -8,6 +8,7 @@
                 <tr>
                     <th>Název týmu</th>
                     <th>Místnost</th>
+                    <th>Kategorie</th>
                 </tr>
             </thead>
             <tbody>
@@ -17,6 +18,7 @@
                         <tr>
                             <td class="col-md-10">{{value: Name}}</td>
                             <td class="col-md-10">{{value: Room}}</td>
+                            <td class="col-md-10">{{value: Category}}</td>
                             <td>
                                 <bs:LinkButton Text="Smazat" Type="Danger" Click="{command: _parent.DeleteTeam(Id)}" />
                             </td>
@@ -41,6 +43,9 @@
                         <bs:FormGroup LabelText="Název místnosti">
                             <dot:TextBox Text="{value: Room}" />
                         </bs:FormGroup>
+                    <bs:FormGroup LabelText="Kategorie">
+                        <dot:TextBox Text="{value: Category}" Type="Number" />
+                    </bs:FormGroup>
                 </bs:Form>
             </ContentTemplate>
             <FooterTemplate>
@@ -75,6 +80,9 @@
                 </bs:FormGroup>
                 <bs:FormGroup LabelText="Název místnosti">
                     <dot:TextBox Text="{value: Room}" />
+                </bs:FormGroup>
+                <bs:FormGroup LabelText="Kategorie">
+                    <dot:TextBox Text="{value: Category}" Type="Number"/>
                 </bs:FormGroup>
                 <bs:FormGroup>
                     <bs:Button Type="Success" Text="Přidat tým"

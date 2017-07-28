@@ -22,12 +22,8 @@ namespace Chemiklani.BL.Services
 
             using (var dc = CreateDbContext())
             {
-                var tmp = new Team
-                {
-                    Members = team.Members,
-                    Name = team.Name,
-                    Room = team.Room,
-                };
+                var tmp = new Team();
+                team.MapTo(tmp);
 
                 dc.Teams.Add(tmp);
                 dc.SaveChanges();

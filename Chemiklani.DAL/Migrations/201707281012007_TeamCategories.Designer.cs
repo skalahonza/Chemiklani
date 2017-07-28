@@ -13,7 +13,7 @@ namespace Chemiklani.DAL.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201707280922497_TeamCategories"; }
+            get { return "201707281012007_TeamCategories"; }
         }
         
         string IMigrationMetadata.Source

@@ -10,7 +10,7 @@ namespace Chemiklani.BL.DTO
         public string Name { get; set; }
         public ICollection<string> Members { get; set; }
         public string Room { get; set; }
-        public int Category { get; set; }
+        public int? Category { get; set; }
 
         //Aditional fields
         public int? Points { get; set; }
