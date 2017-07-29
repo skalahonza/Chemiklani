@@ -49,7 +49,6 @@ namespace Chemiklani.ViewModels
         public void EvaluateTeam(TeamDTO team)
         {
             NewScore.SelectedTeam = team;
-            TaskChanged();
             Displayed = true;
             NewScore.SelectedTask = null;
             NewScore.Points = -1;
