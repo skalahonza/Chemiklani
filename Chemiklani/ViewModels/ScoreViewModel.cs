@@ -49,7 +49,7 @@ namespace Chemiklani.ViewModels
         {
             NewScore = new NewScoreDTO
             {
-                Tasks = taskService.LoadTasks(),
+                Tasks = taskService.LoadTasks(team.Category),
                 SelectedTeam = team
             };
             Displayed = true;

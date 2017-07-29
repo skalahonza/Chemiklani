@@ -59,7 +59,7 @@ namespace Chemiklani.BL.Services
         /// Load all tasks from database
         /// </summary>
         /// <returns>List of all tasks</returns>
-        public List<TaskDTO> LoadTasks()
+        public List<TaskDTO> LoadTasks(int? category = null)
         {
             using (var dc = CreateDbContext())
             {
@@ -72,7 +72,22 @@ namespace Chemiklani.BL.Services
                     MaximumPoints = t.MaximumPoints,
                 });
 
-                return queryable.ToList();
+                var result = queryable.ToList();
+
+                //if category provided, remove unwanted tasks
+                if (category != null)
+                {
+                    for (var i = 0; i < result.Count; i++)
+                    {
+                        if (result[i].TaskNumber < category)
+                        {
+                            result.RemoveAt(i);
+                            i--;
+                        }
+                    }
+                }
+
+                return result;
             }
         }
 
