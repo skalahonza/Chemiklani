@@ -137,17 +137,23 @@ namespace Chemiklani.BL.Services
         /// <returns>List of teams serialized from csv</returns>
         public List<TeamDTO> GetTeamsFromCsv(Stream stream)
         {            
-            var parser = new CsvParser();
+            var parser = new CsvParser(",",";","\t");
             parser.ParseDtos(stream, row =>
             {
-                if (row.Length != 2)
+                if (row.Length < 2)
                     throw new InvalidAppData("Neplatný formát csv.");
 
-                return new TeamDTO
+                var dto = new TeamDTO
                 {
                     Name = row[0],
                     Room = row[1]
                 };
+
+                //add category if provided
+                if (row.Length == 3)
+                    dto.Category = int.Parse(row[2]);
+
+                return dto;
             }, out List<TeamDTO> dtos);
             return dtos;
         }
