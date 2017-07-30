@@ -87,6 +87,13 @@ namespace Chemiklani.BL.Services
                     }
                 }
 
+                //check if result already evaluated
+                foreach (var dto in result)
+                {
+                    if (dc.Scores.Any(x => x.Task.Id == dto.Id))
+                        dto.AlreadyEvaluated = true;
+                }
+
                 return result;
             }
         }
