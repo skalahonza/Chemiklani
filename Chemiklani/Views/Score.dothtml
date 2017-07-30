@@ -62,6 +62,8 @@
                                   EmptyItemText="Vyberte úlohu"
                                   SelectedValue="{value: SelectedTask}" />
                 <bs:Label Text="Body" />
+                <bs:Alert Type="Warning" Text="Chystáte se hodnotit již jednou ohodnocenou úlohu. Data budou přepsána" 
+                          Visible="{value: SelectedTask.AlreadyEvaluated}" />
 
                 <bs:ButtonGroup Visible="{value: _root.MiniScoreDisplayed && SelectedTask != null}"
                                 IsJustified="true">
