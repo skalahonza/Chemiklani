@@ -21,8 +21,8 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <ApplicationInsightsResourceId>/subscriptions/0cb941d0-16ec-42ae-8279-11e3845c3490/resourcegroups/Chemiklani/providers/microsoft.insights/components/Chemiklani</ApplicationInsightsResourceId>
-    <ApplicationInsightsAnnotationResourceId>/subscriptions/0cb941d0-16ec-42ae-8279-11e3845c3490/resourcegroups/Chemiklani/providers/microsoft.insights/components/Chemiklani</ApplicationInsightsAnnotationResourceId>
+    <ApplicationInsightsResourceId>/subscriptions/0cb941d0-16ec-42ae-8279-11e3845c3490/resourcegroups/Chemiklani/providers/microsoft.insights/components/ChemiklaniTelemetry</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/0cb941d0-16ec-42ae-8279-11e3845c3490/resourceGroups/Chemiklani/providers/microsoft.insights/components/ChemiklaniTelemetry</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
