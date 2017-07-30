@@ -14,7 +14,10 @@ namespace Chemiklani.BL.DTO
 
         public int MaximumPoints { get; set; }
 
-        public double TaskNumber => double.TryParse(Name.Replace(",", "."), NumberStyles.Number, CultureInfo.InvariantCulture, out double tmp) ? tmp : double.MaxValue;
+        public double TaskNumber => Name != null && double.TryParse(Name.Replace(",", "."), NumberStyles.Number, CultureInfo.InvariantCulture,
+                                        out double tmp)
+            ? tmp
+            : double.MaxValue;
 
         public void MapFrom(Task entity)
         {
