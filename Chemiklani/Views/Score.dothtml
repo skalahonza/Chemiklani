@@ -25,6 +25,7 @@
                 <th></th>
                 <th>Název týmu</th>
                 <th>Místnost</th>
+                <th>Kategorie</th>
                 <th>Body</th>
             </tr>
         </thead>
@@ -38,6 +39,7 @@
                         </td>
                         <td class="col-md-10">{{value: Name}}</td>
                         <td class="col-md-10">{{value: Room}}</td>
+                        <td class="col-md-10">{{value: Category}}</td>
                         <td class="col-md-10">{{value: Points}}</td>
                     </tr>
                 </ItemTemplate>

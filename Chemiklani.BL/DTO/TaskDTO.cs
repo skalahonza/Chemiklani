@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using Chemiklani.DAL.Entities;
 
 namespace Chemiklani.BL.DTO
@@ -12,6 +13,11 @@ namespace Chemiklani.BL.DTO
         public string Description { get; set; }
 
         public int MaximumPoints { get; set; }
+
+        public double TaskNumber => Name != null && double.TryParse(Name.Replace(",", "."), NumberStyles.Number, CultureInfo.InvariantCulture,
+                                        out double tmp)
+            ? tmp
+            : double.MaxValue;
 
         public void MapFrom(Task entity)
         {

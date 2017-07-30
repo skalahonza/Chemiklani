@@ -9,6 +9,17 @@ namespace Chemiklani.BL.Utils
 {
     public class CsvParser
     {
+        public string[] Delimiters { get; set; }
+
+        public CsvParser():this(";", "\t")
+        {          
+        }
+
+        public CsvParser(params string[] delimiters)
+        {
+            Delimiters = delimiters;
+        }        
+
         /// <summary>
         /// Parse collection fo dtos from given csv
         /// </summary>
@@ -24,7 +35,7 @@ namespace Chemiklani.BL.Utils
             using (var parser = new TextFieldParser(csvStream))
             {
                 parser.TextFieldType = FieldType.Delimited;
-                parser.SetDelimiters(";", "\t");
+                parser.SetDelimiters(Delimiters);
                 while (!parser.EndOfData)
                 {
                     //Processing row

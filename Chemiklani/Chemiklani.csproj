@@ -21,8 +21,8 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <ApplicationInsightsResourceId>/subscriptions/0cb941d0-16ec-42ae-8279-11e3845c3490/resourcegroups/Chemiklani/providers/microsoft.insights/components/Chemiklani</ApplicationInsightsResourceId>
-    <ApplicationInsightsAnnotationResourceId>/subscriptions/0cb941d0-16ec-42ae-8279-11e3845c3490/resourcegroups/Chemiklani/providers/microsoft.insights/components/Chemiklani</ApplicationInsightsAnnotationResourceId>
+    <ApplicationInsightsResourceId>/subscriptions/0cb941d0-16ec-42ae-8279-11e3845c3490/resourcegroups/Chemiklani/providers/microsoft.insights/components/ChemiklaniTelemetry</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/0cb941d0-16ec-42ae-8279-11e3845c3490/resourceGroups/Chemiklani/providers/microsoft.insights/components/ChemiklaniTelemetry</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -188,7 +188,9 @@
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="packages.config" />
     <Content Include="Views\MasterPage.dotmaster" />
     <Content Include="Controls\Menu.dotcontrol" />
@@ -226,6 +228,7 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

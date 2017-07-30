@@ -8,7 +8,7 @@ namespace Chemiklani.BL.DTO
         public string TaskName { get; set; }
         public string TaskDescription { get; set; }
         public int? Points { get; set; }
-        public double TaskNumber => double.TryParse(TaskName, NumberStyles.Number, CultureInfo.InvariantCulture, out double tmp) ? tmp : double.MaxValue;
+        public double TaskNumber => double.TryParse(TaskName.Replace(",","."), NumberStyles.Number, CultureInfo.InvariantCulture, out double tmp) ? tmp : double.MaxValue;
         public void MapFrom(Task entity)
         {
             Id = entity.Id;

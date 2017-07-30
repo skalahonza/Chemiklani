@@ -10,6 +10,7 @@ namespace Chemiklani.BL.DTO
         public string Name { get; set; }
         public ICollection<string> Members { get; set; }
         public string Room { get; set; }
+        public int? Category { get; set; }
 
         //Aditional fields
         public int? Points { get; set; }
@@ -20,12 +21,14 @@ namespace Chemiklani.BL.DTO
             Id = entity.Id;
             Name = entity.Name;
             Room = entity.Room;
+            Category = entity.Category;
         }
 
         public void MapTo(Team entity)
         {
             entity.Name = Name;
             entity.Room = Room;
+            entity.Category = Category;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Chemiklani.ViewModels
         public List<TeamDTO> Teams { get; set; } = new List<TeamDTO>();
         public List<string> Rooms { get; set; } = new List<string>();
         public string SelectedRoom { get; set; }
-        public NewScoreDTO NewScore { get; set; } = new NewScoreDTO();
+        public NewScoreDTO NewScore { get; set; }
 
         public bool Displayed { get; set; }
         public bool MiniScoreDisplayed { get; set; }
@@ -29,7 +29,6 @@ namespace Chemiklani.ViewModels
         public override Task PreRender()
         {
             Rooms = scoreServie.GetRooms();
-            NewScore.Tasks = taskService.LoadTasks();
             return base.PreRender();
         }
 
@@ -48,8 +47,11 @@ namespace Chemiklani.ViewModels
 
         public void EvaluateTeam(TeamDTO team)
         {
-            NewScore.SelectedTeam = team;
-            TaskChanged();
+            NewScore = new NewScoreDTO
+            {
+                Tasks = taskService.LoadTasks(team.Category),
+                SelectedTeam = team
+            };
             Displayed = true;
             NewScore.SelectedTask = null;
             NewScore.Points = -1;
