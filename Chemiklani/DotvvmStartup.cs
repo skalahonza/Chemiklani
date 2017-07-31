@@ -22,10 +22,10 @@ namespace Chemiklani
             config.RouteTable.Add("Teams", "tymy", "Views/Teams.dothtml");
             config.RouteTable.Add("Tasks", "ulohy", "Views/Tasks.dothtml");
             config.RouteTable.Add("SignIn", "sign-in", "Views/SignIn.dothtml");
-            config.RouteTable.Add("Users", "users", "Views/Users.dothtml");
-            config.RouteTable.Add("Score", "score", "Views/Score.dothtml");
-            config.RouteTable.Add("Results", "results/{Room}", "Views/Results.dothtml");
-            config.RouteTable.Add("AllResults", "results", "Views/Results.dothtml");
+            config.RouteTable.Add("Users", "uzivatele", "Views/Users.dothtml");
+            config.RouteTable.Add("Score", "hodnoceni", "Views/Score.dothtml");
+            config.RouteTable.Add("Results", "vysledky/{Room}", "Views/Results.dothtml");
+            config.RouteTable.Add("AllResults", "vysledky", "Views/Results.dothtml");
 
             // Uncomment the following line to auto-register all dothtml files in the Views folder
             // config.RouteTable.AutoDiscoverRoutes(new DefaultRouteStrategy(config));    
