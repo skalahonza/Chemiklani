@@ -16,6 +16,7 @@ namespace Chemiklani.ViewModels
         public override string PageDescription => "Správa týmu.";
 
         public TeamDTO NewTeamData { get; set; } = new TeamDTO();
+        public TeamDTO EditedTeam { get; set; } = new TeamDTO();
         public List<TeamDTO> Teams { get; set; } = new List<TeamDTO>();
         public UploadedFilesCollection Files { get; set; } = new UploadedFilesCollection();
         public bool EditTeamDialogDisplayed { get; set; }
@@ -67,16 +68,16 @@ namespace Chemiklani.ViewModels
 
         public void UpdateTeam(TeamDTO team)
         {
-            NewTeamData = team;
+            EditedTeam = team;
             EditTeamDialogDisplayed = true;
         }
 
         public void Save()
         {
-            if (ExecuteSafe(() => service.UpdateTeam(NewTeamData)))
+            if (ExecuteSafe(() => service.UpdateTeam(EditedTeam)))
                 SetSuccess("Uloženo");
 
-            NewTeamData = new TeamDTO();
+            EditedTeam = new TeamDTO();
             EditTeamDialogDisplayed = false;
         }
     }
