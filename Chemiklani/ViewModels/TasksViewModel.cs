@@ -17,6 +17,7 @@ namespace Chemiklani.ViewModels
 
         public List<TaskDTO>Tasks { get; set; } = new List<TaskDTO>();
         public TaskDTO NewTask { get; set; } = new TaskDTO();
+        public TaskDTO EditedTask { get; set; } = new TaskDTO();
         public UploadedFilesCollection Files { get; set; } = new UploadedFilesCollection();
         public bool EditTaskDialogDisplayed { get; set; }
 
@@ -67,18 +68,18 @@ namespace Chemiklani.ViewModels
 
         public void EditTask(TaskDTO task)
         {
-            NewTask = task;
+            EditedTask = task;
             EditTaskDialogDisplayed = true;
         }
 
         public void Save()
         {
-            if (ExecuteSafe(() => service.UpdateTask(NewTask)))
+            if (ExecuteSafe(() => service.UpdateTask(EditedTask)))
             {
                 SetSuccess("Uloženo.");
             }
             EditTaskDialogDisplayed = false;
-            NewTask = new TaskDTO();
+            EditedTask = new TaskDTO();
         }
     }
 }

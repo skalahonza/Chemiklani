@@ -34,7 +34,7 @@
         <!-- Edit task dialog -->
         <bs:ModalDialog HeaderText="Upravit úlohu" IsDisplayed="{value: EditTaskDialogDisplayed}">
             <ContentTemplate>
-                <bs:Form DataContext="{value: NewTask}"
+                <bs:Form DataContext="{value: EditedTask}"
                          Validator.InvalidCssClass="has-danger">
                     <bs:FormGroup LabelText="Název úlohx">
                         <dot:TextBox Text="{value: Name}" />
@@ -56,7 +56,7 @@
                     </bs:Button>
                     <bs:Button ButtonTagName="button"
                                Validation.Enabled="true"
-                               Validation.Target="{value: NewTask}"
+                               Validation.Target="{value: EditedTask}"
                                Type="Success" Click="{command: Save()}">
                         <bs:GlyphIcon Icon="Ok" /> Uložit
                     </bs:Button>
