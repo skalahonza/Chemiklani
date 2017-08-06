@@ -51,6 +51,17 @@ namespace Chemiklani.BL.Services
             }
         }
 
+        public bool AnyUsers()
+        {
+            using (var dc = CreateDbContext())
+            {
+                using (var userManager = CreateUserManager(dc))
+                {
+                    return userManager.Users.Any();
+                }
+            }
+        }
+
         public void AddNewUser(UserDto data)
         {
             AddNewUser(data, CreateRandomPassword());

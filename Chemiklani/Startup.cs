@@ -32,24 +32,27 @@ namespace Chemiklani
                     OnApplyRedirect = context =>
                     {
                         DotvvmAuthenticationHelper.ApplyRedirectResponse(context.OwinContext, context.RedirectUri);
-                    }                    
+                    }
                 },
-                ExpireTimeSpan = TimeSpan.FromHours(1)                
+                ExpireTimeSpan = TimeSpan.FromHours(1)
             });
 
             //Add default users and roles
-            var userService = new UserService(); 
-            userService.AddRole(UserService.UserRoles.User);
-            userService.AddRole(UserService.UserRoles.Admin);
+            var userService = new UserService();
+            if (!userService.AnyUsers())
+            {
+                userService.AddRole(UserService.UserRoles.User);
+                userService.AddRole(UserService.UserRoles.Admin);
 
-            userService.AddNewUser(new UserDto { UserName = "normal"},"normal");
-            userService.AddNewUser(new UserDto { UserName = "admin",IsAdmin = true},"password");
+                userService.AddNewUser(new UserDto { UserName = "normal" }, "normal");
+                userService.AddNewUser(new UserDto { UserName = "admin", IsAdmin = true }, "password");
+            }
 
             // use DotVVM
             var dotvvmConfiguration = app.UseDotVVM<DotvvmStartup>(applicationPhysicalPath, options: options =>
             {
                 options.AddDefaultTempStorages("temp");
-                
+
                 //Register upload service
                 var uploadPath = Path.Combine(applicationPhysicalPath, "App_Data\\UploadTemp");
                 options.Services.AddSingleton<IUploadedFileStorage>(
