@@ -96,8 +96,8 @@ namespace Chemiklani.ViewModels
 
         public void CancelEvaluation()
         {
-            if (ExecuteSafe(() => scoreServie.ScoreTeam(NewScore.SelectedTeam.Id,
-                NewScore.SelectedTask.Id,0)))
+            if (ExecuteSafe(() => scoreServie.DeleteScore(NewScore.SelectedTeam.Id,
+                NewScore.SelectedTask.Id)))
             {
                 SummarryDisplayed = false;
                 SetSuccess("Ohodnocení zrušeno.");
