@@ -59,7 +59,7 @@ namespace Chemiklani.BL.Services
         /// Load all tasks from database
         /// </summary>
         /// <returns>List of all tasks</returns>
-        public List<TaskDTO> LoadTasks(int? category = null)
+        public List<TaskDTO> LoadTasks(int? teamId = null,int? category = null)
         {
             using (var dc = CreateDbContext())
             {
@@ -88,13 +88,16 @@ namespace Chemiklani.BL.Services
                 }
 
                 //check if result already evaluated
-                foreach (var dto in result)
-                {                        
-                    var score = dc.Scores.FirstOrDefault(x => x.Task.Id == dto.Id);
-                    if (score != null)
-                    {
-                        dto.AlreadyEvaluated = true;
-                        dto.AlreadyEvaluatedPoints = score.Points;
+                if (teamId != null)
+                {
+                    foreach (var dto in result)
+                    {                        
+                        var score = dc.Scores.FirstOrDefault(x => x.Task.Id == dto.Id && x.Team.Id == teamId);
+                        if (score != null)
+                        {
+                            dto.AlreadyEvaluated = true;
+                            dto.AlreadyEvaluatedPoints = score.Points;
+                        }
                     }
                 }
 
