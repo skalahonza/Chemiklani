@@ -89,9 +89,13 @@ namespace Chemiklani.BL.Services
 
                 //check if result already evaluated
                 foreach (var dto in result)
-                {
-                    if (dc.Scores.Any(x => x.Task.Id == dto.Id))
+                {                        
+                    var score = dc.Scores.FirstOrDefault(x => x.Task.Id == dto.Id);
+                    if (score != null)
+                    {
                         dto.AlreadyEvaluated = true;
+                        dto.AlreadyEvaluatedPoints = score.Points;
+                    }
                 }
 
                 return result;

@@ -55,12 +55,17 @@
         <ContentTemplate>
             <div DataContext="{value: NewScore}">
                 <h3>Tým: {{value: SelectedTeam.Name}}</h3>
-                <bs:ComboBoxGroup LabelText="Úloha" DataSource="{value: Tasks}"
-                                  SelectionChanged="{command: _parent.TaskChanged()}"                                                                   
-                                  Validation.Enabled="false"                                  
-                                  DisplayMember="Name"
-                                  EmptyItemText="Vyberte úlohu"
-                                  SelectedValue="{value: SelectedTask}" />
+                <bs:ButtonGroup>
+                    <dot:Repeater RenderWrapperTag="false"
+                                  DataSource="{value: Tasks}">
+                        <ItemTemplate>
+                            <bs:Button Validation.Enabled="false"
+                                       class="{value: AlreadyEvaluated ? "btn btn-warning" : "btn btn-default"}"
+                                       Click="{command: _root.TaskChanged(_this)}"
+                                       Text="{value: _this.Name}" />
+                        </ItemTemplate>
+                    </dot:Repeater>
+                </bs:ButtonGroup>
                 <bs:Label Text="Body" />
                 <bs:Alert Type="Warning" Text="Chystáte se hodnotit již jednou ohodnocenou úlohu. Data budou přepsána" 
                           Visible="{value: SelectedTask.AlreadyEvaluated}" />
@@ -71,6 +76,7 @@
                                   DataSource="{value: PointOptions}">
                         <ItemTemplate>
                             <bs:Button Validation.Enabled="false"
+                                       class="{value: _parent.SelectedTask.AlreadyEvaluatedPoints == _this ? "btn btn-default btn-info" : "btn btn-default"}"
                                        Click="{command: _root.PointsChanged(_this)}"
                                        Text="{value: _this}"/>
                         </ItemTemplate>

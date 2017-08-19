@@ -67,12 +67,18 @@ namespace Chemiklani.ViewModels
             }
         }
 
+        public void TaskChanged(TaskDTO task)
+        {
+            NewScore.SelectedTask = task;
+            TaskChanged();
+        }
+
         public void Evaluate()
         {
             if (ExecuteSafe(() => scoreServie.ScoreTeam(NewScore.SelectedTeam.Id, NewScore.SelectedTask.Id,
                 NewScore.Points)))
             {
-                SetSuccess("Ohodnoceno.");
+                SetSuccess($"Ohodnoceno. Tým: {NewScore.SelectedTeam.Name} Úloha: {NewScore.SelectedTask.Name} Body: {NewScore.Points}");
 
                 //refresh dataset
                 if (SelectedRoom == null)

@@ -20,6 +20,8 @@ namespace Chemiklani.BL.DTO
             ? tmp
             : double.MaxValue;
 
+        public int AlreadyEvaluatedPoints { get; set; }
+
         public void MapFrom(Task entity)
         {
             Id = entity.Id;
