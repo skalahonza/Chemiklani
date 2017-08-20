@@ -13,7 +13,7 @@
         </dot:RoleView>
 
     <!-- New contest dialog -->
-    <bs:ModalDialog HeaderText="Nová soutěž" IsDisplayed="{value NewContestDialogVisible}">
+    <bs:ModalDialog HeaderText="Nová soutěž" IsDisplayed="{value: NewContestDialogVisible}">
         <ContentTemplate>
             Opravdu chcete zahájít novou soutěž? Smažou se všechny týmy, úlohy a hodnocení.
         </ContentTemplate>
