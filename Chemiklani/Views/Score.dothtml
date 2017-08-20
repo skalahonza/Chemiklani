@@ -80,7 +80,7 @@
                                   DataSource="{value: Tasks}">
                         <ItemTemplate>
                             <bs:Button Validation.Enabled="false"
-                                       class="{value: AlreadyEvaluated ? "btn btn-warning" : "btn btn-default"}"
+                                       class="{value: _root.NewScore.SelectedTask != null && _root.NewScore.SelectedTask.Id == Id ? "btn btn-info" :(AlreadyEvaluated ? "btn btn-warning" : "btn btn-default")}"
                                        Click="{command: _root.TaskChanged(_this)}"
                                        Text="{value: _this.Name}" />
                         </ItemTemplate>
@@ -96,7 +96,7 @@
                                   DataSource="{value: PointOptions}">
                         <ItemTemplate>
                             <bs:Button Validation.Enabled="false"
-                                       class="{value: _parent.SelectedTask.AlreadyEvaluatedPoints == _this ? "btn btn-default btn-info" : "btn btn-default"}"
+                                       class="{value: _parent.SelectedTask.AlreadyEvaluatedPoints == _this ? "btn btn-default btn-warning" : "btn btn-default"}"
                                        Click="{command: _root.PointsChanged(_this)}"
                                        Text="{value: _this}" />
                         </ItemTemplate>

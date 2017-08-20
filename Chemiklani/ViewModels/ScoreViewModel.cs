@@ -20,7 +20,7 @@ namespace Chemiklani.ViewModels
         public List<TeamDTO> Teams { get; set; } = new List<TeamDTO>();
         public List<string> Rooms { get; set; } = new List<string>();
         public string SelectedRoom { get; set; }
-        public NewScoreDTO NewScore { get; set; }
+        public NewScoreDTO NewScore { get; set; } = new NewScoreDTO();
 
         public bool Displayed { get; set; }
         public bool MiniScoreDisplayed { get; set; }
