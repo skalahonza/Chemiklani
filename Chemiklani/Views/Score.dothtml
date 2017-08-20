@@ -96,7 +96,7 @@
                                   DataSource="{value: PointOptions}">
                         <ItemTemplate>
                             <bs:Button Validation.Enabled="false"
-                                       class="{value: _parent.SelectedTask.AlreadyEvaluatedPoints == _this ? "btn btn-default btn-warning" : "btn btn-default"}"
+                                       class="{value: _root.NewScore.Points == _this ? "btn btn-info": (_parent.SelectedTask.AlreadyEvaluatedPoints == _this ? "btn btn-warning" : "btn btn-default")}"
                                        Click="{command: _root.PointsChanged(_this)}"
                                        Text="{value: _this}" />
                         </ItemTemplate>
