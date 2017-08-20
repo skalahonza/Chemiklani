@@ -70,6 +70,7 @@ namespace Chemiklani.ViewModels
         public void TaskChanged(TaskDTO task)
         {
             NewScore.SelectedTask = task;
+            NewScore.Points = 0;
             TaskChanged();
         }
 

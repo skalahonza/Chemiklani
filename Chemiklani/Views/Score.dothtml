@@ -3,7 +3,7 @@
 
 <dot:Content ContentPlaceHolderID="MainContent">
     <!-- Team scored notification-->
-    <bs:Alert Type="Info" Visible="{value: SummarryDisplayed}">
+    <bs:Well class="center" Visible="{value: SummarryDisplayed}">
         <h3>Tým ohodnocen</h3>
         <bs:Table>
             <tr>
@@ -19,9 +19,9 @@
                 <td>{{value: NewScore.Points}}</td>
             </tr>
         </bs:Table>
-        <bs:Button Text="Zrušit" Type="Danger" Click="{command: CancelEvaluation()}"/>
-        <bs:Button Text="OK" Click="{staticCommand: SummarryDisplayed = false}"/>
-    </bs:Alert>
+        <bs:Button Text="Zrušit" Type="Danger" Click="{command: CancelEvaluation()}" />
+        <bs:Button Text="OK" Click="{staticCommand: SummarryDisplayed = false}" />
+    </bs:Well>
 
     <h2>Týmy k hodnocení</h2>
     <bs:ComboBoxGroup LabelText="Místnost"
@@ -75,6 +75,7 @@
         <ContentTemplate>
             <div DataContext="{value: NewScore}">
                 <h3>Tým: {{value: SelectedTeam.Name}}</h3>
+                <bs:Label Text="Úloha" />
                 <bs:ButtonGroup>
                     <dot:Repeater RenderWrapperTag="false"
                                   DataSource="{value: Tasks}">
