@@ -2,8 +2,28 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-    <h2>Týmy k hodnocení</h2>
+    <!-- Team scored notification-->
+    <bs:Alert Type="Info" Visible="{value: SummarryDisplayed}">
+        <h3>Tým ohodnocen</h3>
+        <bs:Table>
+            <tr>
+                <td>Název týmu</td>
+                <td>{{value: NewScore.SelectedTeam.Name}}</td>
+            </tr>
+            <tr>
+                <td>Úloha</td>
+                <td>{{value: NewScore.SelectedTask.Name}}</td>
+            </tr>
+            <tr>
+                <td>Body</td>
+                <td>{{value: NewScore.Points}}</td>
+            </tr>
+        </bs:Table>
+        <bs:Button Text="Zrušit" Type="Danger" Click="{command: CancelEvaluation()}"/>
+        <bs:Button Text="OK" Click="{staticCommand: SummarryDisplayed = false}"/>
+    </bs:Alert>
 
+    <h2>Týmy k hodnocení</h2>
     <bs:ComboBoxGroup LabelText="Místnost"
                       DataSource="{value: Rooms}" EmptyItemText="Vyberte místnost..."
                       SelectedValue="{value: SelectedRoom}" />
@@ -16,7 +36,7 @@
     <div class="text-center">
         <bs:ButtonGroup>
             <bs:Button Text="Všechny týmy" Type="Success" Click="{command: LoadAllTeams()}" Validation.Enabled="false" />
-            <bs:Button Text="Filtrovat" Type="Primary" Click="{command: FilterTeams()}" Validation.Enabled="false" Enabled="{value: SelectedRoom != null}"/>
+            <bs:Button Text="Filtrovat" Type="Primary" Click="{command: FilterTeams()}" Validation.Enabled="false" Enabled="{value: SelectedRoom != null}" />
         </bs:ButtonGroup>
     </div>
     <table class="table" Visible="{value: Teams.Count != 0}">
@@ -55,14 +75,19 @@
         <ContentTemplate>
             <div DataContext="{value: NewScore}">
                 <h3>Tým: {{value: SelectedTeam.Name}}</h3>
-                <bs:ComboBoxGroup LabelText="Úloha" DataSource="{value: Tasks}"
-                                  SelectionChanged="{command: _parent.TaskChanged()}"                                                                   
-                                  Validation.Enabled="false"                                  
-                                  DisplayMember="Name"
-                                  EmptyItemText="Vyberte úlohu"
-                                  SelectedValue="{value: SelectedTask}" />
+                <bs:ButtonGroup>
+                    <dot:Repeater RenderWrapperTag="false"
+                                  DataSource="{value: Tasks}">
+                        <ItemTemplate>
+                            <bs:Button Validation.Enabled="false"
+                                       class="{value: AlreadyEvaluated ? "btn btn-warning" : "btn btn-default"}"
+                                       Click="{command: _root.TaskChanged(_this)}"
+                                       Text="{value: _this.Name}" />
+                        </ItemTemplate>
+                    </dot:Repeater>
+                </bs:ButtonGroup>
                 <bs:Label Text="Body" />
-                <bs:Alert Type="Warning" Text="Chystáte se hodnotit již jednou ohodnocenou úlohu. Data budou přepsána" 
+                <bs:Alert Type="Warning" Text="Chystáte se hodnotit již jednou ohodnocenou úlohu. Data budou přepsána"
                           Visible="{value: SelectedTask.AlreadyEvaluated}" />
 
                 <bs:ButtonGroup Visible="{value: _root.MiniScoreDisplayed && SelectedTask != null}"
@@ -71,26 +96,27 @@
                                   DataSource="{value: PointOptions}">
                         <ItemTemplate>
                             <bs:Button Validation.Enabled="false"
+                                       class="{value: _parent.SelectedTask.AlreadyEvaluatedPoints == _this ? "btn btn-default btn-info" : "btn btn-default"}"
                                        Click="{command: _root.PointsChanged(_this)}"
-                                       Text="{value: _this}"/>
+                                       Text="{value: _this}" />
                         </ItemTemplate>
                     </dot:Repeater>
                 </bs:ButtonGroup>
 
                 <dot:TextBox Visible="{value: !_root.MiniScoreDisplayed && SelectedTask != null}"
-                             Type="Number" class="form-control" 
-                             max="{value: SelectedTask.MaximumPoints}" 
+                             Type="Number" class="form-control"
+                             max="{value: SelectedTask.MaximumPoints}"
                              Text="{value: Points}" />
             </div>
         </ContentTemplate>
         <FooterTemplate>
             <div class="text-center">
-                <bs:Button ButtonTagName="button" Type="Danger" Click="{staticCommand: Displayed = false}" >
+                <bs:Button ButtonTagName="button" Type="Danger" Click="{staticCommand: Displayed = false}">
                     <bs:GlyphIcon Icon="Ban_circle" /> Zrušit
                 </bs:Button>
-                <bs:Button ButtonTagName="button" Type="Success" Validation.Enabled="true" Validation.Target="{value: _root.NewScore}" Click="{command: Evaluate()}" >
+                <bs:Button ButtonTagName="button" Type="Success" Validation.Enabled="true" Validation.Target="{value: _root.NewScore}" Click="{command: Evaluate()}">
                     <bs:GlyphIcon Icon="Ok" /> Ohodnotit
-                </bs:Button>                
+                </bs:Button>
             </div>
         </FooterTemplate>
     </bs:ModalDialog>

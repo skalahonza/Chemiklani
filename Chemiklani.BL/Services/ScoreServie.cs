@@ -209,5 +209,18 @@ namespace Chemiklani.BL.Services
                 dc.SaveChanges();
             }
         }
+
+        public void DeleteScore(int selectedTeamId, int selectedTaskId)
+        {
+            using (var dc = CreateDbContext())
+            {
+                var score = dc.Scores.FirstOrDefault(x => x.Team.Id == selectedTeamId && x.Task.Id == selectedTaskId);
+                if (score != null)
+                {
+                    dc.Scores.Remove(score);
+                    dc.SaveChanges();
+                }                
+            }
+        }
     }
 }

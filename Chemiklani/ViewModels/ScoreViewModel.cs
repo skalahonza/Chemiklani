@@ -24,8 +24,8 @@ namespace Chemiklani.ViewModels
 
         public bool Displayed { get; set; }
         public bool MiniScoreDisplayed { get; set; }
-
-
+        public bool SummarryDisplayed { get; set; }
+        
         public override Task PreRender()
         {
             Rooms = scoreServie.GetRooms();
@@ -49,7 +49,7 @@ namespace Chemiklani.ViewModels
         {
             NewScore = new NewScoreDTO
             {
-                Tasks = taskService.LoadTasks(team.Category),
+                Tasks = taskService.LoadTasks(team.Id, team.Category),
                 SelectedTeam = team
             };
             Displayed = true;
@@ -67,13 +67,18 @@ namespace Chemiklani.ViewModels
             }
         }
 
+        public void TaskChanged(TaskDTO task)
+        {
+            NewScore.SelectedTask = task;
+            TaskChanged();
+        }
+
         public void Evaluate()
         {
             if (ExecuteSafe(() => scoreServie.ScoreTeam(NewScore.SelectedTeam.Id, NewScore.SelectedTask.Id,
                 NewScore.Points)))
             {
-                SetSuccess("Ohodnoceno.");
-
+                SummarryDisplayed = true;
                 //refresh dataset
                 if (SelectedRoom == null)
                     LoadAllTeams();
@@ -82,12 +87,26 @@ namespace Chemiklani.ViewModels
             }
 
             Displayed = false;
-            NewScore.SelectedTeam = null;
         }
 
         public void PointsChanged(int points)
         {
             NewScore.Points = points;
+        }
+
+        public void CancelEvaluation()
+        {
+            if (ExecuteSafe(() => scoreServie.DeleteScore(NewScore.SelectedTeam.Id,
+                NewScore.SelectedTask.Id)))
+            {
+                SummarryDisplayed = false;
+                SetSuccess("Ohodnocení zrušeno.");
+                //refresh dataset
+                if (SelectedRoom == null)
+                    LoadAllTeams();
+                else
+                    FilterTeams();
+            }
         }
 
         private List<int> InitializePoints(int maximum)
