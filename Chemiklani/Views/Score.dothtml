@@ -76,14 +76,18 @@
             <div DataContext="{value: NewScore}">
                 <h3>Tým: {{value: SelectedTeam.Name}}</h3>
                 <bs:Label Text="Úloha" />
-                <bs:ButtonGroup>
+                <bs:ButtonGroup IsJustified="true">
                     <dot:Repeater RenderWrapperTag="false"
                                   DataSource="{value: Tasks}">
                         <ItemTemplate>
-                            <bs:Button Validation.Enabled="false"
-                                       class="{value: _root.NewScore.SelectedTask != null && _root.NewScore.SelectedTask.Id == Id ? "btn btn-info" :(AlreadyEvaluated ? "btn btn-warning" : "btn btn-default")}"
-                                       Click="{command: _root.TaskChanged(_this)}"
-                                       Text="{value: _this.Name}" />
+                            <bs:Column SizeSM="2">
+                                <bs:Button Validation.Enabled="false"
+                                           class="{value: _root.NewScore.SelectedTask != null && 
+                                           _root.NewScore.SelectedTask.Id == Id ? "btn form-control btn-info" 
+                                           :(AlreadyEvaluated ? "btn form-control btn-warning" : "btn form-control btn-default")}"
+                                           Click="{command: _root.TaskChanged(_this)}"
+                                           Text="{value: _this.Name}" />
+                            </bs:Column>
                         </ItemTemplate>
                     </dot:Repeater>
                 </bs:ButtonGroup>
