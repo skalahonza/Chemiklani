@@ -20,7 +20,7 @@
             </tr>
         </bs:Table>
         <bs:Button Text="Zrušit" Type="Danger" Click="{command: CancelEvaluation()}" />
-        <bs:Button Text="OK" Click="{staticCommand: SummarryDisplayed = false}" />
+        <bs:Button Text="OK" class="pull-right" Click="{staticCommand: SummarryDisplayed = false}" />
     </bs:Well>
 
     <h2>Týmy k hodnocení</h2>
