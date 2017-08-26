@@ -9,6 +9,7 @@ using Microsoft.Owin.StaticFiles;
 using Owin;
 using DotVVM.Framework.Hosting;
 using DotVVM.Framework.Storage;
+using DotVVM.Tracing.ApplicationInsights.Owin;
 using Microsoft.AspNet.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Owin.Security.Cookies;
@@ -59,8 +60,8 @@ namespace Chemiklani
                     new FileSystemUploadedFileStorage(uploadPath, TimeSpan.FromMinutes(30))
                 );
 
-                //register download service
-                //options.Services.AddSingleton<IReturnedFileStorage>();
+                //register app insights advanced telemetry
+                options.AddApplicationInsightsTracing();
             });
 #if !DEBUG
             dotvvmConfiguration.Debug = false;

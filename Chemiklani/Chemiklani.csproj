@@ -23,6 +23,7 @@
     </NuGetPackageImportStamp>
     <ApplicationInsightsResourceId>/subscriptions/0cb941d0-16ec-42ae-8279-11e3845c3490/resourcegroups/Chemiklani/providers/microsoft.insights/components/ChemiklaniTelemetry</ApplicationInsightsResourceId>
     <ApplicationInsightsAnnotationResourceId>/subscriptions/0cb941d0-16ec-42ae-8279-11e3845c3490/resourceGroups/Chemiklani/providers/microsoft.insights/components/ChemiklaniTelemetry</ApplicationInsightsAnnotationResourceId>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,6 +43,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ApplicationInsights.OwinExtensions, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ApplicationInsights.OwinExtensions.0.5.0\lib\net45\ApplicationInsights.OwinExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="DotVVM.Core, Version=1.1.5.0, Culture=neutral, PublicKeyToken=23f3607db32275da, processorArchitecture=MSIL">
       <HintPath>..\packages\DotVVM.Core.1.1.5\lib\net451\DotVVM.Core.dll</HintPath>
     </Reference>
@@ -53,6 +57,12 @@
     </Reference>
     <Reference Include="DotVVM.Framework.Hosting.Owin, Version=1.1.5.0, Culture=neutral, PublicKeyToken=23f3607db32275da, processorArchitecture=MSIL">
       <HintPath>..\packages\DotVVM.Owin.1.1.5\lib\net451\DotVVM.Framework.Hosting.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="DotVVM.Tracing.ApplicationInsights, Version=0.0.0.0, Culture=neutral, PublicKeyToken=23f3607db32275da, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotVVM.Tracing.ApplicationInsights.1.1.5\lib\net451\DotVVM.Tracing.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="DotVVM.Tracing.ApplicationInsights.Owin, Version=1.1.5.0, Culture=neutral, PublicKeyToken=23f3607db32275da, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotVVM.Tracing.ApplicationInsights.Owin.1.1.5\lib\net451\DotVVM.Tracing.ApplicationInsights.Owin.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -208,6 +218,9 @@
     <Reference Include="System.Text.Encoding.CodePages, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.Encoding.CodePages.4.3.0\lib\net46\System.Text.Encoding.CodePages.dll</HintPath>
     </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.3.1\lib\netstandard1.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System.Threading.Thread, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Thread.4.3.0\lib\net46\System.Threading.Thread.dll</HintPath>
     </Reference>
@@ -310,7 +323,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:60869/</IISUrl>
+          <IISUrl>http://localhost:60896/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
