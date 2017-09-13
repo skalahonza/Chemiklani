@@ -16,12 +16,19 @@ namespace Chemiklani.ViewModels
         [Bind(Direction.ServerToClient)]
         public AlertType AlertType { get; set; }
 
+        /// <summary>
+        /// Sign out current user and redirect him to SignIn page
+        /// </summary>
         public void SignOut()
         {
             Context.GetAuthentication().SignOut();
             Context.RedirectToRoute("SignIn");
         }
 
+        /// <summary>
+        /// Show success alert
+        /// </summary>
+        /// <param name="message">Message to be displayed</param>
         protected void SetSuccess(string message)
         {
             IsDialogDisplayed = true;
@@ -29,6 +36,10 @@ namespace Chemiklani.ViewModels
             AlertType = AlertType.Success;
         }
 
+        /// <summary>
+        /// Show error alert
+        /// </summary>
+        /// <param name="message">Message to be displayed</param>
         protected void SetError(string message)
         {
             IsDialogDisplayed = true;
@@ -36,6 +47,10 @@ namespace Chemiklani.ViewModels
             AlertType = AlertType.Danger;
         }
 
+        /// <summary>
+        /// Show warning alert
+        /// </summary>
+        /// <param name="message">Message to be displayed</param>
         protected void SetWarning(string message)
         {
             IsDialogDisplayed = true;
@@ -43,6 +58,11 @@ namespace Chemiklani.ViewModels
             AlertType = AlertType.Warning;
         }
 
+        /// <summary>
+        /// Tries to execute an action and if something goes wrong, it alerts the user and logs the exception
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
         protected bool ExecuteSafe(Action action)
         {
             try
@@ -70,11 +90,6 @@ namespace Chemiklani.ViewModels
                 return false;
             }
 #endif
-        }
-
-        public virtual void DialogAction()
-        {
-            IsDialogDisplayed = false;
         }
     }
 }

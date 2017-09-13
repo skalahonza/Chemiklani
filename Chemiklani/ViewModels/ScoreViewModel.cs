@@ -26,12 +26,19 @@ namespace Chemiklani.ViewModels
         public bool MiniScoreDisplayed { get; set; }
         public bool SummaryDisplayed { get; set; }
         
+        /// <summary>
+        /// Get available rooms before rendering html
+        /// </summary>
+        /// <returns></returns>
         public override Task PreRender()
         {
             Rooms = scoreService.GetRooms();
             return base.PreRender();
         }
 
+        /// <summary>
+        /// All rooms button clicked
+        /// </summary>
         public void LoadAllTeams()
         {
             SelectedRoom = default(string);
@@ -39,12 +46,19 @@ namespace Chemiklani.ViewModels
             Teams.ForEach(dto => dto.Points = scoreService.GetPointsOfTeam(dto.Id));
         }
 
+        /// <summary>
+        /// Filter teams by room in a dropdown
+        /// </summary>
         public void FilterTeams()
         {
             Teams = teamService.LoadTeams(SelectedRoom);
             Teams.ForEach(dto => dto.Points = scoreService.GetPointsOfTeam(dto.Id));
         }
 
+        /// <summary>
+        /// Evaluate team in a selected task
+        /// </summary>
+        /// <param name="team"></param>
         public void EvaluateTeam(TeamDTO team)
         {
             NewScore = new NewScoreDTO
@@ -57,6 +71,9 @@ namespace Chemiklani.ViewModels
             NewScore.Points = -1;
         }
 
+        /// <summary>
+        /// Task selection changed
+        /// </summary>
         public void TaskChanged()
         {
             if (NewScore.SelectedTask != null)
@@ -67,6 +84,10 @@ namespace Chemiklani.ViewModels
             }
         }
 
+        /// <summary>
+        /// Task selection changed
+        /// </summary>
+        /// <param name="task"></param>
         public void TaskChanged(TaskDTO task)
         {
             NewScore.SelectedTask = task;
@@ -74,6 +95,9 @@ namespace Chemiklani.ViewModels
             TaskChanged();
         }
 
+        /// <summary>
+        /// Evaluate selected team in a selected task
+        /// </summary>
         public void Evaluate()
         {
             if (ExecuteSafe(() => scoreService.ScoreTeam(NewScore.SelectedTeam.Id, NewScore.SelectedTask.Id,
@@ -90,6 +114,10 @@ namespace Chemiklani.ViewModels
             Displayed = false;
         }
 
+        /// <summary>
+        /// Points selection changed
+        /// </summary>
+        /// <param name="points"></param>
         public void PointsChanged(int points)
         {
             NewScore.Points = points;
@@ -110,6 +138,11 @@ namespace Chemiklani.ViewModels
             }
         }
 
+        /// <summary>
+        /// Initialize points for buttons
+        /// </summary>
+        /// <param name="maximum">Maximum points for a task</param>
+        /// <returns></returns>
         private List<int> InitializePoints(int maximum)
         {
             var list = new List<int>();

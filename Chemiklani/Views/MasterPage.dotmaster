@@ -89,11 +89,11 @@ window.cookieconsent.initialise({
             </bs:HelpText>
         </bs:Jumbotron>
 
-        <bs:Alert Type="{value: AlertType}" Visible="{value: IsDialogDisplayed}">
+        <bs:Alert Type="{value: AlertType}" Visible="{value: IsDialogDisplayed && AlertText.Length > 0}">
             {{value: AlertText}}
             <bs:Button Text="OK"
                        Validation.Enabled="false"
-                       Click="{command: DialogAction()}" />
+                       Click="{staticCommand:  IsDialogDisplayed = false}" />
         </bs:Alert>
 
         <dot:ContentPlaceHolder ID="MainContent" />

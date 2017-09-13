@@ -11,6 +11,9 @@ namespace Chemiklani.ViewModels
 	    public SignInDTO SignInData { get; set; } = new SignInDTO();
 	    public string ErrorMessage { get; set; }
 
+        /// <summary>
+        /// Sign in button clicked, redirect when sign in successful, otherwise display errors
+        /// </summary>
 	    public void SignIn()
 	    {
 	        ErrorMessage = "";

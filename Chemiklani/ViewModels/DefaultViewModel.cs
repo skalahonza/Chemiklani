@@ -11,6 +11,9 @@ namespace Chemiklani.ViewModels
 
 	    public bool NewContestDialogVisible { get; set; }
 
+        /// <summary>
+        /// New contest confirm button pressed
+        /// </summary>
 	    public void ConfirmNewContest()
 	    {
 	        scoreService.NewGame();

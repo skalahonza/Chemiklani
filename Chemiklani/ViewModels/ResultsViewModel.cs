@@ -17,6 +17,10 @@ namespace Chemiklani.ViewModels
         public List<TaskDTO> Tasks { get; set; }
         public List<string> Rooms { get; set; }
 
+        /// <summary>
+        /// Load necessary data before rendering html 
+        /// </summary>
+        /// <returns></returns>
         public override Task PreRender()
         {
             Tasks = taskService.LoadTasks();
@@ -29,12 +33,19 @@ namespace Chemiklani.ViewModels
             return base.PreRender();
         }
 
+        /// <summary>
+        /// Room changed in dropdown
+        /// </summary>
+        /// <param name="room"></param>
         public void RoomChanged(string room)
         {
             Room = room;
             Scores = scoreService.GetResults(Room);
         }
 
+        /// <summary>
+        /// Export csv button pressed
+        /// </summary>
         public void ExportCSV()
         {
             ExecuteSafe(() =>
@@ -50,6 +61,9 @@ namespace Chemiklani.ViewModels
             });
         }
 
+        /// <summary>
+        /// Export full csv button pressed
+        /// </summary>
         public void ExportFullCsv()
         {
             ExecuteSafe(() =>
