@@ -23,7 +23,7 @@ namespace Chemiklani
         {
             var applicationPhysicalPath = HostingEnvironment.ApplicationPhysicalPath;
 
-            //Authentication
+            //Authentication - setup authentication
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
@@ -38,7 +38,7 @@ namespace Chemiklani
                 ExpireTimeSpan = TimeSpan.FromHours(1)
             });
 
-            //Add default users and roles
+            //Add default users and roles - app first launch
             var userService = new UserService();
             if (!userService.AnyUsers())
             {

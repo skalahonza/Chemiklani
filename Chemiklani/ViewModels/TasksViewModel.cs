@@ -42,6 +42,7 @@ namespace Chemiklani.ViewModels
 
         public void ProcessFile()
         {
+            //get upload service from service locator - registered in Startup.cs
             var storage = Context.Configuration.ServiceLocator.GetService<IUploadedFileStorage>();
             var file = Files.Files.First();
             if (file.IsAllowed)

@@ -3,7 +3,7 @@
 
 <dot:Content ContentPlaceHolderID="MainContent">
     <!-- Team scored notification-->
-    <bs:Well class="center" Visible="{value: SummarryDisplayed}">
+    <bs:Well class="center" Visible="{value: SummaryDisplayed}">
         <h3>Tým ohodnocen</h3>
         <bs:Table>
             <tr>
@@ -20,7 +20,7 @@
             </tr>
         </bs:Table>
         <bs:Button Text="Zrušit" Type="Danger" Click="{command: CancelEvaluation()}" />
-        <bs:Button Text="OK" class="pull-right" Click="{staticCommand: SummarryDisplayed = false}" />
+        <bs:Button Text="OK" class="pull-right" Click="{staticCommand: SummaryDisplayed = false}" />
     </bs:Well>
 
     <h2>Týmy k hodnocení</h2>
