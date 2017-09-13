@@ -19,6 +19,11 @@ namespace Chemiklani.BL.Services
             Admin
         }
 
+        /// <summary>
+        /// Tries to sign in a user
+        /// </summary>
+        /// <param name="data">Sign in data</param>
+        /// <returns></returns>
         public ClaimsIdentity SignIn(SignInDTO data)
         {
             using (var dc = CreateDbContext())
@@ -51,6 +56,10 @@ namespace Chemiklani.BL.Services
             }
         }
 
+        /// <summary>
+        /// Check if there are users present in the database
+        /// </summary>
+        /// <returns>False, when there is no user in the database</returns>
         public bool AnyUsers()
         {
             using (var dc = CreateDbContext())
@@ -62,11 +71,21 @@ namespace Chemiklani.BL.Services
             }
         }
 
+        /// <summary>
+        /// Add new user into the database
+        /// </summary>
+        /// <param name="data">User data</param>
         public void AddNewUser(UserDto data)
         {
             AddNewUser(data, CreateRandomPassword());
         }
 
+        /// <summary>
+        /// Add new user, with a password into the database
+        /// </summary>
+        /// <param name="data">User data</param>
+        /// <param name="password">User password</param>
+        /// <returns></returns>
         public IdentityResult AddNewUser(UserDto data, string password)
         {
             using (var dc = CreateDbContext())
@@ -92,6 +111,10 @@ namespace Chemiklani.BL.Services
             }
         }
 
+        /// <summary>
+        /// Add a role to the database, used on app setup
+        /// </summary>
+        /// <param name="role">Role enum</param>
         public void AddRole(UserRoles role)
         {
             using (var dc = CreateDbContext())
@@ -107,6 +130,11 @@ namespace Chemiklani.BL.Services
             }
         }
 
+        /// <summary>
+        /// Get all users from the database
+        /// </summary>
+        /// <param name="currentAdminUserName">This username will be skipped</param>
+        /// <returns></returns>
         public List<UserDto> GetUsers(string currentAdminUserName)
         {
             using (var dc = CreateDbContext())
@@ -126,6 +154,10 @@ namespace Chemiklani.BL.Services
             }
         }
 
+        /// <summary>
+        /// Creates random password ofr the user
+        /// </summary>
+        /// <returns></returns>
         private static string CreateRandomPassword()
         {
             var _allowedChars = "abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ123456789-";
@@ -153,6 +185,10 @@ namespace Chemiklani.BL.Services
             return new RoleManager<AppRole, int>(new RoleStore<AppRole, int, AppUserRole>(dc));
         }
 
+        /// <summary>
+        /// Delete user from the database
+        /// </summary>
+        /// <param name="id">Id to be deleted</param>
         public void DeleteUser(int id)
         {
             using (var dc = CreateDbContext())
@@ -165,6 +201,11 @@ namespace Chemiklani.BL.Services
             }
         }
 
+        /// <summary>
+        /// Change user to the admin or back to the normal user
+        /// </summary>
+        /// <param name="id">User id</param>
+        /// <param name="isAdmin">True if the user should be changed to admin</param>
         public void ChangeAdmin(int id, bool isAdmin)
         {
             using (var dc = CreateDbContext())

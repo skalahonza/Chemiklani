@@ -146,6 +146,10 @@ namespace Chemiklani.BL.Services
             }
         }
 
+        /// <summary>
+        /// Update task info
+        /// </summary>
+        /// <param name="dto">Task to be updated</param>
         public void UpdateTask(TaskDTO dto)
         {
             using (var dc = CreateDbContext())

@@ -45,6 +45,13 @@ namespace Chemiklani.BL.Utils
             }
         }
 
+        /// <summary>
+        /// Export list of dtos to csv
+        /// </summary>
+        /// <typeparam name="TDTO"></typeparam>
+        /// <param name="csvSerializer">Function for seriaizng single dto</param>
+        /// <param name="dtos">List of dtos</param>
+        /// <returns></returns>
         public string ExportDtos<TDTO>(Func<TDTO, string> csvSerializer, List<TDTO> dtos)
             where TDTO : BaseDTO
         {

@@ -9,7 +9,7 @@ namespace Chemiklani.ViewModels
 {
     public class ResultsViewModel : SafeViewModel
     {
-        private readonly ScoreServie scoreServie = new ScoreServie();
+        private readonly ScoreService scoreService = new ScoreService();
         private readonly TaskService taskService = new TaskService();
 
         public List<TeamScoreDTO> Scores { get; set; }
@@ -20,19 +20,19 @@ namespace Chemiklani.ViewModels
         public override Task PreRender()
         {
             Tasks = taskService.LoadTasks();
-            Rooms = scoreServie.GetRooms();
+            Rooms = scoreService.GetRooms();
 
             if (Context.Parameters.ContainsKey("Room"))
                 Room = Context.Parameters["Room"].ToString();
 
-            Scores = !string.IsNullOrEmpty(Room) ? scoreServie.GetResults(Room) : scoreServie.GetResults();
+            Scores = !string.IsNullOrEmpty(Room) ? scoreService.GetResults(Room) : scoreService.GetResults();
             return base.PreRender();
         }
 
         public void RoomChanged(string room)
         {
             Room = room;
-            Scores = scoreServie.GetResults(Room);
+            Scores = scoreService.GetResults(Room);
         }
 
         public void ExportCSV()
@@ -54,7 +54,7 @@ namespace Chemiklani.ViewModels
         {
             ExecuteSafe(() =>
             {
-                string csv = Results.GenerateCompleteCsv(scoreServie.GetResults(Room, true));
+                string csv = Results.GenerateCompleteCsv(scoreService.GetResults(Room, true));
 
                 //return csv as file
                 Context.ReturnFile(Encoding.Default.GetBytes(csv), "vysledkyCompleteDataset.csv", "application/csv");

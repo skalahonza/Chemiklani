@@ -4,7 +4,7 @@ namespace Chemiklani.ViewModels
 {
 	public class DefaultViewModel : MasterPageViewModel
 	{
-	    private readonly ScoreServie scoreServie = new ScoreServie();
+	    private readonly ScoreService scoreService = new ScoreService();
 
         public override string PageTitle => "Domù";
 	    public override string PageDescription => "Hodnotící systém pro soutìž chemiklání";
@@ -13,7 +13,7 @@ namespace Chemiklani.ViewModels
 
 	    public void ConfirmNewContest()
 	    {
-	        scoreServie.NewGame();
+	        scoreService.NewGame();
 	        NewContestDialogVisible = false;
             SetSuccess("Nová hra vytvoøena, všechna stará data vymazána.");
 	    }

@@ -30,6 +30,10 @@ namespace Chemiklani.BL.Services
             }
         }
 
+        /// <summary>
+        /// Update the team info
+        /// </summary>
+        /// <param name="dto">Tem to be updated</param>
         public void UpdateTeam(TeamDTO dto)
         {
             using (var dc = CreateDbContext())

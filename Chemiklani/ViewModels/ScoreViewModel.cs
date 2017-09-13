@@ -7,7 +7,7 @@ namespace Chemiklani.ViewModels
 {
     public class ScoreViewModel : MasterPageViewModel
     {
-        private readonly ScoreServie scoreServie = new ScoreServie();
+        private readonly ScoreService scoreService = new ScoreService();
         private readonly TeamService teamService = new TeamService();
         private readonly TaskService taskService = new TaskService();
 
@@ -24,11 +24,11 @@ namespace Chemiklani.ViewModels
 
         public bool Displayed { get; set; }
         public bool MiniScoreDisplayed { get; set; }
-        public bool SummarryDisplayed { get; set; }
+        public bool SummaryDisplayed { get; set; }
         
         public override Task PreRender()
         {
-            Rooms = scoreServie.GetRooms();
+            Rooms = scoreService.GetRooms();
             return base.PreRender();
         }
 
@@ -36,13 +36,13 @@ namespace Chemiklani.ViewModels
         {
             SelectedRoom = default(string);
             Teams = teamService.LoadTeams();
-            Teams.ForEach(dto => dto.Points = scoreServie.GetPointsOfTeam(dto.Id));
+            Teams.ForEach(dto => dto.Points = scoreService.GetPointsOfTeam(dto.Id));
         }
 
         public void FilterTeams()
         {
             Teams = teamService.LoadTeams(SelectedRoom);
-            Teams.ForEach(dto => dto.Points = scoreServie.GetPointsOfTeam(dto.Id));
+            Teams.ForEach(dto => dto.Points = scoreService.GetPointsOfTeam(dto.Id));
         }
 
         public void EvaluateTeam(TeamDTO team)
@@ -76,10 +76,10 @@ namespace Chemiklani.ViewModels
 
         public void Evaluate()
         {
-            if (ExecuteSafe(() => scoreServie.ScoreTeam(NewScore.SelectedTeam.Id, NewScore.SelectedTask.Id,
+            if (ExecuteSafe(() => scoreService.ScoreTeam(NewScore.SelectedTeam.Id, NewScore.SelectedTask.Id,
                 NewScore.Points)))
             {
-                SummarryDisplayed = true;
+                SummaryDisplayed = true;
                 //refresh dataset
                 if (SelectedRoom == null)
                     LoadAllTeams();
@@ -97,10 +97,10 @@ namespace Chemiklani.ViewModels
 
         public void CancelEvaluation()
         {
-            if (ExecuteSafe(() => scoreServie.DeleteScore(NewScore.SelectedTeam.Id,
+            if (ExecuteSafe(() => scoreService.DeleteScore(NewScore.SelectedTeam.Id,
                 NewScore.SelectedTask.Id)))
             {
-                SummarryDisplayed = false;
+                SummaryDisplayed = false;
                 SetSuccess("Ohodnocení zrušeno.");
                 //refresh dataset
                 if (SelectedRoom == null)

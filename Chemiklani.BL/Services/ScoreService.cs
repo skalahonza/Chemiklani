@@ -7,7 +7,7 @@ using Chemiklani.DAL.Entities;
 
 namespace Chemiklani.BL.Services
 {
-    public class ScoreServie : BaseService
+    public class ScoreService : BaseService
     {
         /// <summary>
         /// Set points gained by the team from a certain task
@@ -199,6 +199,9 @@ namespace Chemiklani.BL.Services
             return max;
         }
 
+        /// <summary>
+        /// Create new game, delete all teams, tasks and scores
+        /// </summary>
         public void NewGame()
         {
             using (var dc = CreateDbContext())
@@ -210,6 +213,11 @@ namespace Chemiklani.BL.Services
             }
         }
 
+        /// <summary>
+        /// Delete score for given team and task
+        /// </summary>
+        /// <param name="selectedTeamId">Delete score of given team</param>
+        /// <param name="selectedTaskId">Delete score for given task</param>
         public void DeleteScore(int selectedTeamId, int selectedTaskId)
         {
             using (var dc = CreateDbContext())
