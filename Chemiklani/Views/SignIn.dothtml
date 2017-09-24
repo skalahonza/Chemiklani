@@ -78,14 +78,17 @@
                 <h3 class="form-signin-heading">Vstupte do Chemiklání</h3>
                 <hr class="colorgraph"><br>
 
-                <dot:TextBox class="form-control" Text="{value: SignInData.UserName}" placeholder="Uživatelské jméno"/>
-                <dot:TextBox class="form-control" Text="{value: SignInData.Password}" placeholder="Heslo" Type="Password"/>
+                <dot:TextBox class="form-control" Text="{value: SignInData.UserName}" 
+                             placeholder="Uživatelské jméno"/>
+                <dot:TextBox class="form-control" Text="{value: SignInData.Password}" 
+                             placeholder="Heslo" Type="Password"/>
 
-                <bs:Button Click="{command: SignIn()}" Text="Přihlásit" Type="Primary" Size="Large" class="btn-block"/>
+                <bs:Button Click="{command: SignIn()}" IsSubmitButton="true" Text="Přihlásit" 
+                           Type="Primary" Size="Large" class="btn-block"/>
                 <br/>
                 <dot:ValidationSummary IncludeErrorsFromChildren="true" class="alert-danger"/>
             </form>
-        <bs:Alert Type="Danger" Text="{value: ErrorMessage}" />
+        <bs:Alert Type="Danger" Text="{value: ErrorMessage}" Visible="{value: ErrorMessage.Length > 0}" />
     </div>
 </body>
 </html>
