@@ -17,16 +17,23 @@
     <bs:Panel class="text-center">
         <h2>Jak hodnotit</h2>
         <hr />
+
+        <h3>Njeprve pejděte na stránku hodnocení</h3>
+        <bs:Image ImageUrl="../Images/NavigateToHodnoceni.PNG" Width="90%" />
+        <hr />
+
         <h3>
             Vyberte si místnost a klepněte na <bs:Button Type="Primary" Text="Filtrovat" /> nebo si zobrazte <bs:Button Type="Success" Text="Všechny týmy" />
         </h3>
-        <bs:Image ImageUrl="../Images/SelectRoom.PNG" Width="90%"/>
+        <bs:Image ImageUrl="../Images/SelectRoom.PNG" Width="90%"/>        
         <hr />
+
         <h3>
             Klepnutím na tlačítko <bs:Button Text="Hodnotit"/> se zobrazí hodnotící formulář pro příslušný tým
         </h3>
         <bs:Image ImageUrl="../Images/SelectTeam.PNG" Width="90%"/>
         <hr />
+
         <h3>
             Zvolte úlohu klepnutím na její číslo a poté zvolte příslušný počet bodů
         </h3>
