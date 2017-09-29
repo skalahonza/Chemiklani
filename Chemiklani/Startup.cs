@@ -37,7 +37,7 @@ namespace Chemiklani
                 },
 
                 //infinite signin timespan
-                ExpireTimeSpan = TimeSpan.MaxValue
+                ExpireTimeSpan = TimeSpan.FromDays(2)
             });
 
             //Add default users and roles - app first launch
