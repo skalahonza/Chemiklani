@@ -102,9 +102,9 @@
         </bs:Form>
         <bs:Well>
             <h2>Formát csv:</h2>
-            nazevtymu,mistnost <br />
-            nazevtymu,mistnost <br />
-            nazevtymu,mistnost
+            nazevtymu,mistnost,kategorie <br />
+            nazevtymu,mistnost,kategorie <br />
+            nazevtymu,mistnost,kategorie
         </bs:Well>
 </dot:Content>
 
