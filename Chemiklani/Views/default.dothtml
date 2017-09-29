@@ -44,9 +44,10 @@
             <br/>
             Aktální výběr a počet bodů je zobrazen <b class="text-primary">modře</b>.
         </h4>
+        <hr/>
 
         <h3>
-            A je to! můžete začít <bs:Button Type="Success" Text="Hodnotit" Click="{command: GoToEvaluation()}"/>.
+            Potvrďte klepnutím na <bs:Button ButtonTagName="button" Type="Success"><bs:GlyphIcon Icon="Ok" /> Ohodnotit</bs:Button> a máte hotovo.
         </h3>
     </bs:Panel>
 
