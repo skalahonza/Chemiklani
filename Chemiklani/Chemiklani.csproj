@@ -270,6 +270,11 @@
     </Content>
     <Content Include="Connected Services\Application Insights\ConnectedService.json" />
     <None Include="Properties\PublishProfiles\Chemiklani - Web Deploy.pubxml" />
+    <Content Include="Images\NavigateToHodnoceni.PNG" />
+    <Content Include="Images\SelectRoom.PNG" />
+    <Content Include="Images\SelectTeam.PNG" />
+    <Content Include="Images\TeamScore.PNG" />
+    <Content Include="Images\TeamScore2.PNG" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

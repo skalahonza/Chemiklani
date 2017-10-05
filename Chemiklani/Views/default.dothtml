@@ -2,15 +2,54 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-        <dot:RoleView Roles="Admin">
-            <bs:Panel class="text-center">
-                <h2>Nová soutěž</h2>
-                <p>
-                    Klepnutím na tlačítko se zahájí nová soutěž. Smažou se všechny týmy, úlohy a hodnocení.
-                </p>
-                <bs:Button Text="Nová soutěž" Type="Primary" Click="{staticCommand: NewContestDialogVisible=true}"/>
-            </bs:Panel>
-        </dot:RoleView>
+    <dot:RoleView Roles="Admin">
+        <bs:Panel class="text-center">
+            <h2>Nová soutěž</h2>
+            <hr />
+            <p>
+                Klepnutím na tlačítko se zahájí nová soutěž. Smažou se všechny týmy, úlohy a hodnocení.
+            </p>
+            <bs:Button Text="Nová soutěž" Type="Primary" Click="{staticCommand: NewContestDialogVisible=true}" />
+        </bs:Panel>
+    </dot:RoleView>
+
+    <!-- Instructions -->
+    <bs:Panel class="text-center">
+        <h2>Jak hodnotit</h2>
+        <hr />
+
+        <h3>Njeprve pejděte na stránku hodnocení</h3>
+        <bs:Image ImageUrl="../Images/NavigateToHodnoceni.PNG" Width="90%" />
+        <hr />
+
+        <h3>
+            Vyberte si místnost a klepněte na <bs:Button Type="Primary" Text="Filtrovat" /> nebo si zobrazte <bs:Button Type="Success" Text="Všechny týmy" />
+        </h3>
+        <bs:Image ImageUrl="../Images/SelectRoom.PNG" Width="90%"/>        
+        <hr />
+
+        <h3>
+            Klepnutím na tlačítko <bs:Button Text="Hodnotit"/> se zobrazí hodnotící formulář pro příslušný tým
+        </h3>
+        <bs:Image ImageUrl="../Images/SelectTeam.PNG" Width="90%"/>
+        <hr />
+
+        <h3>
+            Zvolte úlohu klepnutím na její číslo a poté zvolte příslušný počet bodů
+        </h3>
+        <bs:Image ImageUrl="../Images/TeamScore2.PNG" Width="90%"/>
+        <h4>
+            Pokud již byla úloha hodnocena zobrazí se <b class="text-warning">oranžově</b>.
+            Stejně tak se zobrazí i předchozí počet bodů. 
+            <br/>
+            Aktální výběr a počet bodů je zobrazen <b class="text-primary">modře</b>.
+        </h4>
+        <hr/>
+
+        <h3>
+            Potvrďte klepnutím na <bs:Button ButtonTagName="button" Type="Success"><bs:GlyphIcon Icon="Ok" /> Ohodnotit</bs:Button> a máte hotovo.
+        </h3>
+    </bs:Panel>
 
     <!-- New contest dialog -->
     <bs:ModalDialog HeaderText="Nová soutěž" IsDisplayed="{value: NewContestDialogVisible}">
@@ -18,8 +57,8 @@
             Opravdu chcete zahájít novou soutěž? Smažou se všechny týmy, úlohy a hodnocení.
         </ContentTemplate>
         <FooterTemplate>
-            <bs:Button Text="Ano" Type="Danger" Click="{command: ConfirmNewContest()}"/>
-            <bs:Button Text="Ne" Click="{staticCommand: NewContestDialogVisible=false}"/>
+            <bs:Button Text="Ano" Type="Danger" Click="{command: ConfirmNewContest()}" />
+            <bs:Button Text="Ne" Click="{staticCommand: NewContestDialogVisible=false}" />
         </FooterTemplate>
     </bs:ModalDialog>
 </dot:Content>

@@ -35,7 +35,9 @@ namespace Chemiklani
                         DotvvmAuthenticationHelper.ApplyRedirectResponse(context.OwinContext, context.RedirectUri);
                     }
                 },
-                ExpireTimeSpan = TimeSpan.FromHours(1)
+
+                //infinite signin timespan
+                ExpireTimeSpan = TimeSpan.FromDays(2)
             });
 
             //Add default users and roles - app first launch
