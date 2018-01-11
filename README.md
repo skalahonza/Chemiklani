@@ -4,6 +4,7 @@ Hodnotící systém pro soutěž chemiklání.
 ## Requirements
 * Visual Studio
 * <a href="https://www.dotvvm.com/install">DOTVVM extension</a>
+* <a href="https://www.dotvvm.com/landing/bootstrap-for-dotvvm">Bootstrap for DOTVVM</a>
 * Windows (.Net)
 
 ## Azure deploy
