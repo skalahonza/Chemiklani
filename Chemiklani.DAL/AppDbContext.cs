@@ -1,4 +1,3 @@
-using System;
 using System.Data.Entity;
 using Chemiklani.DAL.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;

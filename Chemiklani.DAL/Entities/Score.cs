@@ -1,5 +1,3 @@
-using Riganti.Utils.Infrastructure.Core;
-
 namespace Chemiklani.DAL.Entities
 {
     public class Score : IEntity<int>
