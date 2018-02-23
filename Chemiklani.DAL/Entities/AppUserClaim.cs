@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Riganti.Utils.Infrastructure.Core;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Chemiklani.DAL.Entities
 {

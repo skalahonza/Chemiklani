@@ -1,4 +1,4 @@
-using Riganti.Utils.Infrastructure.Core;
+
 
 namespace Chemiklani.DAL.Entities
 {
