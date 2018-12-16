@@ -9,5 +9,6 @@ namespace Chemiklani.DAL.Entities
         public ICollection<string> Members { get; set; }
         public string Room { get; set; }
         public int? Category { get; set; }
+        public string School { get; set; }
     }
 }

@@ -36,13 +36,16 @@
             <ContentTemplate>
                 <bs:Form DataContext="{value: EditedTeam}"
                          Validator.InvalidCssClass="has-danger">
-                        <bs:FormGroup LabelText="Název týmu">
-                            <dot:TextBox Text="{value: Name}" />
-                            <dot:Validator Value="{value: Name}" ShowErrorMessageText="true" class="alert-danger" />
-                        </bs:FormGroup>
-                        <bs:FormGroup LabelText="Název místnosti">
-                            <dot:TextBox Text="{value: Room}" />
-                        </bs:FormGroup>
+                    <bs:FormGroup LabelText="Název týmu">
+                        <dot:TextBox Text="{value: Name}" />
+                        <dot:Validator Value="{value: Name}" ShowErrorMessageText="true" class="alert-danger" />
+                    </bs:FormGroup>
+                    <bs:FormGroup LabelText="Název místnosti">
+                        <dot:TextBox Text="{value: Room}" />
+                    </bs:FormGroup>
+                    <bs:FormGroup LabelText="Škola">
+                        <dot:TextBox Text="{value: School}" />
+                    </bs:FormGroup>
                     <bs:FormGroup LabelText="Kategorie">
                         <dot:TextBox Text="{value: Category}" Type="Number" />
                     </bs:FormGroup>
