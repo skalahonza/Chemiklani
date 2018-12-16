@@ -75,6 +75,10 @@
     <Compile Include="Migrations\201707281012007_TeamCategories.Designer.cs">
       <DependentUpon>201707281012007_TeamCategories.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812161041396_SchoolTeam.cs" />
+    <Compile Include="Migrations\201812161041396_SchoolTeam.Designer.cs">
+      <DependentUpon>201812161041396_SchoolTeam.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -91,6 +95,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707281012007_TeamCategories.resx">
       <DependentUpon>201707281012007_TeamCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812161041396_SchoolTeam.resx">
+      <DependentUpon>201812161041396_SchoolTeam.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
