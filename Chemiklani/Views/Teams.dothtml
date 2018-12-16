@@ -9,6 +9,7 @@
                     <th>Název týmu</th>
                     <th>Místnost</th>
                     <th>Kategorie</th>
+                    <th>Škola</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,6 +20,7 @@
                             <td class="col-md-10">{{value: Name}}</td>
                             <td class="col-md-10">{{value: Room}}</td>
                             <td class="col-md-10">{{value: Category}}</td>
+                            <td class="col-md-10">{{value: School}}</td>
                             <td>
                                 <bs:LinkButton Text="Smazat" Type="Danger" Click="{command: _parent.DeleteTeam(Id)}" />
                             </td>
@@ -84,8 +86,11 @@
                 <bs:FormGroup LabelText="Název místnosti">
                     <dot:TextBox Text="{value: Room}" />
                 </bs:FormGroup>
+                <bs:FormGroup LabelText="Škola">
+                    <dot:TextBox Text="{value: School}" />
+                </bs:FormGroup>
                 <bs:FormGroup LabelText="Kategorie">
-                    <dot:TextBox Text="{value: Category}" Type="Number"/>
+                    <dot:TextBox Text="{value: Category}" Type="Number" />
                 </bs:FormGroup>
                 <bs:FormGroup>
                     <bs:Button Type="Success" Text="Přidat tým"
@@ -105,9 +110,11 @@
         </bs:Form>
         <bs:Well>
             <h2>Formát csv:</h2>
-            nazevtymu,mistnost,kategorie <br />
-            nazevtymu,mistnost,kategorie <br />
-            nazevtymu,mistnost,kategorie
+            nazevtymu,mistnost,kategorie,skola
+            <br />
+            nazevtymu,mistnost,kategorie,skola
+            <br />
+            nazevtymu,mistnost,kategorie,skola
         </bs:Well>
 </dot:Content>
 

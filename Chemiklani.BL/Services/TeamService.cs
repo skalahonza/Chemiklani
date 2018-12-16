@@ -153,8 +153,12 @@ namespace Chemiklani.BL.Services
                 };
 
                 //add category if provided
-                if (row.Length == 3)
+                if (row.Length >= 3)
                     dto.Category = int.Parse(row[2]);
+
+                //add school if provided
+                if (row.Length >= 4)
+                    dto.School = row[3];
 
                 return dto;
             }, out List<TeamDTO> dtos);
