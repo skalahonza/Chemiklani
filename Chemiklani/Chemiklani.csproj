@@ -266,6 +266,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Connected Services\Application Insights\ConnectedService.json" />
+    <Content Include="Images\Logos\ASB-logo.svg" />
+    <Content Include="Images\Logos\logo_long.svg" />
+    <Content Include="Images\Logos\MSMT_logo s textem_cz-kvalita.png" />
     <Content Include="Images\NavigateToHodnoceni.PNG" />
     <Content Include="Images\SelectRoom.PNG" />
     <Content Include="Images\SelectTeam.PNG" />

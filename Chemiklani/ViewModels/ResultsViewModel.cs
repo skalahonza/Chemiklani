@@ -14,8 +14,10 @@ namespace Chemiklani.ViewModels
 
         public List<TeamScoreDTO> Scores { get; set; }
         public string Room { get; set; }
+        public int? Category { get; set; }
         public List<TaskDTO> Tasks { get; set; }
         public List<string> Rooms { get; set; }
+        public List<int> Categories { get; set; }
 
         /// <summary>
         /// Load necessary data before rendering html 
@@ -25,13 +27,15 @@ namespace Chemiklani.ViewModels
         {
             Tasks = taskService.LoadTasks();
             Rooms = scoreService.GetRooms();
+            Categories = scoreService.GetCategories();
 
             if (Context.Parameters.ContainsKey("Room"))
                 Room = Context.Parameters["Room"].ToString();
 
-            Scores = !string.IsNullOrEmpty(Room) ? scoreService.GetResults(Room) : scoreService.GetResults();
+            //Scores = !string.IsNullOrEmpty(Room) ? scoreService.GetResults(Room) : scoreService.GetResults();
+            Scores = scoreService.GetResults(Room, Category);
             return base.PreRender();
-        }
+        }        
 
         /// <summary>
         /// Room changed in dropdown
@@ -39,8 +43,17 @@ namespace Chemiklani.ViewModels
         /// <param name="room"></param>
         public void RoomChanged(string room)
         {
-            Room = room;
-            Scores = scoreService.GetResults(Room);
+            Room = room;            
+        }
+
+        public void CategoryChanged(int category)
+        {
+            Category = category;            
+        }
+
+        public void ClearCategory()
+        {
+            Category = null;
         }
 
         /// <summary>
@@ -68,7 +81,7 @@ namespace Chemiklani.ViewModels
         {
             ExecuteSafe(() =>
             {
-                string csv = Results.GenerateCompleteCsv(scoreService.GetResults(Room, true));
+                string csv = Results.GenerateCompleteCsv(scoreService.GetResults(Room, completeDataSet:true));
 
                 //return csv as file
                 Context.ReturnFile(Encoding.Default.GetBytes(csv), "vysledkyCompleteDataset.csv", "application/csv");

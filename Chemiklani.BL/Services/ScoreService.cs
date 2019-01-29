@@ -90,26 +90,43 @@ namespace Chemiklani.BL.Services
             }
         }
 
+        public List<int> GetCategories()
+        {
+            using (var dc = CreateDbContext())
+            {
+                return dc.Teams
+                    .Where(x => x.Category != null)
+                    .Select(x => x.Category.Value)                                        
+                    .Distinct()
+                    .ToList();
+            }
+        }
+
         /// <summary>
         /// Get sore dataset for given list of teams
         /// </summary>
-        /// <param name="room">Room, used for filter, elave empty if filter not required</param>
-        /// <param name="completeDataset">True: you can view points for each task</param>
+        /// <param name="room">Room, used for filter, leave empty if filter not required</param>
+        /// <param name="category">Category of the teams</param>
+        /// <param name="completeDataSet">True: you can view points for each task</param>
         /// <returns></returns>
-        public List<TeamScoreDTO> GetResults(string room = "", bool completeDataset = false)
+        public List<TeamScoreDTO> GetResults(string room = "", int? category = null, bool completeDataSet = false)
         {
             var result = new List<TeamScoreDTO>();
             using (var dc = CreateDbContext())
             {
                 //get all teams
-                IQueryable<Team> teamsQuerry = dc.Teams;
+                IQueryable<Team> teamsQuery = dc.Teams;
 
                 //filter by room if required
                 if (!string.IsNullOrEmpty(room))
-                    teamsQuerry = teamsQuerry.Where(t => t.Room == room);
+                    teamsQuery = teamsQuery.Where(t => t.Room == room);
+
+                //filter by category if required
+                if (category != null)
+                    teamsQuery = teamsQuery.Where(x => x.Category == category);
 
                 //transfer to dto
-                var teams = teamsQuerry.ToList()
+                var teams = teamsQuery.ToList()
                     .Select(team =>
                     {
                         var tmp = new TeamDTO();
@@ -134,7 +151,7 @@ namespace Chemiklani.BL.Services
                     {
                         Team = t,
                         TasksScores =
-                            completeDataset ? new List<TaskScoreDTO>(TaskScores(t.Id, competedTasks,scores).OrderBy(x => x.TaskNumber)) : new List<TaskScoreDTO>(),
+                            completeDataSet ? new List<TaskScoreDTO>(TaskScores(t.Id, competedTasks, scores).OrderBy(x => x.TaskNumber)) : new List<TaskScoreDTO>(),
                         TotalPoints = GetPointsOfTeam(t.Id),
                     });
                 });
@@ -228,7 +245,7 @@ namespace Chemiklani.BL.Services
                 {
                     dc.Scores.Remove(score);
                     dc.SaveChanges();
-                }                
+                }
             }
         }
     }

@@ -29,7 +29,8 @@
     <bs:Container>
         <bs:Jumbotron>
             <h1>Výsledky</h1>
-            <h2 Visible="{value: Room.Length != 0}">Místnost {{value: Room}}</h2>
+            <h2 Visible="{value: Room.Length != 0}">Místnost:  {{value: Room}}</h2>
+            <h2 Visible="{value: Category != null}">Kategorie:  {{value: Category}}</h2>
         </bs:Jumbotron>
 
         <bs:Row class="text-center">
@@ -54,13 +55,30 @@
             </bs:ButtonGroup>
         </bs:Row>
 
+        <bs:Row class="text-center">
+            <h3>Kategorie</h3>
+            <bs:ButtonGroup>
+                <bs:Button Click="{command: ClearCategory()}"
+                           Text="Všechny"
+                           Type="Primary" />
+                <dot:Repeater DataSource="{value: Categories}" RenderWrapperTag="false">
+                    <ItemTemplate>
+                        <bs:Button Click="{command: _root.CategoryChanged(_this)}"
+                                   Text="{value: _this}"
+                                   Type="Primary" />
+                    </ItemTemplate>
+                </dot:Repeater>
+            </bs:ButtonGroup>
+        </bs:Row>
+
         <bs:Row>
-            <bs:Table Type="Striped">
+            <bs:Table Type="Striped" class="result-table">
                 <thead>
                     <tr>
                         <th>Pořadí</th>
                         <th>Název Týmu</th>
                         <th>Místnost</th>
+                        <th>Škola</th>
                         <th>Body celkem</th>
                     </tr>
                 </thead>
@@ -70,6 +88,7 @@
                             <td>{{value: Placings}}</td>
                             <td>{{value: Team.Name}}</td>
                             <td>{{value: Team.Room}}</td>
+                            <td>{{value: Team.School}}</td>
                             <td>{{value: TotalPoints}}</td>
                         </tr>
                     </ItemTemplate>
@@ -80,4 +99,7 @@
 </body>
 </html>
 
+<style media="print">
+    
+</style>
 
