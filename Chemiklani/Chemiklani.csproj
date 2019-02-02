@@ -267,6 +267,8 @@
     </Content>
     <Content Include="Connected Services\Application Insights\ConnectedService.json" />
     <Content Include="Images\Logos\ASB-logo.svg" />
+    <Content Include="Images\Logos\logo-long-kvalita.png" />
+    <Content Include="Images\Logos\logoradek.png" />
     <Content Include="Images\Logos\logo_long.svg" />
     <Content Include="Images\Logos\MSMT_logo s textem_cz-kvalita.png" />
     <Content Include="Images\NavigateToHodnoceni.PNG" />

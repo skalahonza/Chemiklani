@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,8 @@ namespace Chemiklani.ViewModels
         public List<TaskDTO> Tasks { get; set; }
         public List<string> Rooms { get; set; }
         public List<int> Categories { get; set; }
+
+        public string Date => DateTime.Now.ToString("dd.MM.yyyy");
 
         /// <summary>
         /// Load necessary data before rendering html 
