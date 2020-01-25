@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Chemiklání | Výsledky</title>
+    <title>Chemistryrace | Results</title>
 
     <script src="https://code.jquery.com/jquery-3.2.1.js"
             integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
@@ -28,15 +28,15 @@
 <body>
     <bs:Container>
         <bs:Jumbotron>
-            <h1>Výsledky</h1>
+            <h1>Results</h1>
             <h2 Visible="{value: Room.Length != 0}">Místnost {{value: Room}}</h2>
         </bs:Jumbotron>
 
         <bs:Row class="text-center">
-            <h3>Místnosti</h3>
+            <h3>Rooms</h3>
             <bs:ButtonGroup>
                 <bs:Button Click="{command: RoomChanged("")}"
-                           Text="Všechny"
+                           Text="All"
                            Type="Primary" />
                 <dot:Repeater DataSource="{value: Rooms}" RenderWrapperTag="false">
                     <ItemTemplate>
@@ -48,7 +48,7 @@
                 <dot:AuthenticatedView>
                     <AuthenticatedTemplate>
                         <bs:Button Type="Success" Text="Export CSV" Click="{command: ExportCSV()}"/>
-                        <bs:Button Type="Warning" Text="Export CSV (kompletní)" Click="{command: ExportFullCsv()}"/>
+                        <bs:Button Type="Warning" Text="Export CSV (complete)" Click="{command: ExportFullCsv()}"/>
                     </AuthenticatedTemplate>
                 </dot:AuthenticatedView>
             </bs:ButtonGroup>
@@ -58,10 +58,10 @@
             <bs:Table Type="Striped">
                 <thead>
                     <tr>
-                        <th>Pořadí</th>
-                        <th>Název Týmu</th>
-                        <th>Místnost</th>
-                        <th>Body celkem</th>
+                        <th>Position</th>
+                        <th>Team</th>
+                        <th>Room</th>
+                        <th>Points</th>
                     </tr>
                 </thead>
                 <dot:Repeater DataSource="{value: Scores}" WrapperTagName="tbody">

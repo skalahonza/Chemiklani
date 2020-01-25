@@ -2,7 +2,7 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-    <h2>Seznam uživatelů</h2>
+    <h2>List of users</h2>
     <dot:Repeater DataSource="{value: Users}" WrapperTagName="table"
                   class="table" Validation.Enabled="false" Visible="{value: Users.Count != 0}">
         <ItemTemplate>
@@ -10,38 +10,38 @@
                 <td class="col-md-10">{{value: UserName}}</td>
                 <td><bs:CheckBox Text="Admin" Checked="{value: IsAdmin}" Changed="{command: _parent.ChangeAdmin(Id,IsAdmin)}"/></td>
                 <td>
-                <bs:LinkButton Text="Smazat" Type="Danger" Click="{command: _parent.DeleteUser(Id)}" /></td>
+                <bs:LinkButton Text="Delete" Type="Danger" Click="{command: _parent.DeleteUser(Id)}" /></td>
             </tr>
         </ItemTemplate>
     </dot:Repeater>  
 
     <bs:HelpText class="text-center" Visible="{value: Users.Count == 0}">
         <h2>
-            Kromě Vás nejsou v systému žádní uživatelé.
+            There are no users in the system except you.
         </h2>
     </bs:HelpText>
 
-    <h2>Přidat uživatele</h2>
+    <h2>Add user</h2>
 
     <bs:Form DataContext="{value: NewUser}"
              Validator.InvalidCssClass="has-danger">
         <fieldset Validation.Target="{value: _parent.NewUser}">
-            <bs:FormGroup LabelText="Uživatelské jméno">
+            <bs:FormGroup LabelText="Username">
                 <dot:TextBox Text="{value: UserName}" />
                 <dot:Validator Value="{value: UserName}" ShowErrorMessageText="true" class="alert-danger" />
             </bs:FormGroup>
-            <bs:FormGroup LabelText="Heslo">
+            <bs:FormGroup LabelText="Password">
                 <dot:TextBox Text="{value: Password}" Type="Password"/>
                 <dot:Validator Value="{value: Password}" ShowErrorMessageText="true" class="alert-danger" />
             </bs:FormGroup>
-            <bs:FormGroup LabelText="Heslo znovu">
+            <bs:FormGroup LabelText="Password confirm">
                 <dot:TextBox Text="{value: PasswordConfirm}" Type="Password" />
                 <dot:Validator Value="{value: PasswordConfirm}" ShowErrorMessageText="true" class="alert-danger" />
             </bs:FormGroup>
             <bs:FormGroup>                
                 <bs:CheckBox Text="Admin" class="text-center" Checked="{value: IsAdmin}"/>
             </bs:FormGroup>
-            <bs:Button Type="Success" Text="Přidat uživatele" IsSubmitButton="true"
+            <bs:Button Type="Success" Text="Add user" IsSubmitButton="true"
                        Click="{command: _parent.AddUser()}" />
         </fieldset>
     </bs:Form> 

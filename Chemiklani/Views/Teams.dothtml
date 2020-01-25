@@ -2,14 +2,14 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-        <h2>Seznam týmů</h2>
+        <h2>Teams</h2>
         <table class="table" Visible="{value: Teams.Count != 0}">
             <thead>
                 <tr>
-                    <th>Název týmu</th>
-                    <th>Místnost</th>
-                    <th>Kategorie</th>
-                    <th>Škola</th>
+                    <th>Team name</th>
+                    <th>Room</th>
+                    <th>Category</th>
+                    <th>School</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,10 +22,10 @@
                             <td class="col-md-10">{{value: Category}}</td>
                             <td class="col-md-10">{{value: School}}</td>
                             <td>
-                                <bs:LinkButton Text="Smazat" Type="Danger" Click="{command: _parent.DeleteTeam(Id)}" />
+                                <bs:LinkButton Text="Delete" Type="Danger" Click="{command: _parent.DeleteTeam(Id)}" />
                             </td>
                             <td>
-                                <bs:LinkButton Text="Editovat"  Click="{command:  _root.UpdateTeam(_this)}" />
+                                <bs:LinkButton Text="Edit"  Click="{command:  _root.UpdateTeam(_this)}" />
                             </td>
                         </tr>
                     </ItemTemplate>
@@ -34,21 +34,21 @@
         </table>
 
         <!-- Edit team dialog -->
-        <bs:ModalDialog HeaderText="Upravit tým" IsDisplayed="{value: EditTeamDialogDisplayed}">
+        <bs:ModalDialog HeaderText="Edit team" IsDisplayed="{value: EditTeamDialogDisplayed}">
             <ContentTemplate>
                 <bs:Form DataContext="{value: EditedTeam}"
                          Validator.InvalidCssClass="has-danger">
-                    <bs:FormGroup LabelText="Název týmu">
+                    <bs:FormGroup LabelText="Team name">
                         <dot:TextBox Text="{value: Name}" />
                         <dot:Validator Value="{value: Name}" ShowErrorMessageText="true" class="alert-danger" />
                     </bs:FormGroup>
-                    <bs:FormGroup LabelText="Název místnosti">
+                    <bs:FormGroup LabelText="Room">
                         <dot:TextBox Text="{value: Room}" />
                     </bs:FormGroup>
-                    <bs:FormGroup LabelText="Škola">
+                    <bs:FormGroup LabelText="School">
                         <dot:TextBox Text="{value: School}" />
                     </bs:FormGroup>
-                    <bs:FormGroup LabelText="Kategorie">
+                    <bs:FormGroup LabelText="Category">
                         <dot:TextBox Text="{value: Category}" Type="Number" />
                     </bs:FormGroup>
                 </bs:Form>
@@ -62,7 +62,7 @@
                                Validation.Enabled="true"
                                Validation.Target="{value: EditedTeam}"
                                Type="Success" Click="{command: Save()}">
-                        <bs:GlyphIcon Icon="Ok" /> Uložit
+                        <bs:GlyphIcon Icon="Ok" /> Save
                     </bs:Button>
                 </div>
             </FooterTemplate>
@@ -70,30 +70,30 @@
 
         <bs:HelpText class="text-center" Visible="{value: Teams.Count == 0}">
             <h2>
-                Zatím zde nejsou žádné týmy.
+                There are no teams yet.
             </h2>
         </bs:HelpText>
 
-        <h2>Přidat týmy</h2>
+        <h2>Add teams</h2>
 
         <bs:Form DataContext="{value: NewTeamData}"
                  Validator.InvalidCssClass="has-danger">
             <fieldset Validation.Target="{value: _parent.NewTeamData}">
-                <bs:FormGroup LabelText="Název týmu">
+                <bs:FormGroup LabelText="Team name">
                     <dot:TextBox Text="{value: Name}" />
                     <dot:Validator Value="{value: Name}" ShowErrorMessageText="true" class="alert-danger" />
                 </bs:FormGroup>
-                <bs:FormGroup LabelText="Název místnosti">
+                <bs:FormGroup LabelText="Room">
                     <dot:TextBox Text="{value: Room}" />
                 </bs:FormGroup>
-                <bs:FormGroup LabelText="Škola">
+                <bs:FormGroup LabelText="School">
                     <dot:TextBox Text="{value: School}" />
                 </bs:FormGroup>
-                <bs:FormGroup LabelText="Kategorie">
+                <bs:FormGroup LabelText="Category">
                     <dot:TextBox Text="{value: Category}" Type="Number" />
                 </bs:FormGroup>
                 <bs:FormGroup>
-                    <bs:Button Type="Success" Text="Přidat tým"
+                    <bs:Button Type="Success" Text="Add team"
                                Validation.Target="{value: _root.NewTeamData}"
                                Click="{command: _parent.AddTeam()}" />
                     <dot:FileUpload Validation.Enabled="false"
@@ -103,18 +103,16 @@
                                     UploadCompleted="{command: _parent.ProcessFile()}"
                                     AllowedFileTypes=".csv"
                                     SuccessMessageText=""
-                                    UploadErrorMessageText="Nahrávání selhalo."
-                                    UploadButtonText="Přidat týmy z csv" />
+                                    UploadErrorMessageText="Upload failed."
+                                    UploadButtonText="Add from CSV" />
                 </bs:FormGroup>
             </fieldset>
         </bs:Form>
         <bs:Well>
-            <h2>Formát csv:</h2>
-            nazevtymu,mistnost,kategorie,skola
-            <br />
-            nazevtymu,mistnost,kategorie,skola
-            <br />
-            nazevtymu,mistnost,kategorie,skola
+            <h2>CSV Format:</h2>
+            teamname,room,category,school<br />
+            teamname,room,category,school<br />
+            teamname,room,category,school<br />            
         </bs:Well>
 </dot:Content>
 

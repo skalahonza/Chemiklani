@@ -4,49 +4,49 @@
 <dot:Content ContentPlaceHolderID="MainContent">
     <!-- Team scored notification-->
     <bs:Well class="center" Visible="{value: SummaryDisplayed}">
-        <h3>Tým ohodnocen</h3>
+        <h3>Team scored</h3>
         <bs:Table>
             <tr>
-                <td>Název týmu</td>
+                <td>Team</td>
                 <td>{{value: NewScore.SelectedTeam.Name}}</td>
             </tr>
             <tr>
-                <td>Úloha</td>
+                <td>Task</td>
                 <td>{{value: NewScore.SelectedTask.Name}}</td>
             </tr>
             <tr>
-                <td>Body</td>
+                <td>Points</td>
                 <td>{{value: NewScore.Points}}</td>
             </tr>
         </bs:Table>
-        <bs:Button Text="Zrušit" Type="Danger" Click="{command: CancelEvaluation()}" />
+        <bs:Button Text="Cancel" Type="Danger" Click="{command: CancelEvaluation()}" />
         <bs:Button Text="OK" class="pull-right" Click="{staticCommand: SummaryDisplayed = false}" />
     </bs:Well>
 
-    <h2>Týmy k hodnocení</h2>
-    <bs:ComboBoxGroup LabelText="Místnost"
-                      DataSource="{value: Rooms}" EmptyItemText="Vyberte místnost..."
+    <h2>Teams</h2>
+    <bs:ComboBoxGroup LabelText="Rooms"
+                      DataSource="{value: Rooms}" EmptyItemText="Select room..."
                       SelectedValue="{value: SelectedRoom}" />
 
     <bs:HelpText Visible="{value: Teams.Count == 0}">
         <h3 class="text-center">
-            Zatím zde nejsou žádné týmy, načtěte si je, abyste mohli začít hodnotit. Vyberte místnost, abyste mohli spustit filtr. Nebo si zobrazte všechny týmy, je to na Vás.
+            There are no teams yet, add them in order to proceed. You can filter teams based on a selected room, or you can display all teams.            
         </h3>
     </bs:HelpText>
     <div class="text-center">
         <bs:ButtonGroup>
-            <bs:Button Text="Všechny týmy" Type="Success" Click="{command: LoadAllTeams()}" Validation.Enabled="false" />
-            <bs:Button Text="Filtrovat" Type="Primary" Click="{command: FilterTeams()}" Validation.Enabled="false" Enabled="{value: SelectedRoom != null}" />
+            <bs:Button Text="All teams" Type="Success" Click="{command: LoadAllTeams()}" Validation.Enabled="false" />
+            <bs:Button Text="Filter" Type="Primary" Click="{command: FilterTeams()}" Validation.Enabled="false" Enabled="{value: SelectedRoom != null}" />
         </bs:ButtonGroup>
     </div>
     <table class="table" Visible="{value: Teams.Count != 0}">
         <thead>
             <tr>
                 <th></th>
-                <th>Název týmu</th>
-                <th>Místnost</th>
-                <th>Kategorie</th>
-                <th>Body</th>
+                <th>Team</th>
+                <th>Room</th>
+                <th>Category</th>
+                <th>Points</th>
             </tr>
         </thead>
         <tbody>
@@ -68,14 +68,14 @@
     </table>
 
     <!-- Score a team Dialog-->
-    <bs:ModalDialog HeaderText="Hodnocení týmu"
+    <bs:ModalDialog HeaderText="Score team"
                     DataContext="{value: _this}"
                     IsDisplayed="{value: Displayed}"
                     Size="Large">
         <ContentTemplate>
             <div DataContext="{value: NewScore}">
-                <h3>Tým: {{value: SelectedTeam.Name}}</h3>
-                <bs:Label Text="Úloha" />
+                <h3>Team: {{value: SelectedTeam.Name}}</h3>
+                <bs:Label Text="Task" />
                 <bs:ButtonGroup IsJustified="true">
                     <dot:Repeater RenderWrapperTag="false"
                                   DataSource="{value: Tasks}">
@@ -92,7 +92,7 @@
                     </dot:Repeater>
                 </bs:ButtonGroup>
                 <bs:Label Text="Body" />
-                <bs:Alert Type="Warning" Text="Chystáte se hodnotit již jednou ohodnocenou úlohu. Data budou přepsána"
+                <bs:Alert Type="Warning" Text="You are about to score a previously scored task. Previous data will be overridden."
                           Visible="{value: SelectedTask.AlreadyEvaluated}" />
 
                 <bs:ButtonGroup Visible="{value: _root.MiniScoreDisplayed && SelectedTask != null}"
@@ -117,10 +117,10 @@
         <FooterTemplate>
             <div class="text-center">
                 <bs:Button ButtonTagName="button" Type="Danger" Click="{staticCommand: Displayed = false}">
-                    <bs:GlyphIcon Icon="Ban_circle" /> Zrušit
+                    <bs:GlyphIcon Icon="Ban_circle" /> Cancel
                 </bs:Button>
                 <bs:Button ButtonTagName="button" Type="Success" Validation.Enabled="true" Validation.Target="{value: _root.NewScore}" Click="{command: Evaluate()}">
-                    <bs:GlyphIcon Icon="Ok" /> Ohodnotit
+                    <bs:GlyphIcon Icon="Ok" /> Score
                 </bs:Button>
             </div>
         </FooterTemplate>

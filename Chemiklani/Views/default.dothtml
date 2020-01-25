@@ -4,12 +4,12 @@
 <dot:Content ContentPlaceHolderID="MainContent">
     <dot:RoleView Roles="Admin">
         <bs:Panel class="text-center">
-            <h2>Nová soutěž</h2>
+            <h2>New contest</h2>
             <hr />
             <p>
-                Klepnutím na tlačítko se zahájí nová soutěž. Smažou se všechny týmy, úlohy a hodnocení.
+                Press the button to create new contest, all data from previous contests will be discarded.
             </p>
-            <bs:Button Text="Nová soutěž" Type="Primary" Click="{staticCommand: NewContestDialogVisible=true}" />
+            <bs:Button Text="New contest" Type="Primary" Click="{staticCommand: NewContestDialogVisible=true}" />
         </bs:Panel>
     </dot:RoleView>
 
@@ -52,13 +52,13 @@
     </bs:Panel>
 
     <!-- New contest dialog -->
-    <bs:ModalDialog HeaderText="Nová soutěž" IsDisplayed="{value: NewContestDialogVisible}">
+    <bs:ModalDialog HeaderText="New contest" IsDisplayed="{value: NewContestDialogVisible}">
         <ContentTemplate>
-            Opravdu chcete zahájít novou soutěž? Smažou se všechny týmy, úlohy a hodnocení.
+            Are you usre you want to create new contest? All data form previous contest will be discarded.            
         </ContentTemplate>
         <FooterTemplate>
-            <bs:Button Text="Ano" Type="Danger" Click="{command: ConfirmNewContest()}" />
-            <bs:Button Text="Ne" Click="{staticCommand: NewContestDialogVisible=false}" />
+            <bs:Button Text="Yes" Type="Danger" Click="{command: ConfirmNewContest()}" />
+            <bs:Button Text="No" Click="{staticCommand: NewContestDialogVisible=false}" />
         </FooterTemplate>
     </bs:ModalDialog>
 </dot:Content>

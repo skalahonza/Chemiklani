@@ -2,13 +2,13 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-        <h2>Seznam Úloh</h2>
+        <h2>Tasks</h2>
         <table class="table" Visible="{value: Tasks.Count != 0}">
             <thead>
                 <tr>
-                    <th>Název úlohy</th>
-                    <th>Popis</th>
-                    <th>Maximum bodů</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Maximum points</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,10 +20,10 @@
                             <td class="col-md-10">{{value: Description}}</td>
                             <td class="col-md-10">{{value: MaximumPoints}}</td>
                             <td>
-                                <bs:LinkButton Text="Smazat" Type="Danger" Click="{command: _parent.DeleteTask(Id)}" />
+                                <bs:LinkButton Text="Delete" Type="Danger" Click="{command: _parent.DeleteTask(Id)}" />
                             </td>
                             <td>
-                                <bs:LinkButton Text="Editovat" Click="{command:  _root.EditTask(_this)}" />
+                                <bs:LinkButton Text="Edit" Click="{command:  _root.EditTask(_this)}" />
                             </td>
                         </tr>
                     </ItemTemplate>
@@ -32,18 +32,18 @@
         </table>
 
         <!-- Edit task dialog -->
-        <bs:ModalDialog HeaderText="Upravit úlohu" IsDisplayed="{value: EditTaskDialogDisplayed}">
+        <bs:ModalDialog HeaderText="Edit task" IsDisplayed="{value: EditTaskDialogDisplayed}">
             <ContentTemplate>
                 <bs:Form DataContext="{value: EditedTask}"
                          Validator.InvalidCssClass="has-danger">
-                    <bs:FormGroup LabelText="Název úlohx">
+                    <bs:FormGroup LabelText="Task name">
                         <dot:TextBox Text="{value: Name}" />
                         <dot:Validator Value="{value: Name}" ShowErrorMessageText="true" class="alert-danger" />
                     </bs:FormGroup>
-                    <bs:FormGroup LabelText="Popis">
+                    <bs:FormGroup LabelText="Description">
                         <dot:TextBox Text="{value: Description}" />
                     </bs:FormGroup>
-                    <bs:FormGroup LabelText="Maximum bodů">
+                    <bs:FormGroup LabelText="Maximum points">
                         <dot:TextBox Text="{value: MaximumPoints}" Type="Number" />
                         <dot:Validator Value="{value: MaximumPoints}" ShowErrorMessageText="true" class="alert-danger" />
                     </bs:FormGroup>
@@ -52,13 +52,13 @@
             <FooterTemplate>
                 <div class="text-center">
                     <bs:Button ButtonTagName="button" Type="Danger" Click="{staticCommand: _root.EditTaskDialogDisplayed = false}">
-                        <bs:GlyphIcon Icon="Ban_circle" /> Zrušit
+                        <bs:GlyphIcon Icon="Ban_circle" /> Cancel
                     </bs:Button>
                     <bs:Button ButtonTagName="button"
                                Validation.Enabled="true"
                                Validation.Target="{value: EditedTask}"
                                Type="Success" Click="{command: Save()}">
-                        <bs:GlyphIcon Icon="Ok" /> Uložit
+                        <bs:GlyphIcon Icon="Ok" /> Save
                     </bs:Button>
                 </div>
             </FooterTemplate>
@@ -66,28 +66,28 @@
 
         <bs:HelpText class="text-center" Visible="{value: Tasks.Count == 0}">
             <h2>
-                Zatím zde nejsou žádné úlohy.
+                There are no tasks yet.
             </h2>
         </bs:HelpText>
 
-        <h2>Přidat Úlohy</h2>
+        <h2>Add task</h2>
         <bs:Form DataContext="{value: NewTask}"
                  Validator.InvalidCssClass="has-danger">
             <fieldset Validation.Target="{value: _parent.NewTask}">
-                <bs:FormGroup LabelText="Název úlohy">
+                <bs:FormGroup LabelText="Task name">
                     <dot:TextBox Text="{value: Name}" />
                     <dot:Validator Value="{value: Name}" ShowErrorMessageText="true" class="alert-danger" />
                 </bs:FormGroup>
-                <bs:FormGroup LabelText="Popis">
+                <bs:FormGroup LabelText="Description">
                     <dot:TextBox Text="{value: Description}" Type="MultiLine" />
                     <dot:Validator Value="{value: Description}" ShowErrorMessageText="true" class="alert-danger" />
                 </bs:FormGroup>
-                <bs:FormGroup LabelText="Maximum bodů">
+                <bs:FormGroup LabelText="Maximum points">
                     <dot:TextBox Text="{value: MaximumPoints}" Type="Number" />
                     <dot:Validator Value="{value: MaximumPoints}" ShowErrorMessageText="true" class="alert-danger" />
                 </bs:FormGroup>
                 <bs:FormGroup>
-                    <bs:Button Type="Success" Text="Přidat úlohu" IsSubmitButton="true"
+                    <bs:Button Type="Success" Text="Add task" IsSubmitButton="true"
                                Click="{command: _parent.AddTask()}" />
                     <dot:FileUpload Validation.Enabled="false"
                                     NumberOfFilesIndicatorText=""
@@ -96,15 +96,15 @@
                                     UploadCompleted="{command: _parent.ProcessFile()}"
                                     AllowedFileTypes=".csv"
                                     SuccessMessageText=""
-                                    UploadErrorMessageText="Nahrávání selhalo."
-                                    UploadButtonText="Přidat úlohy z csv" />
+                                    UploadErrorMessageText="Upload failed."
+                                    UploadButtonText="Add from CSV" />
                 </bs:FormGroup>
             </fieldset>
         </bs:Form>
         <bs:Well>
-            <h2>Formát csv:</h2>
-            nazevUlohy,popisek,maximumBodu<br />
-            nazevUlohy,popisek,maximumBodu<br />
-            nazevUlohy,popisek,maximumBodu<br />
+            <h2>CSV Format:</h2>
+            name,description,maximumPoints<br />
+            name,description,maximumPoints<br />
+            name,description,maximumPoints<br />
         </bs:Well>
 </dot:Content>
