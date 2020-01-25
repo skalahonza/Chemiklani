@@ -51,7 +51,7 @@ namespace Chemiklani.BL.Services
             }
             catch (System.Data.Entity.Infrastructure.DbUpdateException)
             {
-                throw new InvalidDeleteRequest("Úlohu nelze vymazat pokud byla použita v hodnocení.");
+                throw new InvalidDeleteRequest("Task cannot be deleted if scored already.");
             }
         }
 
@@ -116,7 +116,7 @@ namespace Chemiklani.BL.Services
             parser.ParseDtos(stream, row =>
             {
                 if (row.Length < 3)
-                    throw new InvalidAppData("Neplatný formát csv.");
+                    throw new InvalidAppData("Invalid CSV format.");
 
                 return new TaskDTO
                 {
@@ -162,7 +162,7 @@ namespace Chemiklani.BL.Services
                 }
                 else
                 {
-                    throw new AppDataNotFound("Úloha nenalezena.");
+                    throw new AppDataNotFound("Task not found.");
                 }
             }
         }

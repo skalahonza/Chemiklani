@@ -14,7 +14,7 @@ namespace Chemiklani.BL.Utils
                 var parser = new CsvParser();
                 var builder = new StringBuilder();
                 //append header
-                builder.AppendLine(string.Join(delimiter, "Místnost", "Název týmu",
+                builder.AppendLine(string.Join(delimiter, "Room", "Team name",
                     //append task names
                     string.Join(delimiter, scores.First().TasksScores.Select(x => x.TaskName))));
 

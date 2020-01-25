@@ -17,7 +17,7 @@ namespace Chemiklani.BL.Services
         public void AddTeam(TeamDTO team)
         {
             if (string.IsNullOrEmpty(team.Room))
-                team.Room = "Žádná místnost";
+                team.Room = "No room";
 
             using (var dc = CreateDbContext())
             {
@@ -45,7 +45,7 @@ namespace Chemiklani.BL.Services
                 }
                 else
                 {
-                    throw new AppDataNotFound("Tým nenalezen.");
+                    throw new AppDataNotFound("Team not found.");
                 }
             }
         }
@@ -129,7 +129,7 @@ namespace Chemiklani.BL.Services
             }
             catch (System.Data.Entity.Infrastructure.DbUpdateException)
             {
-                throw new InvalidDeleteRequest("Tým nelze vymazat pokud již byl hodnocen.");
+                throw new InvalidDeleteRequest("Team cannot be deleted if scored already.");
             }
         }
 
@@ -144,7 +144,7 @@ namespace Chemiklani.BL.Services
             parser.ParseDtos(stream, row =>
             {
                 if (row.Length < 2)
-                    throw new InvalidAppData("Neplatný formát csv.");
+                    throw new InvalidAppData("Invalid CSV format.");
 
                 var dto = new TeamDTO
                 {

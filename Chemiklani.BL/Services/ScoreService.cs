@@ -24,16 +24,16 @@ namespace Chemiklani.BL.Services
 
                 if (team == null)
                 {
-                    throw new AppDataNotFound("Vybraný tým neexistuje.");
+                    throw new AppDataNotFound("Selected team does not exist.");
                 }
                 if (task == null)
                 {
-                    throw new AppDataNotFound("Vybraná úloha neexistuje.");
+                    throw new AppDataNotFound("Selected task does not exist.");
                 }
 
                 if (points > task.MaximumPoints)
                 {
-                    throw new InvalidAppData("Body pøekraèují bodové maximum úlohy.");
+                    throw new InvalidAppData("You cannot assign more points than the task maximum.");
                 }
 
                 var score = dc.Scores.FirstOrDefault(s => s.Team.Id == team.Id && s.Task.Id == task.Id);
@@ -68,7 +68,7 @@ namespace Chemiklani.BL.Services
                 var team = dc.Teams.Find(teamId);
                 if (team == null)
                 {
-                    throw new AppDataNotFound("Vybraný tým neexistuje.");
+                    throw new AppDataNotFound("Selected team does not exist.");
                 }
 
                 var scores = dc.Scores.Where(x => x.Team.Id == team.Id);
@@ -93,7 +93,7 @@ namespace Chemiklani.BL.Services
         /// <summary>
         /// Get sore dataset for given list of teams
         /// </summary>
-        /// <param name="room">Room, used for filter, elave empty if filter not required</param>
+        /// <param name="room">Room, used for filter, leave empty if filter not required</param>
         /// <param name="completeDataset">True: you can view points for each task</param>
         /// <returns></returns>
         public List<TeamScoreDTO> GetResults(string room = "", bool completeDataset = false)

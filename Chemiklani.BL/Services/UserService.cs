@@ -41,14 +41,14 @@ namespace Chemiklani.BL.Services
                                 userManager.GeneratePasswordResetToken(user.Id), data.Password);
                             if (!result.Succeeded)
                             {
-                                throw new InvalidAppData("Heslo je příliš krátké.");
+                                throw new InvalidAppData("Password too short.");
                             }
                             userManager.Update(user);
                             dc.SaveChanges();
                         }
                         else
                         {
-                            throw new AppAuthenticationException("Špatné uživatelské jméno nebo heslo.");
+                            throw new AppAuthenticationException("Wrong username or password.");
                         }
                     }
                     return userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
