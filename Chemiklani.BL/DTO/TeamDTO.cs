@@ -6,7 +6,7 @@ namespace Chemiklani.BL.DTO
 {
     public class TeamDTO : BaseDTO,IMappable<Team>
     {
-        [Required(ErrorMessage = "Musíte vyplnit název týmu.")]
+        [Required(ErrorMessage = "Name is required.")]
         public string Name { get; set; }
         public ICollection<string> Members { get; set; }
         public string Room { get; set; }

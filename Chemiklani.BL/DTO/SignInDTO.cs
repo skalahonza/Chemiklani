@@ -4,10 +4,10 @@ namespace Chemiklani.BL.DTO
 {
     public class SignInDTO
     {
-        [Required(ErrorMessage = "Uživatelské jméno nesmí být prázdné")]
+        [Required(ErrorMessage = "Username is required.")]
         public string UserName { get; set; }
 
-        [Required(ErrorMessage = "Heslo nesmí být prázdné"), DataType(DataType.Password)]
+        [Required(ErrorMessage = "Password is required."), DataType(DataType.Password)]
         public string Password { get; set; }
     }
 }

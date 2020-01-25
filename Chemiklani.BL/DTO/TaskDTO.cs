@@ -6,7 +6,7 @@ namespace Chemiklani.BL.DTO
 {
     public class TaskDTO : BaseDTO, IMappable<Task>
     {
-        [Required(ErrorMessage = "Musíte vyplnit název úlohy.")]
+        [Required(ErrorMessage = "Task name is required.")]
         public string Name { get; set; }
 
         public string Description { get; set; }
