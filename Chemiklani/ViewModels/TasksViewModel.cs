@@ -12,8 +12,8 @@ namespace Chemiklani.ViewModels
     [Authorize(Roles = new[] {"Admin"})]
     public class TasksViewModel : MasterPageViewModel
     {
-        public override string PageTitle => "Úlohy";
-        public override string PageDescription => "Správa úloh a jejich bodového ohodnocení.";
+        public override string PageTitle => "Tasks";
+        public override string PageDescription => "Manage tasks.";
 
         public List<TaskDTO>Tasks { get; set; } = new List<TaskDTO>();
         public TaskDTO NewTask { get; set; } = new TaskDTO();
@@ -55,7 +55,7 @@ namespace Chemiklani.ViewModels
                     service.AddTasks(tasks);
                 }))
                 {
-                    SetSuccess("Úlohy úspìšnì naèteny z csv.");
+                    SetSuccess("Tasks loaded from CSV.");
                 }
 
                 storage.DeleteFile(file.FileId);
@@ -63,7 +63,7 @@ namespace Chemiklani.ViewModels
             }
             else
             {
-                SetError("CSV soubor není validní.");
+                SetError("CSV is invalid.");
             }
         }
 
@@ -77,7 +77,7 @@ namespace Chemiklani.ViewModels
         {
             if (ExecuteSafe(() => service.UpdateTask(EditedTask)))
             {
-                SetSuccess("Uloženo.");
+                SetSuccess("Saved.");
             }
             EditTaskDialogDisplayed = false;
             EditedTask = new TaskDTO();

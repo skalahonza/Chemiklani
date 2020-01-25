@@ -11,8 +11,8 @@ namespace Chemiklani.ViewModels
         private readonly TeamService teamService = new TeamService();
         private readonly TaskService taskService = new TaskService();
 
-        public override string PageTitle => "Hodnocení";
-        public override string PageDescription => "Hodnocení týmù v jednotlivých úlohách.";
+        public override string PageTitle => "Scoring";
+        public override string PageDescription => "Score a team with points";
 
         //Value from which, the points will turn form series of radiobuttons into numberpicker
         public int MiniSore => 20;
@@ -129,7 +129,7 @@ namespace Chemiklani.ViewModels
                 NewScore.SelectedTask.Id)))
             {
                 SummaryDisplayed = false;
-                SetSuccess("Ohodnocení zrušeno.");
+                SetSuccess("Canceled.");
                 //refresh dataset
                 if (SelectedRoom == null)
                     LoadAllTeams();

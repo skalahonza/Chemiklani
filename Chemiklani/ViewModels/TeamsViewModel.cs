@@ -12,8 +12,8 @@ namespace Chemiklani.ViewModels
     [Authorize(Roles = new[] {"Admin"})]
     public class TeamsViewModel : MasterPageViewModel
     {
-        public override string PageTitle => "Týmy";
-        public override string PageDescription => "Správa týmu.";
+        public override string PageTitle => "Teams";
+        public override string PageDescription => "Manage teams.";
 
         public TeamDTO NewTeamData { get; set; } = new TeamDTO();
         public TeamDTO EditedTeam { get; set; } = new TeamDTO();
@@ -55,7 +55,7 @@ namespace Chemiklani.ViewModels
                     service.AddTeams(teams);
                 }))
                 {
-                    SetSuccess("Týmy úspìšnì naèteny z csv.");
+                    SetSuccess("Teams loaded from CSV.");
                 }
 
                 storage.DeleteFile(file.FileId);
@@ -63,7 +63,7 @@ namespace Chemiklani.ViewModels
             }
             else
             {
-                SetError("CSV soubor není validní.");
+                SetError("CSV is invalid.");
             }
         }
 
@@ -76,7 +76,7 @@ namespace Chemiklani.ViewModels
         public void Save()
         {
             if (ExecuteSafe(() => service.UpdateTeam(EditedTeam)))
-                SetSuccess("Uloženo");
+                SetSuccess("Saved");
 
             EditedTeam = new TeamDTO();
             EditTeamDialogDisplayed = false;

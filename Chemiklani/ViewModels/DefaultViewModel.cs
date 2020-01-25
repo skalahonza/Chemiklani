@@ -6,8 +6,8 @@ namespace Chemiklani.ViewModels
 	{
 	    private readonly ScoreService scoreService = new ScoreService();
 
-        public override string PageTitle => "Domù";
-	    public override string PageDescription => "Hodnotící systém pro soutìž Chemiklání";
+        public override string PageTitle => "Home";
+	    public override string PageDescription => "Chemistryrace, evaluation system";
 
 	    public bool NewContestDialogVisible { get; set; }
 
@@ -18,7 +18,7 @@ namespace Chemiklani.ViewModels
 	    {
 	        scoreService.NewGame();
 	        NewContestDialogVisible = false;
-            SetSuccess("Nová hra vytvoøena, všechna stará data vymazána.");
+            SetSuccess("New game created, all previous data erased.");
 	    }
 
 	    public void GoToEvaluation()

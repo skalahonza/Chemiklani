@@ -8,7 +8,7 @@ namespace Chemiklani.ViewModels
     {
 	    public abstract string PageTitle { get; }
         public abstract string PageDescription { get; }
-	    public string AppName => "Chemiklání";
+	    public string AppName => "Chemistryrace";
 	    public string CurrentRoute => Context.Route.RouteName;
 	    public string CurrentUserName => Context.GetAuthentication().User.Identity.Name;
     }

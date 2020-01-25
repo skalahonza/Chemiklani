@@ -9,8 +9,8 @@ namespace Chemiklani.ViewModels
     [Authorize(Roles = new[] {"Admin"})]
     public class UsersViewModel : MasterPageViewModel
     {
-        public override string PageTitle => "Uživatelé";
-        public override string PageDescription => "Správa uživatelù. Uživatele lze libovolnì pøidávat a odebírat.";
+        public override string PageTitle => "Users";
+        public override string PageDescription => "Manage users, add or remove users, or promote them as admins.";
 
         public List<UserDto> Users { get; set; } = new List<UserDto>();
         public AddUserDTO NewUser { get; set; } = new AddUserDTO();

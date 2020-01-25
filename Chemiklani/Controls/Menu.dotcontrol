@@ -1,25 +1,25 @@
 ﻿@viewModel Chemiklani.ViewModels.MasterPageViewModel, Chemiklani
 
-<bs:ResponsiveNavigation HeaderText="Chemiklání" IsInverted="true" FixedTo="Top" IsResponsivelyCollapsing="true" HeaderLinkUrl="/">
+<bs:ResponsiveNavigation HeaderText="Chemistryrace" IsInverted="true" FixedTo="Top" IsResponsivelyCollapsing="true" HeaderLinkUrl="/">
     <LeftAlignedItemsTemplate>
-        <bs:NavigationItem RouteName="Default" Text="Domů" IsSelected="{value: CurrentRoute=='Default'}" />
+        <bs:NavigationItem RouteName="Default" Text="Home" IsSelected="{value: CurrentRoute=='Default'}" />
         <dot:RoleView Roles="Admin">
             <IsMemberTemplate>
-                <bs:NavigationItem RouteName="Tasks" Text="Úlohy" IsSelected="{value: CurrentRoute=='Tasks'}" />
-                <bs:NavigationItem RouteName="Teams" Text="Týmy" IsSelected="{value: CurrentRoute=='Teams'}" />
-                <bs:NavigationItem RouteName="Users" Text="Uživatelé" IsSelected="{value: CurrentRoute=='Users'}" />
+                <bs:NavigationItem RouteName="Tasks" Text="Tasks" IsSelected="{value: CurrentRoute=='Tasks'}" />
+                <bs:NavigationItem RouteName="Teams" Text="Teams" IsSelected="{value: CurrentRoute=='Teams'}" />
+                <bs:NavigationItem RouteName="Users" Text="Users" IsSelected="{value: CurrentRoute=='Users'}" />
             </IsMemberTemplate>
             <IsNotMemberTemplate>
             </IsNotMemberTemplate>            
         </dot:RoleView>        
-        <bs:NavigationItem RouteName="Score" Text="Hodnocení" IsSelected="{value: CurrentRoute=='Score'}" />
-        <bs:NavigationItem RouteName="AllResults" Text="Výsledky" IsSelected="{value: CurrentRoute=='AllResults'}" />
+        <bs:NavigationItem RouteName="Score" Text="Score" IsSelected="{value: CurrentRoute=='Score'}" />
+        <bs:NavigationItem RouteName="AllResults" Text="Results" IsSelected="{value: CurrentRoute=='AllResults'}" />
     </LeftAlignedItemsTemplate>
     <RightAlignedItemsTemplate>
-        <bs:DropDownButton Text="{value: "Přihlášen jako: " + CurrentUserName}">
+        <bs:DropDownButton Text="{value: "Signed in as: " + CurrentUserName}">
             <Items>
                 <bs:DropDownButtonItem Validation.Enabled="false" Click="{command: SignOut()}">
-                    <bs:GlyphIcon Icon="User" /> Odhlásit
+                    <bs:GlyphIcon Icon="User" /> Sign Out
                 </bs:DropDownButtonItem>
             </Items>
         </bs:DropDownButton>
