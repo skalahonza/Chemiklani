@@ -40,7 +40,7 @@ namespace Chemiklani.ViewModels
         public void RoomChanged(string room)
         {
             Room = room;
-            Context.RedirectToUrl($"vysledky/{Room}");
+            Context.RedirectToUrl($"/vysledky/{Room}");
         }
 
         /// <summary>
