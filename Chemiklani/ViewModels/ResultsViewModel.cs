@@ -57,7 +57,7 @@ namespace Chemiklani.ViewModels
                     dto => string.Join(delimiter, dto.Placings, dto.Team.Name, dto.Team.Room, dto.TotalPoints), Scores);
 
                 //return csv as file
-                Context.ReturnFile(Encoding.Default.GetBytes(csv), "vysledky.csv", "application/csv");
+                Context.ReturnFile(Encoding.UTF8.GetBytes(csv), "vysledky.csv", "application/csv");
             });
         }
 
@@ -71,7 +71,7 @@ namespace Chemiklani.ViewModels
                 string csv = Results.GenerateCompleteCsv(scoreService.GetResults(Room, true));
 
                 //return csv as file
-                Context.ReturnFile(Encoding.Default.GetBytes(csv), "vysledkyCompleteDataset.csv", "application/csv");
+                Context.ReturnFile(Encoding.UTF8.GetBytes(csv), "vysledkyCompleteDataset.csv", "application/csv");
             });
         }
     }
