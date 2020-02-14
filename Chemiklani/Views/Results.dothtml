@@ -32,7 +32,7 @@
     <bs:Container>
         <bs:Jumbotron>
             <h1>Results</h1>
-            <h2 Visible="{value: Room.Length != 0}">Místnost {{value: Room}}</h2>
+            <h2 Visible="{value: Room.Length != 0}">Room {{value: Room}}</h2>
         </bs:Jumbotron>
 
         <bs:Row class="text-center">

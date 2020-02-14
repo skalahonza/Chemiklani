@@ -55,7 +55,7 @@
                 <ItemTemplate>
                     <tr>
                         <td>
-                            <bs:LinkButton Text="Hodnotit" Click="{command: _parent.EvaluateTeam(_this)}" Validation.Enabled="false" />
+                            <bs:LinkButton Text="Score" Click="{command: _parent.EvaluateTeam(_this)}" Validation.Enabled="false" />
                         </td>
                         <td class="col-md-10">{{value: Name}}</td>
                         <td class="col-md-10">{{value: Room}}</td>
