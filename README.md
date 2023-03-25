@@ -1,13 +1,13 @@
-Project Archived:
+# Project Archived:
 This repository is now archived and will no longer receive updates. The latest version of the app is being developed in a new repository, which can be found at https://github.com/skalahonza/ch2.
 
-Why was this repository archived?
+## Why was this repository archived?
 This repository is no longer being actively developed and maintained, and any issues or pull requests will not be addressed. The new repository is where all new development and improvements to the app will be made.
 
-Where can I find the latest version of the app?
+## Where can I find the latest version of the app?
 The latest version of the app is being developed in the new repository at https://github.com/skalahonza/ch2. Please head over there to find the latest updates and improvements to the app.
 
-Can I still use this repository?
+## Can I still use this repository?
 Yes, you can still use this repository to access the code and any previous versions of the app. However, please note that this repository is no longer being actively developed and maintained, and any issues or pull requests will not be addressed.
 
 # Chemiklani
